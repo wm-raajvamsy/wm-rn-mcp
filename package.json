@@ -1,0 +1,35 @@
+{
+  "name": "wavemaker-rn-mcp",
+  "version": "1.0.0",
+  "description": "MCP Server for WaveMaker React Native",
+  "type": "module",
+  "main": "build/index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/index.ts",
+    "start": "node build/index.js",
+    "watch": "tsc --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "wavemaker"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.24.3",
+    "@types/form-data": "^2.2.1",
+    "axios": "1.13.2",
+    "execa": "9.6.1",
+    "form-data": "^4.0.5",
+    "fs-extra": "11.3.2"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "@types/node": "^24.10.1",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  }
+}
