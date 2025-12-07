@@ -31,9 +31,11 @@ import {
   listDirectory,
   editFile,
 } from "./filesystem.js";
+import { codebaseTools, executeCodebaseTool } from "./codebase/index.js";
 
 // Tool definitions with schemas
 export const toolDefinitions = [
+  ...codebaseTools,  // Add all 35 codebase tools first
   {
     name: "wavemaker_authenticate",
     description: "Authenticate with WaveMaker Studio using an auth token. Returns a formatted auth cookie for subsequent requests.",
@@ -1078,6 +1080,18 @@ export async function handleToolCall(name: string, args: any) {
       }
 
       default:
+        // Check if it's a codebase tool
+        if (name.startsWith('search_') || name.startsWith('read_') || name.startsWith('analyze_') || name.startsWith('list_')) {
+          const result = await executeCodebaseTool(name, args);
+          return {
+            content: [
+              {
+                type: "text",
+                text: JSON.stringify(result, null, 2),
+              },
+            ],
+          };
+        }
         throw new Error(`Unknown tool: ${name}`);
     }
   } catch (error) {

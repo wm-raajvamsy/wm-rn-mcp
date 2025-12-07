@@ -9,7 +9,17 @@
     "dev": "tsx src/index.ts",
     "start": "node build/index.js",
     "watch": "tsc --watch",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node tests/run-all-tests.js",
+    "test:base-component": "node tests/category/base-component.test.js",
+    "test:widget-component": "node tests/category/widget-component.test.js",
+    "test:style-theme": "node tests/category/style-theme.test.js",
+    "test:transpiler-codegen": "node tests/category/transpiler-codegen.test.js",
+    "test:variable-binding": "node tests/category/variable-binding.test.js",
+    "test:fragment-page": "node tests/category/fragment-page.test.js",
+    "test:service-di": "node tests/category/service-di.test.js",
+    "test:integration": "node tests/integration/workflows.test.js",
+    "test:edge-cases": "node tests/edge-cases.test.js",
+    "test:performance": "node tests/performance.test.js"
   },
   "keywords": [
     "mcp",

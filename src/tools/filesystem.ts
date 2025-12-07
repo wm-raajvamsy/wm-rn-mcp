@@ -335,12 +335,25 @@ const searchFilesRecursive = async (
     
     // Helper to check if filename matches glob pattern
     const matchesGlob = (filename: string, globPattern: string): boolean => {
-        const regex = new RegExp(
-            globPattern
-                .replace(/\./g, '\\.')
-                .replace(/\*/g, '.*')
-                .replace(/\?/g, '.')
-        );
+        // Handle brace expansion: *.{js,ts} -> (*.js|*.ts)
+        let pattern = globPattern;
+        
+        // Expand braces: {a,b,c} -> (a|b|c)
+        pattern = pattern.replace(/\{([^}]+)\}/g, (_, group) => {
+            return `(${group.split(',').join('|')})`;
+        });
+        
+        // Escape dots before wildcards
+        pattern = pattern.replace(/\./g, '\\.');
+        
+        // Convert glob wildcards to regex
+        pattern = pattern.replace(/\*/g, '.*');
+        pattern = pattern.replace(/\?/g, '.');
+        
+        // Anchor the pattern
+        pattern = `^${pattern}$`;
+        
+        const regex = new RegExp(pattern);
         return regex.test(filename);
     };
     
@@ -357,9 +370,8 @@ const searchFilesRecursive = async (
             lines.forEach((line, index) => {
                 if (matches.length >= options.maxResults) return;
                 
-                const testPattern = options.ignoreCase 
-                    ? new RegExp(pattern.source, pattern.flags + 'i')
-                    : pattern;
+                // Use the pattern as-is since ignoreCase is already applied at creation
+                const testPattern = pattern;
                 
                 if (testPattern.test(line)) {
                     const context: string[] = [];
