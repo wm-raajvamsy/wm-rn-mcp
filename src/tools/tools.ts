@@ -19,6 +19,18 @@ import {
   getWidgetProperties,
   getWidgetStyles,
 } from "./wavepulse.js";
+import {
+  executeCommand,
+  echoCommand,
+  sedCommand,
+  readFile,
+  writeFile,
+  appendFile,
+  grepFiles,
+  findFiles,
+  listDirectory,
+  editFile,
+} from "./filesystem.js";
 
 // Tool definitions with schemas
 export const toolDefinitions = [
@@ -385,6 +397,354 @@ export const toolDefinitions = [
       required: ["baseUrl", "channelId", "widgetId"],
     },
   },
+  // Filesystem Tools
+  {
+    name: "filesystem_execute_command",
+    description: "Execute a whitelisted shell command with optional arguments. Allowed commands: git, npm, node, npx, yarn, pnpm, ls, cat, grep, find, echo, pwd, which, whoami, date, wc, head, tail, sort, uniq, diff, tree, du, df",
+    inputSchema: {
+      type: "object",
+      properties: {
+        command: {
+          type: "string",
+          description: "The command to execute (must be in whitelist)",
+        },
+        args: {
+          type: "array",
+          items: { type: "string" },
+          description: "Command arguments",
+        },
+        cwd: {
+          type: "string",
+          description: "Working directory for command execution",
+        },
+        timeout: {
+          type: "number",
+          description: "Timeout in milliseconds (default: 30000)",
+        },
+        shell: {
+          type: "boolean",
+          description: "Execute in shell (default: false)",
+        },
+      },
+      required: ["command"],
+    },
+  },
+  {
+    name: "filesystem_echo_command",
+    description: "Echo text to stdout or write to a file",
+    inputSchema: {
+      type: "object",
+      properties: {
+        text: {
+          type: "string",
+          description: "Text to echo",
+        },
+        newline: {
+          type: "boolean",
+          description: "Add newline at the end (default: true)",
+        },
+        filePath: {
+          type: "string",
+          description: "Optional file path to write text to instead of stdout",
+        },
+      },
+      required: ["text"],
+    },
+  },
+  {
+    name: "filesystem_sed_command",
+    description: "Perform sed-like text replacement in a file using regex patterns",
+    inputSchema: {
+      type: "object",
+      properties: {
+        filePath: {
+          type: "string",
+          description: "Path to the file to edit",
+        },
+        pattern: {
+          type: "string",
+          description: "Regex pattern to find",
+        },
+        replacement: {
+          type: "string",
+          description: "Replacement text",
+        },
+        flags: {
+          type: "string",
+          description: "Regex flags (default: 'g' for global)",
+        },
+        backup: {
+          type: "boolean",
+          description: "Create backup before modifying (default: true)",
+        },
+        inPlace: {
+          type: "boolean",
+          description: "Edit file in-place (default: true)",
+        },
+      },
+      required: ["filePath", "pattern", "replacement"],
+    },
+  },
+  {
+    name: "filesystem_read_file",
+    description: "Read file contents with support for different encodings, partial reading, and binary files. Paths can be absolute (e.g., /Users/name/file.txt) or relative (resolved from MCP server's working directory).",
+    inputSchema: {
+      type: "object",
+      properties: {
+        filePath: {
+          type: "string",
+          description: "Path to the file to read",
+        },
+        encoding: {
+          type: "string",
+          description: "File encoding (default: 'utf-8')",
+        },
+        offset: {
+          type: "number",
+          description: "Starting line number for partial read",
+        },
+        limit: {
+          type: "number",
+          description: "Number of lines to read",
+        },
+        binary: {
+          type: "boolean",
+          description: "Read as binary and return base64 encoded (default: false)",
+        },
+      },
+      required: ["filePath"],
+    },
+  },
+  {
+    name: "filesystem_write_file",
+    description: "Write content to a file with atomic write operation, optional backup, and directory creation",
+    inputSchema: {
+      type: "object",
+      properties: {
+        filePath: {
+          type: "string",
+          description: "Path to the file to write",
+        },
+        content: {
+          type: "string",
+          description: "Content to write to the file",
+        },
+        encoding: {
+          type: "string",
+          description: "File encoding (default: 'utf-8')",
+        },
+        createDirs: {
+          type: "boolean",
+          description: "Create parent directories if they don't exist (default: true)",
+        },
+        backup: {
+          type: "boolean",
+          description: "Create backup of existing file (default: false)",
+        },
+        mode: {
+          type: "string",
+          description: "File permissions in octal format (e.g., '0644')",
+        },
+      },
+      required: ["filePath", "content"],
+    },
+  },
+  {
+    name: "filesystem_append_file",
+    description: "Append content to an existing file or create a new file",
+    inputSchema: {
+      type: "object",
+      properties: {
+        filePath: {
+          type: "string",
+          description: "Path to the file to append to",
+        },
+        content: {
+          type: "string",
+          description: "Content to append",
+        },
+        encoding: {
+          type: "string",
+          description: "File encoding (default: 'utf-8')",
+        },
+        createIfMissing: {
+          type: "boolean",
+          description: "Create file if it doesn't exist (default: true)",
+        },
+        newlineBefore: {
+          type: "boolean",
+          description: "Add newline before content (default: true)",
+        },
+      },
+      required: ["filePath", "content"],
+    },
+  },
+  {
+    name: "filesystem_grep_files",
+    description: "Search for regex patterns in files with recursive directory search. IMPORTANT: Use absolute paths (e.g., /Users/name/project) or paths will be resolved relative to the MCP server's working directory. Supports context lines, file filtering by glob patterns (e.g., '*.ts', '**/*.json'), and case-insensitive search. Returns match count and files searched count.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        pattern: {
+          type: "string",
+          description: "Regex pattern to search for",
+        },
+        paths: {
+          type: "array",
+          items: { type: "string" },
+          description: "Array of file or directory paths to search",
+        },
+        recursive: {
+          type: "boolean",
+          description: "Recursively search directories (default: true)",
+        },
+        ignoreCase: {
+          type: "boolean",
+          description: "Case-insensitive search (default: false)",
+        },
+        includeLineNumbers: {
+          type: "boolean",
+          description: "Include line numbers in results (default: true)",
+        },
+        contextLines: {
+          type: "number",
+          description: "Number of context lines to show around matches (default: 0)",
+        },
+        maxResults: {
+          type: "number",
+          description: "Maximum number of results to return (default: 1000)",
+        },
+        filePattern: {
+          type: "string",
+          description: "Glob pattern to filter files (e.g., '*.ts')",
+        },
+        excludePattern: {
+          type: "string",
+          description: "Glob pattern to exclude files",
+        },
+      },
+      required: ["pattern", "paths"],
+    },
+  },
+  {
+    name: "filesystem_find_files",
+    description: "Find files by glob pattern (e.g., '*.json', '**/*.ts', '**/src/**/*.js'). IMPORTANT: Use absolute searchPath (e.g., /Users/name/project) or it will be resolved relative to the MCP server's working directory. Pattern examples: '*.json' (files in search dir only), '**/*.json' (recursive all subdirs), '**/test/**/*.ts' (specific subdirectories). Supports type filtering, depth limits, and returns file metadata.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        searchPath: {
+          type: "string",
+          description: "Root directory to search from",
+        },
+        pattern: {
+          type: "string",
+          description: "Glob pattern to match files (e.g., '*.ts', '**/*.json')",
+        },
+        type: {
+          type: "string",
+          enum: ["file", "directory", "all"],
+          description: "Filter by type (default: 'all')",
+        },
+        maxDepth: {
+          type: "number",
+          description: "Maximum directory depth to search",
+        },
+        ignoreHidden: {
+          type: "boolean",
+          description: "Ignore hidden files and directories (default: true)",
+        },
+        followSymlinks: {
+          type: "boolean",
+          description: "Follow symbolic links (default: false)",
+        },
+        maxResults: {
+          type: "number",
+          description: "Maximum number of results (default: 1000)",
+        },
+      },
+      required: ["searchPath"],
+    },
+  },
+  {
+    name: "filesystem_list_directory",
+    description: "List directory contents with detailed file information, sorting, and filtering options. Paths can be absolute (e.g., /Users/name/dir) or relative (resolved from MCP server's working directory). Supports recursive listing, hidden file filtering, and sorting by name/size/modified date.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        directoryPath: {
+          type: "string",
+          description: "Path to the directory to list",
+        },
+        recursive: {
+          type: "boolean",
+          description: "List subdirectories recursively (default: false)",
+        },
+        includeHidden: {
+          type: "boolean",
+          description: "Include hidden files (default: false)",
+        },
+        includeStats: {
+          type: "boolean",
+          description: "Include file statistics (default: true)",
+        },
+        sortBy: {
+          type: "string",
+          enum: ["name", "size", "modified"],
+          description: "Sort entries by field (default: 'name')",
+        },
+        pattern: {
+          type: "string",
+          description: "Glob pattern to filter entries",
+        },
+      },
+      required: ["directoryPath"],
+    },
+  },
+  {
+    name: "filesystem_edit_file",
+    description: "Edit file with multiple line-based operations (insert, replace, delete) with atomic updates and backup",
+    inputSchema: {
+      type: "object",
+      properties: {
+        filePath: {
+          type: "string",
+          description: "Path to the file to edit",
+        },
+        operations: {
+          type: "array",
+          items: {
+            type: "object",
+            properties: {
+              type: {
+                type: "string",
+                enum: ["insert", "replace", "delete"],
+                description: "Type of operation",
+              },
+              startLine: {
+                type: "number",
+                description: "Starting line number (1-based)",
+              },
+              endLine: {
+                type: "number",
+                description: "Ending line number for replace/delete operations",
+              },
+              content: {
+                type: "string",
+                description: "Content for insert/replace operations",
+              },
+            },
+            required: ["type", "startLine"],
+          },
+          description: "Array of edit operations to apply",
+        },
+        backup: {
+          type: "boolean",
+          description: "Create backup before editing (default: true)",
+        },
+      },
+      required: ["filePath", "operations"],
+    },
+  },
 ];
 
 // Central tool execution handler
@@ -586,6 +946,127 @@ export async function handleToolCall(name: string, args: any) {
 
       case "wavepulse_get_widget_styles": {
         const result = await getWidgetStyles(args);
+        return {
+          content: [
+            {
+              type: "text",
+              text: JSON.stringify(result, null, 2),
+            },
+          ],
+        };
+      }
+
+      // Filesystem Tools
+      case "filesystem_execute_command": {
+        const result = await executeCommand(args);
+        return {
+          content: [
+            {
+              type: "text",
+              text: JSON.stringify(result, null, 2),
+            },
+          ],
+        };
+      }
+
+      case "filesystem_echo_command": {
+        const result = await echoCommand(args);
+        return {
+          content: [
+            {
+              type: "text",
+              text: JSON.stringify(result, null, 2),
+            },
+          ],
+        };
+      }
+
+      case "filesystem_sed_command": {
+        const result = await sedCommand(args);
+        return {
+          content: [
+            {
+              type: "text",
+              text: JSON.stringify(result, null, 2),
+            },
+          ],
+        };
+      }
+
+      case "filesystem_read_file": {
+        const result = await readFile(args);
+        return {
+          content: [
+            {
+              type: "text",
+              text: JSON.stringify(result, null, 2),
+            },
+          ],
+        };
+      }
+
+      case "filesystem_write_file": {
+        const result = await writeFile(args);
+        return {
+          content: [
+            {
+              type: "text",
+              text: JSON.stringify(result, null, 2),
+            },
+          ],
+        };
+      }
+
+      case "filesystem_append_file": {
+        const result = await appendFile(args);
+        return {
+          content: [
+            {
+              type: "text",
+              text: JSON.stringify(result, null, 2),
+            },
+          ],
+        };
+      }
+
+      case "filesystem_grep_files": {
+        const result = await grepFiles(args);
+        return {
+          content: [
+            {
+              type: "text",
+              text: JSON.stringify(result, null, 2),
+            },
+          ],
+        };
+      }
+
+      case "filesystem_find_files": {
+        const result = await findFiles(args);
+        return {
+          content: [
+            {
+              type: "text",
+              text: JSON.stringify(result, null, 2),
+            },
+          ],
+        };
+      }
+
+      case "filesystem_list_directory": {
+        const result = await listDirectory(args);
+        return {
+          content: [
+            {
+              type: "text",
+              text: JSON.stringify(result, null, 2),
+            },
+          ],
+        };
+      }
+
+      case "filesystem_edit_file": {
+        const result = await editFile(args);
         return {
           content: [
             {
