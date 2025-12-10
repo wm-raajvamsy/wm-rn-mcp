@@ -20,9 +20,12 @@ const server = new McpServer({
 console.log(`🔧 Registering ${toolDefinitions.length} MCP tools...`);
 
 toolDefinitions.forEach(toolDef => {
+  // Extract the shape from the ZodObject if it has one, otherwise use the inputSchema directly
+  const paramsSchema = (toolDef.inputSchema as any).shape || (toolDef.inputSchema as any);
+  
   server.tool(
     toolDef.name as string,
-    toolDef.inputSchema as any, // Zod schema object (ZodRawShape)
+    paramsSchema, // ZodRawShape
     {
       description: toolDef.description as string
     },
