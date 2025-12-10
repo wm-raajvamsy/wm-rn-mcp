@@ -7,6 +7,7 @@ import {
   ListToolsRequestSchema,
 } from "@modelcontextprotocol/sdk/types.js";
 import { toolDefinitions, handleToolCall } from "./tools/tools.js";
+import { zodToJsonSchema } from "zod-to-json-schema";
 
 // Create an MCP server
 const server = new Server(
@@ -26,7 +27,36 @@ const server = new Server(
 // Register tool handlers
 server.setRequestHandler(ListToolsRequestSchema, async () => {
   return {
-    tools: toolDefinitions,
+    tools: toolDefinitions.map(tool => {
+      try {
+        const jsonSchema: any = zodToJsonSchema(tool.inputSchema as any, { 
+          target: 'jsonSchema7',
+          $refStrategy: 'none'
+        });
+        
+        // Ensure type is set to 'object' at root level
+        if (!jsonSchema.type) {
+          jsonSchema.type = 'object';
+        }
+        
+        return {
+          name: tool.name,
+          description: tool.description,
+          inputSchema: jsonSchema,
+        };
+      } catch (error) {
+        console.error(`Error converting schema for tool ${tool.name}:`, error);
+        // Fallback to basic schema
+        return {
+          name: tool.name,
+          description: tool.description,
+          inputSchema: {
+            type: 'object',
+            properties: {},
+          },
+        };
+      }
+    }),
   };
 });
 

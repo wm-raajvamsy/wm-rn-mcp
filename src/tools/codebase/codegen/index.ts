@@ -3,7 +3,7 @@
  * Exports all transpiler and code generation related tools
  */
 
-import { Tool } from '@modelcontextprotocol/sdk/types.js';
+import { z } from 'zod';
 import {
   SearchTranspilerEngineTool,
   handleSearchTranspilerEngine
@@ -32,7 +32,7 @@ import {
 /**
  * Tool definitions for transpiler and codegen domain
  */
-export const transpilerCodegenTools: Tool[] = [
+export const transpilerCodegenTools = [
   {
     name: 'search_transpiler_engine',
     description: `Searches for transpiler engine implementation that converts WaveMaker HTML markup to React Native JSX.
@@ -72,35 +72,14 @@ A transpiler engine finder that locates the core transpilation system converting
 - Error Handling: How transpilation errors are caught and reported
 
 Use phase parameter to focus: 'parse' for HTML parsing, 'transform' for AST transformation, 'generate' for JSX generation, or 'all' for complete pipeline.`,
-    inputSchema: {
-      type: 'object',
-      properties: {
-        runtimePath: {
-          type: 'string',
-          description: 'Absolute path to @wavemaker/app-rn-runtime codebase directory'
-        },
-        codegenPath: {
-          type: 'string',
-          description: 'Absolute path to @wavemaker/rn-codegen codebase directory'
-        },
-        query: {
-          type: 'string',
-          description: 'Query about transpiler (e.g., "transpilation pipeline", "markup conversion", "JSX generation")'
-        },
-        phase: {
-          type: 'string',
-          enum: ['parse', 'transform', 'generate', 'all'],
-          description: 'Transpilation phase to focus on',
-          default: 'all'
-        },
-        maxResults: {
-          type: 'number',
-          description: 'Maximum number of files to return',
-          default: 10
-        }
-      },
-      required: ['runtimePath', 'codegenPath', 'query']
-    }
+    inputSchema: z.object({
+      runtimePath: z.string().describe('Absolute path to @wavemaker/app-rn-runtime codebase directory'),
+      codegenPath: z.string().describe('Absolute path to @wavemaker/rn-codegen codebase directory'),
+      query: z.string().describe('Query about transpiler (e.g., "transpilation pipeline", "markup conversion", "JSX generation")'),
+      phase: z.enum(['parse', 'transform', 'generate', 'all']).default('all').describe('Transpilation phase to focus on'),
+      maxResults: z.number().default(10).describe('Maximum number of files to return')
+    }),
+    outputSchema: z.any()
   },
   {
     name: 'search_transformer_registry',
@@ -141,33 +120,14 @@ A transformer registry finder that locates the mapping system connecting widget 
 - Inheritance: Base transformers vs widget-specific transformers
 
 Use widgetName parameter to find transformer for specific widget (e.g., "button", "list", "form").`,
-    inputSchema: {
-      type: 'object',
-      properties: {
-        runtimePath: {
-          type: 'string',
-          description: 'Absolute path to @wavemaker/app-rn-runtime codebase directory'
-        },
-        codegenPath: {
-          type: 'string',
-          description: 'Absolute path to @wavemaker/rn-codegen codebase directory'
-        },
-        query: {
-          type: 'string',
-          description: 'Query about transformers (e.g., "button transformer", "widget transformation", "transformer registry")'
-        },
-        widgetName: {
-          type: 'string',
-          description: 'Optional: specific widget name to find transformer for'
-        },
-        maxResults: {
-          type: 'number',
-          description: 'Maximum number of files to return',
-          default: 15
-        }
-      },
-      required: ['runtimePath', 'codegenPath', 'query']
-    }
+    inputSchema: z.object({
+      runtimePath: z.string().describe('Absolute path to @wavemaker/app-rn-runtime codebase directory'),
+      codegenPath: z.string().describe('Absolute path to @wavemaker/rn-codegen codebase directory'),
+      query: z.string().describe('Query about transformers (e.g., "button transformer", "widget transformation", "transformer registry")'),
+      widgetName: z.string().optional().describe('Optional: specific widget name to find transformer for'),
+      maxResults: z.number().default(15).describe('Maximum number of files to return')
+    }),
+    outputSchema: z.any()
   },
   {
     name: 'search_html_parser',
@@ -208,29 +168,13 @@ An HTML parser finder that locates the parsing system converting WaveMaker HTML/
 - Whitespace Handling: Text node processing, whitespace normalization
 
 Use this tool to understand the first critical phase of markup to code conversion.`,
-    inputSchema: {
-      type: 'object',
-      properties: {
-        runtimePath: {
-          type: 'string',
-          description: 'Absolute path to @wavemaker/app-rn-runtime codebase directory'
-        },
-        codegenPath: {
-          type: 'string',
-          description: 'Absolute path to @wavemaker/rn-codegen codebase directory'
-        },
-        query: {
-          type: 'string',
-          description: 'Query about HTML parsing (e.g., "markup parsing", "AST generation", "XML processing")'
-        },
-        maxResults: {
-          type: 'number',
-          description: 'Maximum number of files to return',
-          default: 10
-        }
-      },
-      required: ['runtimePath', 'codegenPath', 'query']
-    }
+    inputSchema: z.object({
+      runtimePath: z.string().describe('Absolute path to @wavemaker/app-rn-runtime codebase directory'),
+      codegenPath: z.string().describe('Absolute path to @wavemaker/rn-codegen codebase directory'),
+      query: z.string().describe('Query about HTML parsing (e.g., "markup parsing", "AST generation", "XML processing")'),
+      maxResults: z.number().default(10).describe('Maximum number of files to return')
+    }),
+    outputSchema: z.any()
   },
   {
     name: 'search_css_parser',
@@ -271,29 +215,13 @@ A CSS/LESS parser finder that locates the stylesheet parsing system processing t
 - AST Structure: CSS AST format and traversal
 
 Use this tool to understand how theme stylesheets are parsed before React Native transformation.`,
-    inputSchema: {
-      type: 'object',
-      properties: {
-        runtimePath: {
-          type: 'string',
-          description: 'Absolute path to @wavemaker/app-rn-runtime codebase directory'
-        },
-        codegenPath: {
-          type: 'string',
-          description: 'Absolute path to @wavemaker/rn-codegen codebase directory'
-        },
-        query: {
-          type: 'string',
-          description: 'Query about CSS parsing (e.g., "LESS parsing", "style extraction", "CSS processing")'
-        },
-        maxResults: {
-          type: 'number',
-          description: 'Maximum number of files to return',
-          default: 10
-        }
-      },
-      required: ['runtimePath', 'codegenPath', 'query']
-    }
+    inputSchema: z.object({
+      runtimePath: z.string().describe('Absolute path to @wavemaker/app-rn-runtime codebase directory'),
+      codegenPath: z.string().describe('Absolute path to @wavemaker/rn-codegen codebase directory'),
+      query: z.string().describe('Query about CSS parsing (e.g., "LESS parsing", "style extraction", "CSS processing")'),
+      maxResults: z.number().default(10).describe('Maximum number of files to return')
+    }),
+    outputSchema: z.any()
   },
   {
     name: 'search_template_system',
@@ -333,29 +261,13 @@ A template system finder that locates Handlebars templates defining code generat
 - Output Format: JavaScript/TypeScript code structure
 
 Use this tool to understand the final phase of code generation where templates produce actual code files.`,
-    inputSchema: {
-      type: 'object',
-      properties: {
-        runtimePath: {
-          type: 'string',
-          description: 'Absolute path to @wavemaker/app-rn-runtime codebase directory'
-        },
-        codegenPath: {
-          type: 'string',
-          description: 'Absolute path to @wavemaker/rn-codegen codebase directory'
-        },
-        query: {
-          type: 'string',
-          description: 'Query about templates (e.g., "component template", "page generation", "Handlebars helpers")'
-        },
-        maxResults: {
-          type: 'number',
-          description: 'Maximum number of files to return',
-          default: 15
-        }
-      },
-      required: ['runtimePath', 'codegenPath', 'query']
-    }
+    inputSchema: z.object({
+      runtimePath: z.string().describe('Absolute path to @wavemaker/app-rn-runtime codebase directory'),
+      codegenPath: z.string().describe('Absolute path to @wavemaker/rn-codegen codebase directory'),
+      query: z.string().describe('Query about templates (e.g., "component template", "page generation", "Handlebars helpers")'),
+      maxResults: z.number().default(15).describe('Maximum number of files to return')
+    }),
+    outputSchema: z.any()
   },
   {
     name: 'search_build_flow',
@@ -398,29 +310,13 @@ A build flow finder that locates the orchestration system coordinating the compl
 - Performance: Build time optimization strategies
 
 Use this tool to understand how all code generation pieces come together in the complete build pipeline.`,
-    inputSchema: {
-      type: 'object',
-      properties: {
-        runtimePath: {
-          type: 'string',
-          description: 'Absolute path to @wavemaker/app-rn-runtime codebase directory'
-        },
-        codegenPath: {
-          type: 'string',
-          description: 'Absolute path to @wavemaker/rn-codegen codebase directory'
-        },
-        query: {
-          type: 'string',
-          description: 'Query about build flow (e.g., "build pipeline", "app generation", "build profiles")'
-        },
-        maxResults: {
-          type: 'number',
-          description: 'Maximum number of files to return',
-          default: 10
-        }
-      },
-      required: ['runtimePath', 'codegenPath', 'query']
-    }
+    inputSchema: z.object({
+      runtimePath: z.string().describe('Absolute path to @wavemaker/app-rn-runtime codebase directory'),
+      codegenPath: z.string().describe('Absolute path to @wavemaker/rn-codegen codebase directory'),
+      query: z.string().describe('Query about build flow (e.g., "build pipeline", "app generation", "build profiles")'),
+      maxResults: z.number().default(10).describe('Maximum number of files to return')
+    }),
+    outputSchema: z.any()
   }
 ];
 

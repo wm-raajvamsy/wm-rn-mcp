@@ -309,9 +309,12 @@ export async function findProject(args: {
     try {
         const projectList: ProjectInfo[] = await fetchProjectsList(args.baseUrl, args.authCookie);
 
+        // Remove trailing slash from preview URL for consistent matching
+        const normalizedUrl = args.appPreviewUrl.replace(/\/$/, '');
+
         const project = projectList.find(p => 
             p.displayName === args.projectName &&
-            args.appPreviewUrl.endsWith(`${p.name}_${p.vcsBranchId}`)
+            normalizedUrl.endsWith(`${p.name}_${p.vcsBranchId}`)
         );
 
         if (!project) {

@@ -3,15 +3,7 @@
  * Exports all styling and theme related tools
  */
 
-import { Tool } from '@modelcontextprotocol/sdk/types.js';
-import {
-  SearchStyleDefinitionsTool,
-  handleSearchStyleDefinitions
-} from './styledef-search.js';
-import {
-  SearchClassNamesTool,
-  handleSearchClassNames
-} from './classname-search.js';
+import { z } from 'zod';
 import {
   SearchThemeCompilationTool,
   handleSearchThemeCompilation
@@ -36,146 +28,7 @@ import {
 /**
  * Tool definitions for styling and theme domain
  */
-export const styleThemeTools: Tool[] = [
-  {
-    name: 'search_style_definitions',
-    description: `Searches for style definition files (.styledef.ts) that define styling capabilities and selector mappings for widgets.
-
-**WHAT IS IT:**
-A style definition discovery tool that finds .styledef.ts files in @wavemaker/rn-codegen. These files define the styling blueprint for each widget, including rnStyleSelector patterns for nested element styling, className mappings for theme compilation, state-specific styles (focused, disabled, invalid), and theme variable references. The rnStyleSelector function generates class names like "app-button-icon", "app-list-item-caption" for styling specific widget parts.
-
-**WHEN TO USE THIS TOOL:**
-- When you need to style nested elements within a widget (icon inside button, caption in list item)
-- When discovering what parts of a widget can be styled
-- When understanding the class name generation pattern (rnStyleSelector)
-- When finding available style selectors for a specific widget
-- When learning how to apply custom styles to widget sub-elements
-- When debugging why custom styles aren't applying to nested elements
-- When comparing style capabilities across similar widgets
-- When implementing custom widgets and need style definition examples
-
-**WHY USE THIS TOOL:**
-- Style definitions are the blueprint for widget styling capabilities
-- rnStyleSelector patterns reveal what widget parts can be independently styled
-- Understanding class name generation is crucial for custom styling
-- Nested element styling isn't obvious without seeing style definitions
-- State-specific styles (focused, disabled) are defined here
-- Theme variable usage shows how widgets integrate with themes
-- Style definitions determine what CSS classes are generated during theme compilation
-- Knowing available selectors prevents trial-and-error styling
-
-**KEY CAPABILITIES YOU CAN DISCOVER:**
-- rnStyleSelector Patterns: rnStyleSelector("button", "icon") → "app-button-icon" class
-- Nested Element Selectors: Multi-level paths like rnStyleSelector("list", "item", "caption")
-- className Mappings: CSS class names (.app-button, .btn-primary) to RN style paths
-- State Styles: focused, disabled, invalid, readonly, active states
-- Widget Parts: root, text, icon, label, caption, container, content elements
-- Theme Variables: Usage of variables like primaryColor, baseFontSize
-- Style Inheritance: How styles cascade from base to specific elements
-- Platform-Specific Styles: iOS vs Android style variations
-- Variant Styles: Primary, secondary, danger, success button variants
-
-Use component parameter to filter to specific widget (e.g., "button", "list", "card"). Set extractClassNames=true to get all generated class names. Set includeNested=true to include multi-level selectors.`,
-    inputSchema: {
-      type: 'object',
-      properties: {
-        runtimePath: {
-          type: 'string',
-          description: 'Absolute path to @wavemaker/app-rn-runtime codebase directory'
-        },
-        codegenPath: {
-          type: 'string',
-          description: 'Absolute path to @wavemaker/rn-codegen codebase directory'
-        },
-        query: {
-          type: 'string',
-          description: 'Style definition query (e.g., "button icon", "nested classes", "list item styles")'
-        },
-        component: {
-          type: 'string',
-          description: 'Specific component name (e.g., "button", "list", "card")'
-        },
-        extractClassNames: {
-          type: 'boolean',
-          description: 'Extract all rnStyleSelector class names from found files',
-          default: true
-        },
-        includeNested: {
-          type: 'boolean',
-          description: 'Include nested style selectors',
-          default: true
-        },
-        maxResults: {
-          type: 'number',
-          description: 'Maximum number of files to return',
-          default: 15
-        }
-      },
-      required: ['runtimePath', 'codegenPath', 'query']
-    }
-  },
-  {
-    name: 'search_class_names',
-    description: `Extracts and catalogs all rnStyleSelector-generated class names with structured metadata.
-
-**WHAT IS IT:**
-A class name catalog tool that extracts all rnStyleSelector() calls from style definition files and returns structured data showing component name, selector path, generated class name, and nesting level. For example, rnStyleSelector("button", "icon") generates "app-button-icon", while rnStyleSelector("list", "item", "caption") generates "app-list-item-caption". It provides a complete inventory of styleable widget parts.
-
-**WHEN TO USE THIS TOOL:**
-- When you need the exact class name to style a specific widget part
-- When discovering all styleable elements within a widget
-- When understanding the nesting structure of widget styling
-- When you know what part you want to style but not the class name
-- When comparing styling capabilities across widgets
-- When documenting available style hooks for a widget
-- When debugging why a custom class isn't applying
-- When creating theme overrides for specific widget parts
-
-**WHY USE THIS TOOL:**
-- Class names follow a pattern but aren't always obvious (app-button-icon vs button-icon)
-- Discovering all styleable parts requires parsing style definitions
-- Nesting levels determine class name structure (2-level vs 3-level)
-- Some widgets have many styleable parts (20+ for complex widgets like List)
-- Knowing exact class names prevents guessing and trial-and-error
-- Structured data shows relationships between widget parts
-- Helps understand widget styling architecture at a glance
-- Essential for creating comprehensive theme customizations
-
-**KEY CAPABILITIES YOU CAN DISCOVER:**
-- Generated Class Names: Complete list of all rnStyleSelector-generated classes
-- Selector Paths: The arguments passed to rnStyleSelector (e.g., ["button", "icon"])
-- Nesting Levels: 2-level (root.text), 3-level (list.item.caption), 4+ level selectors
-- Component Mapping: Which class names belong to which widgets
-- Widget Parts: root, text, icon, label, caption, container, content, header, footer
-- State Variants: focused, disabled, invalid, active, pressed classes
-- Hierarchical Structure: Parent-child relationships in styling
-- Naming Patterns: Conventions like app-{widget}-{part}-{subpart}
-
-Use component parameter to filter to specific widget. Set includeNested=true (default) to include 3+ level selectors. Returns structured data with component, path, className, and nesting information for each selector.`,
-    inputSchema: {
-      type: 'object',
-      properties: {
-        runtimePath: {
-          type: 'string',
-          description: 'Absolute path to @wavemaker/app-rn-runtime codebase directory'
-        },
-        codegenPath: {
-          type: 'string',
-          description: 'Absolute path to @wavemaker/rn-codegen codebase directory'
-        },
-        component: {
-          type: 'string',
-          description: 'Optional: filter to specific component'
-        },
-        includeNested: {
-          type: 'boolean',
-          description: 'Include nested selectors (3+ levels)',
-          default: true
-        }
-      },
-      required: ['runtimePath', 'codegenPath']
-    }
-  },
+export const styleThemeTools = [
   {
     name: 'search_theme_compilation',
     description: `Searches for theme compilation pipeline and processing logic in WaveMaker codegen.
@@ -215,29 +68,13 @@ A theme compilation system finder that locates ThemeService and the complete the
 - Output Format: Structure of generated theme.js files
 
 Use this tool to trace the complete journey from LESS/CSS source files to runtime StyleSheet objects.`,
-    inputSchema: {
-      type: 'object',
-      properties: {
-        runtimePath: {
-          type: 'string',
-          description: 'Absolute path to @wavemaker/app-rn-runtime codebase directory'
-        },
-        codegenPath: {
-          type: 'string',
-          description: 'Absolute path to @wavemaker/rn-codegen codebase directory'
-        },
-        query: {
-          type: 'string',
-          description: 'Query about theme compilation (e.g., "theme processing", "LESS compilation", "style generation")'
-        },
-        maxResults: {
-          type: 'number',
-          description: 'Maximum number of files to return',
-          default: 10
-        }
-      },
-      required: ['runtimePath', 'codegenPath', 'query']
-    }
+    inputSchema: z.object({
+      runtimePath: z.string().describe('Absolute path to @wavemaker/app-rn-runtime codebase directory'),
+      codegenPath: z.string().describe('Absolute path to @wavemaker/rn-codegen codebase directory'),
+      query: z.string().describe('Query about theme compilation (e.g., "theme processing", "LESS compilation", "style generation")'),
+      maxResults: z.number().default(10).describe('Maximum number of files to return')
+    }),
+    outputSchema: z.any()
   },
   {
     name: 'search_css_to_rn',
@@ -278,29 +115,13 @@ A CSS transformation system finder that locates the conversion logic transformin
 - StyleSheet Generation: How final RN StyleSheet objects are created
 
 Use this tool to understand the complete CSS to React Native transformation pipeline and discover which CSS features are supported.`,
-    inputSchema: {
-      type: 'object',
-      properties: {
-        runtimePath: {
-          type: 'string',
-          description: 'Absolute path to @wavemaker/app-rn-runtime codebase directory'
-        },
-        codegenPath: {
-          type: 'string',
-          description: 'Absolute path to @wavemaker/rn-codegen codebase directory'
-        },
-        query: {
-          type: 'string',
-          description: 'Query about CSS transformation (e.g., "CSS parsing", "property conversion", "unit transformation")'
-        },
-        maxResults: {
-          type: 'number',
-          description: 'Maximum number of files to return',
-          default: 10
-        }
-      },
-      required: ['runtimePath', 'codegenPath', 'query']
-    }
+    inputSchema: z.object({
+      runtimePath: z.string().describe('Absolute path to @wavemaker/app-rn-runtime codebase directory'),
+      codegenPath: z.string().describe('Absolute path to @wavemaker/rn-codegen codebase directory'),
+      query: z.string().describe('Query about CSS transformation (e.g., "CSS parsing", "property conversion", "unit transformation")'),
+      maxResults: z.number().default(10).describe('Maximum number of files to return')
+    }),
+    outputSchema: z.any()
   },
   {
     name: 'read_theme_variables',
@@ -341,24 +162,12 @@ A theme variable reader that extracts variable definitions from theme configurat
 - Default Values: Baseline theme configuration
 
 Use themeName parameter to read variables from a specific theme. Returns structured data with variable names, values, and categories.`,
-    inputSchema: {
-      type: 'object',
-      properties: {
-        runtimePath: {
-          type: 'string',
-          description: 'Absolute path to @wavemaker/app-rn-runtime codebase directory'
-        },
-        codegenPath: {
-          type: 'string',
-          description: 'Absolute path to @wavemaker/rn-codegen codebase directory'
-        },
-        themeName: {
-          type: 'string',
-          description: 'Optional: specific theme name to read variables from'
-        }
-      },
-      required: ['runtimePath', 'codegenPath']
-    }
+    inputSchema: z.object({
+      runtimePath: z.string().describe('Absolute path to @wavemaker/app-rn-runtime codebase directory'),
+      codegenPath: z.string().describe('Absolute path to @wavemaker/rn-codegen codebase directory'),
+      themeName: z.string().optional().describe('Optional: specific theme name to read variables from')
+    }),
+    outputSchema: z.any()
   },
   {
     name: 'search_nested_styles',
@@ -398,29 +207,13 @@ A nested style pattern finder that locates rnStyleSelector calls with 3+ paramet
 - Best Practices: How WaveMaker widgets implement nested styling
 
 Use component parameter to filter to specific widget. Returns nested selectors with their paths, generated class names, and nesting depth.`,
-    inputSchema: {
-      type: 'object',
-      properties: {
-        runtimePath: {
-          type: 'string',
-          description: 'Absolute path to @wavemaker/app-rn-runtime codebase directory'
-        },
-        codegenPath: {
-          type: 'string',
-          description: 'Absolute path to @wavemaker/rn-codegen codebase directory'
-        },
-        component: {
-          type: 'string',
-          description: 'Optional: filter to specific component'
-        },
-        maxResults: {
-          type: 'number',
-          description: 'Maximum number of results to return',
-          default: 15
-        }
-      },
-      required: ['runtimePath', 'codegenPath']
-    }
+    inputSchema: z.object({
+      runtimePath: z.string().describe('Absolute path to @wavemaker/app-rn-runtime codebase directory'),
+      codegenPath: z.string().describe('Absolute path to @wavemaker/rn-codegen codebase directory'),
+      component: z.string().optional().describe('Optional: filter to specific component'),
+      maxResults: z.number().default(15).describe('Maximum number of results to return')
+    }),
+    outputSchema: z.any()
   },
   {
     name: 'analyze_style_precedence',
@@ -461,24 +254,12 @@ A style precedence analyzer that examines how styles from multiple sources are m
 - Performance Impact: Precedence level affects re-render behavior
 
 Use component parameter to analyze precedence for a specific widget. Returns precedence order, merge logic, and examples of overriding at each level.`,
-    inputSchema: {
-      type: 'object',
-      properties: {
-        runtimePath: {
-          type: 'string',
-          description: 'Absolute path to @wavemaker/app-rn-runtime codebase directory'
-        },
-        codegenPath: {
-          type: 'string',
-          description: 'Absolute path to @wavemaker/rn-codegen codebase directory'
-        },
-        component: {
-          type: 'string',
-          description: 'Optional: analyze precedence for specific component'
-        }
-      },
-      required: ['runtimePath', 'codegenPath']
-    }
+    inputSchema: z.object({
+      runtimePath: z.string().describe('Absolute path to @wavemaker/app-rn-runtime codebase directory'),
+      codegenPath: z.string().describe('Absolute path to @wavemaker/rn-codegen codebase directory'),
+      component: z.string().optional().describe('Optional: analyze precedence for specific component')
+    }),
+    outputSchema: z.any()
   }
 ];
 
@@ -486,8 +267,6 @@ Use component parameter to analyze precedence for a specific widget. Returns pre
  * Handler registry for style and theme tools
  */
 export const styleThemeHandlers = new Map([
-  ['search_style_definitions', handleSearchStyleDefinitions],
-  ['search_class_names', handleSearchClassNames],
   ['search_theme_compilation', handleSearchThemeCompilation],
   ['search_css_to_rn', handleSearchCssToRn],
   ['read_theme_variables', handleReadThemeVariables],

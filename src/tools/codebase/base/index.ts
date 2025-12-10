@@ -3,7 +3,7 @@
  * Exports all base component related tools
  */
 
-import { Tool } from '@modelcontextprotocol/sdk/types.js';
+import { z } from 'zod';
 import {
   SearchBaseComponentTool,
   handleSearchBaseComponent
@@ -32,7 +32,7 @@ import {
 /**
  * Tool definitions for base component domain
  */
-export const baseComponentTools: Tool[] = [
+export const baseComponentTools = [
   {
     name: 'search_base_component',
     description: `Searches for BaseComponent implementation and core infrastructure files in @wavemaker/app-rn-runtime.
@@ -70,40 +70,15 @@ BaseComponent is the foundational abstract class that ALL WaveMaker React Native
 - Cleanup Management: automatic cleanup array, proper memory management
 
 Use focus parameter to narrow search: 'lifecycle' for hooks, 'properties' for prop system, 'styling' for theme/styles, 'events' for EventNotifier, or 'all' for comprehensive search.`,
-    inputSchema: {
-      type: 'object',
-      properties: {
-        runtimePath: {
-          type: 'string',
-          description: 'Absolute path to @wavemaker/app-rn-runtime codebase directory'
-        },
-        codegenPath: {
-          type: 'string',
-          description: 'Absolute path to @wavemaker/rn-codegen codebase directory'
-        },
-        query: {
-          type: 'string',
-          description: 'Semantic query about BaseComponent (e.g., "lifecycle hooks", "property handling", "state management")'
-        },
-        focus: {
-          type: 'string',
-          enum: ['lifecycle', 'properties', 'styling', 'events', 'all'],
-          description: 'Focus area within BaseComponent',
-          default: 'all'
-        },
-        includeTests: {
-          type: 'boolean',
-          description: 'Include test files in results',
-          default: false
-        },
-        maxResults: {
-          type: 'number',
-          description: 'Maximum number of files to return',
-          default: 10
-        }
-      },
-      required: ['runtimePath', 'codegenPath', 'query']
-    }
+    inputSchema: z.object({
+      runtimePath: z.string().describe('Absolute path to @wavemaker/app-rn-runtime codebase directory'),
+      codegenPath: z.string().describe('Absolute path to @wavemaker/rn-codegen codebase directory'),
+      query: z.string().describe('Semantic query about BaseComponent (e.g., "lifecycle hooks", "property handling", "state management")'),
+      focus: z.enum(['lifecycle', 'properties', 'styling', 'events', 'all']).default('all').describe('Focus area within BaseComponent'),
+      includeTests: z.boolean().default(false).describe('Include test files in results'),
+      maxResults: z.number().default(10).describe('Maximum number of files to return')
+    }),
+    outputSchema: z.any()
   },
   {
     name: 'read_base_component',
@@ -142,30 +117,12 @@ A file parser tool that extracts structured information from BaseComponent and r
 - JSDoc Comments: Usage examples, parameter descriptions, warnings
 
 Use extract parameter to control what gets parsed: ['methods', 'properties', 'lifecycle', 'imports', 'exports', 'types']. Set includeComments=true for JSDoc documentation.`,
-    inputSchema: {
-      type: 'object',
-      properties: {
-        filePath: {
-          type: 'string',
-          description: 'Path to BaseComponent file (from search_base_component result)'
-        },
-        extract: {
-          type: 'array',
-          items: {
-            type: 'string',
-            enum: ['methods', 'properties', 'lifecycle', 'imports', 'exports', 'types']
-          },
-          description: 'What to extract from file',
-          default: ['methods', 'properties', 'lifecycle']
-        },
-        includeComments: {
-          type: 'boolean',
-          description: 'Include JSDoc comments in extraction',
-          default: true
-        }
-      },
-      required: ['filePath']
-    }
+    inputSchema: z.object({
+      filePath: z.string().describe('Path to BaseComponent file (from search_base_component result)'),
+      extract: z.array(z.enum(['methods', 'properties', 'lifecycle', 'imports', 'exports', 'types'])).default(['methods', 'properties', 'lifecycle']).describe('What to extract from file'),
+      includeComments: z.boolean().default(true).describe('Include JSDoc comments in extraction')
+    }),
+    outputSchema: z.any()
   },
   {
     name: 'search_lifecycle_hooks',
@@ -206,27 +163,14 @@ A specialized search tool that finds lifecycle method implementations throughout
 - Initialization Sequence: Constructor → render → componentDidMount → init
 
 Use hookType parameter to filter: 'mount' for initialization, 'unmount' for cleanup, 'update' for change detection, 'render' for rendering, or 'all' for comprehensive search.`,
-    inputSchema: {
-      type: 'object',
-      properties: {
-        query: {
-          type: 'string',
-          description: 'Query about lifecycle hooks (e.g., "mount hooks", "cleanup", "update lifecycle")'
-        },
-        hookType: {
-          type: 'string',
-          enum: ['mount', 'unmount', 'update', 'render', 'all'],
-          description: 'Type of lifecycle hook to search for',
-          default: 'all'
-        },
-        maxResults: {
-          type: 'number',
-          description: 'Maximum number of files to return',
-          default: 15
-        }
-      },
-      required: ['runtimePath', 'codegenPath', 'query']
-    }
+    inputSchema: z.object({
+      runtimePath: z.string().describe('Absolute path to @wavemaker/app-rn-runtime codebase directory'),
+      codegenPath: z.string().describe('Absolute path to @wavemaker/rn-codegen codebase directory'),
+      query: z.string().describe('Query about lifecycle hooks (e.g., "mount hooks", "cleanup", "update lifecycle")'),
+      hookType: z.enum(['mount', 'unmount', 'update', 'render', 'all']).default('all').describe('Type of lifecycle hook to search for'),
+      maxResults: z.number().default(15).describe('Maximum number of files to return')
+    }),
+    outputSchema: z.any()
   },
   {
     name: 'search_props_provider',
@@ -267,21 +211,13 @@ A specialized search tool that finds the PropsProvider class and property manage
 - Performance: Proxy overhead vs direct access, caching strategies
 
 Use this tool to understand the complete property lifecycle from markup → rendering → runtime changes → re-renders.`,
-    inputSchema: {
-      type: 'object',
-      properties: {
-        query: {
-          type: 'string',
-          description: 'Query about PropsProvider (e.g., "property management", "getProperty", "property inheritance")'
-        },
-        maxResults: {
-          type: 'number',
-          description: 'Maximum number of files to return',
-          default: 10
-        }
-      },
-      required: ['runtimePath', 'codegenPath', 'query']
-    }
+    inputSchema: z.object({
+      runtimePath: z.string().describe('Absolute path to @wavemaker/app-rn-runtime codebase directory'),
+      codegenPath: z.string().describe('Absolute path to @wavemaker/rn-codegen codebase directory'),
+      query: z.string().describe('Query about PropsProvider (e.g., "property management", "getProperty", "property inheritance")'),
+      maxResults: z.number().default(10).describe('Maximum number of files to return')
+    }),
+    outputSchema: z.any()
   },
   {
     name: 'search_event_notifier',
@@ -322,21 +258,13 @@ A specialized search tool that finds the EventNotifier class and event system ar
 - Event Throttling: High-frequency events (scroll) use throttling (100ms) for performance
 
 Use this tool to understand the complete event flow: component.notify() → listener execution → propagation → cleanup.`,
-    inputSchema: {
-      type: 'object',
-      properties: {
-        query: {
-          type: 'string',
-          description: 'Query about event system (e.g., "event notification", "event listeners", "event callbacks")'
-        },
-        maxResults: {
-          type: 'number',
-          description: 'Maximum number of files to return',
-          default: 10
-        }
-      },
-      required: ['runtimePath', 'codegenPath', 'query']
-    }
+    inputSchema: z.object({
+      runtimePath: z.string().describe('Absolute path to @wavemaker/app-rn-runtime codebase directory'),
+      codegenPath: z.string().describe('Absolute path to @wavemaker/rn-codegen codebase directory'),
+      query: z.string().describe('Query about event system (e.g., "event notification", "event listeners", "event callbacks")'),
+      maxResults: z.number().default(10).describe('Maximum number of files to return')
+    }),
+    outputSchema: z.any()
   },
   {
     name: 'analyze_component_hierarchy',
@@ -377,21 +305,13 @@ A hierarchical analyzer tool that maps the component inheritance tree, showing w
 - Method Origin: Where specific methods are defined in the hierarchy (Base vs Widget)
 
 Use componentName parameter to filter to a specific widget or base class. Use depth parameter (default: 3) to control how deep the hierarchy analysis goes. This tool helps visualize the entire widget architecture at a glance.`,
-    inputSchema: {
-      type: 'object',
-      properties: {
-        componentName: {
-          type: 'string',
-          description: 'Optional: filter hierarchy to specific component name'
-        },
-        depth: {
-          type: 'number',
-          description: 'Maximum depth of hierarchy to analyze',
-          default: 3
-        }
-      },
-      required: ['runtimePath', 'codegenPath']
-    }
+    inputSchema: z.object({
+      runtimePath: z.string().describe('Absolute path to @wavemaker/app-rn-runtime codebase directory'),
+      codegenPath: z.string().describe('Absolute path to @wavemaker/rn-codegen codebase directory'),
+      componentName: z.string().optional().describe('Optional: filter hierarchy to specific component name'),
+      depth: z.number().default(3).describe('Maximum depth of hierarchy to analyze')
+    }),
+    outputSchema: z.any()
   }
 ];
 

@@ -2,13 +2,13 @@
  * Service & DI Tools Registry
  */
 
-import { Tool } from '@modelcontextprotocol/sdk/types.js';
+import { z } from 'zod';
 import { handleSearchRuntimeServices } from './runtime-services.js';
 import { handleSearchDiSystem } from './di-search.js';
 import { handleSearchServiceLayer } from './service-layer.js';
 import { CodebaseToolResult } from '../types.js';
 
-export const serviceTools: Tool[] = [
+export const serviceTools = [
   {
     name: 'search_runtime_services',
     description: `Searches for runtime service implementations providing core app functionality.
@@ -47,23 +47,14 @@ A runtime service finder that locates implementations of core services providing
 - Service Integration: How services are used in pages/widgets
 
 Use serviceName parameter to filter to specific service.`,
-    inputSchema: {
-      type: 'object',
-      properties: {
-        runtimePath: {
-          type: 'string',
-          description: 'Absolute path to @wavemaker/app-rn-runtime codebase directory'
-        },
-        codegenPath: {
-          type: 'string',
-          description: 'Absolute path to @wavemaker/rn-codegen codebase directory'
-        },
-        query: {type: 'string'},
-        serviceName: {type: 'string', description: 'Optional: specific service name'},
-        maxResults: {type: 'number', default: 10}
-      },
-      required: ['runtimePath', 'codegenPath', 'query']
-    }
+    inputSchema: z.object({
+      runtimePath: z.string().describe('Absolute path to @wavemaker/app-rn-runtime codebase directory'),
+      codegenPath: z.string().describe('Absolute path to @wavemaker/rn-codegen codebase directory'),
+      query: z.string(),
+      serviceName: z.string().optional().describe('Optional: specific service name'),
+      maxResults: z.number().default(10)
+    }),
+    outputSchema: z.any()
   },
   {
     name: 'search_di_system',
@@ -103,22 +94,13 @@ A dependency injection (DI) system finder that locates the injector implementati
 - Testing: How DI enables service mocking and testing
 
 Use this tool to understand the dependency injection infrastructure.`,
-    inputSchema: {
-      type: 'object',
-      properties: {
-        runtimePath: {
-          type: 'string',
-          description: 'Absolute path to @wavemaker/app-rn-runtime codebase directory'
-        },
-        codegenPath: {
-          type: 'string',
-          description: 'Absolute path to @wavemaker/rn-codegen codebase directory'
-        },
-        query: {type: 'string'},
-        maxResults: {type: 'number', default: 10}
-      },
-      required: ['runtimePath', 'codegenPath', 'query']
-    }
+    inputSchema: z.object({
+      runtimePath: z.string().describe('Absolute path to @wavemaker/app-rn-runtime codebase directory'),
+      codegenPath: z.string().describe('Absolute path to @wavemaker/rn-codegen codebase directory'),
+      query: z.string(),
+      maxResults: z.number().default(10)
+    }),
+    outputSchema: z.any()
   },
   {
     name: 'search_service_layer',
@@ -158,22 +140,13 @@ A service layer finder that locates the architecture organizing services and the
 - Layer Organization: Grouping and categorization of services
 
 Use this tool to understand the complete service layer architecture.`,
-    inputSchema: {
-      type: 'object',
-      properties: {
-        runtimePath: {
-          type: 'string',
-          description: 'Absolute path to @wavemaker/app-rn-runtime codebase directory'
-        },
-        codegenPath: {
-          type: 'string',
-          description: 'Absolute path to @wavemaker/rn-codegen codebase directory'
-        },
-        query: {type: 'string'},
-        maxResults: {type: 'number', default: 10}
-      },
-      required: ['runtimePath', 'codegenPath', 'query']
-    }
+    inputSchema: z.object({
+      runtimePath: z.string().describe('Absolute path to @wavemaker/app-rn-runtime codebase directory'),
+      codegenPath: z.string().describe('Absolute path to @wavemaker/rn-codegen codebase directory'),
+      query: z.string(),
+      maxResults: z.number().default(10)
+    }),
+    outputSchema: z.any()
   }
 ];
 

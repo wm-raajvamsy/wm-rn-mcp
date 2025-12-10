@@ -5,9 +5,11 @@
   "type": "module",
   "main": "build/index.js",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && cp src/tools/codebase/components/widget-catalog.json build/tools/codebase/components/",
     "dev": "tsx src/index.ts",
+    "dev:http": "tsx src/http-server.ts",
     "start": "node build/index.js",
+    "start:http": "node build/http-server.js",
     "watch": "tsc --watch",
     "test": "node tests/run-all-tests.js",
     "test:base-component": "node tests/category/base-component.test.js",
@@ -29,13 +31,17 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.24.3",
+    "@modelcontextprotocol/sdk": "1.17.2",
+    "@types/express": "^5.0.6",
     "@types/form-data": "^2.2.1",
     "axios": "1.13.2",
     "execa": "9.6.1",
+    "express": "^5.2.1",
     "form-data": "^4.0.5",
     "fs-extra": "11.3.2",
-    "glob": "^13.0.0"
+    "glob": "^13.0.0",
+    "zod": "^3.23.8",
+    "zod-to-json-schema": "^3.25.0"
   },
   "devDependencies": {
     "@types/fs-extra": "^11.0.4",

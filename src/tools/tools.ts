@@ -1,3 +1,4 @@
+import { z } from 'zod';
 import {
   authenticateWithToken,
   findProject,
@@ -39,718 +40,314 @@ export const toolDefinitions = [
   {
     name: "wavemaker_authenticate",
     description: "Authenticate with WaveMaker Studio using an auth token. Returns a formatted auth cookie for subsequent requests.",
-    inputSchema: {
-      type: "object",
-      properties: {
-        baseUrl: {
-          type: "string",
-          description: "The base URL of the WaveMaker Studio instance (e.g., https://www.wavemakeronline.com)",
-        },
-        authToken: {
-          type: "string",
-          description: "The authentication token to validate",
-        },
-      },
-      required: ["baseUrl", "authToken"],
-    },
+    inputSchema: z.object({
+      baseUrl: z.string().describe("The base URL of the WaveMaker Studio instance (e.g., https://www.wavemakeronline.com)"),
+      authToken: z.string().describe("The authentication token to validate")
+    }),
+    outputSchema: z.any()
   },
   {
     name: "wavemaker_find_project",
     description: "Find a WaveMaker project ID by project name and preview URL. Returns the project ID and platform version.",
-    inputSchema: {
-      type: "object",
-      properties: {
-        baseUrl: {
-          type: "string",
-          description: "The base URL of the WaveMaker Studio instance",
-        },
-        authCookie: {
-          type: "string",
-          description: "The authentication cookie (auth_cookie=...)",
-        },
-        projectName: {
-          type: "string",
-          description: "The display name of the project to find",
-        },
-        appPreviewUrl: {
-          type: "string",
-          description: "The full preview URL of the application",
-        },
-      },
-      required: ["baseUrl", "authCookie", "projectName", "appPreviewUrl"],
-    },
+    inputSchema: z.object({
+      baseUrl: z.string().describe("The base URL of the WaveMaker Studio instance"),
+      authCookie: z.string().describe("The authentication cookie (auth_cookie=...)"),
+      projectName: z.string().describe("The display name of the project to find"),
+      appPreviewUrl: z.string().describe("The full preview URL of the application")
+    }),
+    outputSchema: z.any()
   },
   {
     name: "wavemaker_download_project",
     description: "Download a WaveMaker project to a local directory. Creates a git repository with the project files. Only supports WaveMaker platform version >=11.4.0.",
-    inputSchema: {
-      type: "object",
-      properties: {
-        baseUrl: {
-          type: "string",
-          description: "The base URL of the WaveMaker Studio instance",
-        },
-        projectId: {
-          type: "string",
-          description: "The project ID (studioProjectId) to download",
-        },
-        authCookie: {
-          type: "string",
-          description: "The authentication cookie (auth_cookie=...)",
-        },
-        projectDir: {
-          type: "string",
-          description: "The local directory path where the project should be downloaded",
-        },
-      },
-      required: ["baseUrl", "projectId", "authCookie", "projectDir"],
-    },
+    inputSchema: z.object({
+      baseUrl: z.string().describe("The base URL of the WaveMaker Studio instance"),
+      projectId: z.string().describe("The project ID (studioProjectId) to download"),
+      authCookie: z.string().describe("The authentication cookie (auth_cookie=...)"),
+      projectDir: z.string().describe("The local directory path where the project should be downloaded")
+    }),
+    outputSchema: z.any()
   },
   {
     name: "wavemaker_pull_changes",
     description: "Pull the latest changes from WaveMaker Studio for a project. Returns a list of changed files. Only supports WaveMaker platform version >=11.4.0.",
-    inputSchema: {
-      type: "object",
-      properties: {
-        baseUrl: {
-          type: "string",
-          description: "The base URL of the WaveMaker Studio instance",
-        },
-        projectId: {
-          type: "string",
-          description: "The project ID (studioProjectId)",
-        },
-        authCookie: {
-          type: "string",
-          description: "The authentication cookie (auth_cookie=...)",
-        },
-        projectDir: {
-          type: "string",
-          description: "The local directory path of the project",
-        },
-        remoteBaseCommitId: {
-          type: "string",
-          description: "The remote base commit ID from the previous download or pull",
-        },
-      },
-      required: ["baseUrl", "projectId", "authCookie", "projectDir", "remoteBaseCommitId"],
-    },
+    inputSchema: z.object({
+      baseUrl: z.string().describe("The base URL of the WaveMaker Studio instance"),
+      projectId: z.string().describe("The project ID (studioProjectId)"),
+      authCookie: z.string().describe("The authentication cookie (auth_cookie=...)"),
+      projectDir: z.string().describe("The local directory path of the project"),
+      remoteBaseCommitId: z.string().describe("The remote base commit ID from the previous download or pull")
+    }),
+    outputSchema: z.any()
   },
   {
     name: "wavemaker_push_changes",
     description: "Push local changes to WaveMaker Studio. Stashes changes, pulls latest, re-applies changes, commits and pushes.",
-    inputSchema: {
-      type: "object",
-      properties: {
-        baseUrl: {
-          type: "string",
-          description: "The base URL of the WaveMaker Studio instance",
-        },
-        projectId: {
-          type: "string",
-          description: "The project ID (studioProjectId)",
-        },
-        authCookie: {
-          type: "string",
-          description: "The authentication cookie (auth_cookie=...)",
-        },
-        projectDir: {
-          type: "string",
-          description: "The local directory path of the project",
-        },
-        remoteBaseCommitId: {
-          type: "string",
-          description: "The remote base commit ID from the previous download or pull",
-        },
-        commitMessage: {
-          type: "string",
-          description: "Optional commit message. Defaults to timestamp-based message if not provided.",
-        },
-      },
-      required: ["baseUrl", "projectId", "authCookie", "projectDir", "remoteBaseCommitId"],
-    },
+    inputSchema: z.object({
+      baseUrl: z.string().describe("The base URL of the WaveMaker Studio instance"),
+      projectId: z.string().describe("The project ID (studioProjectId)"),
+      authCookie: z.string().describe("The authentication cookie (auth_cookie=...)"),
+      projectDir: z.string().describe("The local directory path of the project"),
+      remoteBaseCommitId: z.string().describe("The remote base commit ID from the previous download or pull"),
+      commitMessage: z.string().optional().describe("Optional commit message. Defaults to timestamp-based message if not provided.")
+    }),
+    outputSchema: z.any()
   },
   // WavePulse Tools
   {
     name: "wavepulse_get_element_tree",
     description: "Get the element tree from the connected mobile app. Returns the widget/element hierarchy with id, name, tagName, and children. Use the 'id' field from the response for widget property/style lookups.",
-    inputSchema: {
-      type: "object",
-      properties: {
-        baseUrl: {
-          type: "string",
-          description: "The base URL of the WavePulse server (e.g., http://localhost:3000/wavepulse)",
-        },
-        channelId: {
-          type: "string",
-          description: "The channel ID of the connected mobile app",
-        },
-      },
-      required: ["baseUrl", "channelId"],
-    },
+    inputSchema: z.object({
+      baseUrl: z.string().describe("The base URL of the WavePulse server (e.g., http://localhost:3000/wavepulse)"),
+      channelId: z.string().describe("The channel ID of the connected mobile app")
+    }),
+    outputSchema: z.any()
   },
   {
     name: "wavepulse_get_network_logs",
     description: "Get accumulated network request logs from the connected mobile app. Returns all HTTP requests made by the app.",
-    inputSchema: {
-      type: "object",
-      properties: {
-        baseUrl: {
-          type: "string",
-          description: "The base URL of the WavePulse server (e.g., http://localhost:3000/wavepulse)",
-        },
-        channelId: {
-          type: "string",
-          description: "The channel ID of the connected mobile app",
-        },
-      },
-      required: ["baseUrl", "channelId"],
-    },
+    inputSchema: z.object({
+      baseUrl: z.string().describe("The base URL of the WavePulse server (e.g., http://localhost:3000/wavepulse)"),
+      channelId: z.string().describe("The channel ID of the connected mobile app")
+    }),
+    outputSchema: z.any()
   },
   {
     name: "wavepulse_clear_network_logs",
     description: "Clear all network logs for the specified channel.",
-    inputSchema: {
-      type: "object",
-      properties: {
-        baseUrl: {
-          type: "string",
-          description: "The base URL of the WavePulse server (e.g., http://localhost:3000/wavepulse)",
-        },
-        channelId: {
-          type: "string",
-          description: "The channel ID of the connected mobile app",
-        },
-      },
-      required: ["baseUrl", "channelId"],
-    },
+    inputSchema: z.object({
+      baseUrl: z.string().describe("The base URL of the WavePulse server (e.g., http://localhost:3000/wavepulse)"),
+      channelId: z.string().describe("The channel ID of the connected mobile app")
+    }),
+    outputSchema: z.any()
   },
   {
     name: "wavepulse_get_console_logs",
     description: "Get accumulated console logs from the connected mobile app. Returns debug, info, warn, and error console messages.",
-    inputSchema: {
-      type: "object",
-      properties: {
-        baseUrl: {
-          type: "string",
-          description: "The base URL of the WavePulse server (e.g., http://localhost:3000/wavepulse)",
-        },
-        channelId: {
-          type: "string",
-          description: "The channel ID of the connected mobile app",
-        },
-      },
-      required: ["baseUrl", "channelId"],
-    },
+    inputSchema: z.object({
+      baseUrl: z.string().describe("The base URL of the WavePulse server (e.g., http://localhost:3000/wavepulse)"),
+      channelId: z.string().describe("The channel ID of the connected mobile app")
+    }),
+    outputSchema: z.any()
   },
   {
     name: "wavepulse_clear_console_logs",
     description: "Clear all console logs for the specified channel.",
-    inputSchema: {
-      type: "object",
-      properties: {
-        baseUrl: {
-          type: "string",
-          description: "The base URL of the WavePulse server (e.g., http://localhost:3000/wavepulse)",
-        },
-        channelId: {
-          type: "string",
-          description: "The channel ID of the connected mobile app",
-        },
-      },
-      required: ["baseUrl", "channelId"],
-    },
+    inputSchema: z.object({
+      baseUrl: z.string().describe("The base URL of the WavePulse server (e.g., http://localhost:3000/wavepulse)"),
+      channelId: z.string().describe("The channel ID of the connected mobile app")
+    }),
+    outputSchema: z.any()
   },
   {
     name: "wavepulse_get_timeline",
     description: "Get accumulated timeline events from the connected mobile app. Returns events like APP_STARTUP, VARIABLE_INVOKE, PAGE_READY, and NETWORK_REQUEST.",
-    inputSchema: {
-      type: "object",
-      properties: {
-        baseUrl: {
-          type: "string",
-          description: "The base URL of the WavePulse server (e.g., http://localhost:3000/wavepulse)",
-        },
-        channelId: {
-          type: "string",
-          description: "The channel ID of the connected mobile app",
-        },
-      },
-      required: ["baseUrl", "channelId"],
-    },
+    inputSchema: z.object({
+      baseUrl: z.string().describe("The base URL of the WavePulse server (e.g., http://localhost:3000/wavepulse)"),
+      channelId: z.string().describe("The channel ID of the connected mobile app")
+    }),
+    outputSchema: z.any()
   },
   {
     name: "wavepulse_clear_timeline",
     description: "Clear all timeline events for the specified channel.",
-    inputSchema: {
-      type: "object",
-      properties: {
-        baseUrl: {
-          type: "string",
-          description: "The base URL of the WavePulse server (e.g., http://localhost:3000/wavepulse)",
-        },
-        channelId: {
-          type: "string",
-          description: "The channel ID of the connected mobile app",
-        },
-      },
-      required: ["baseUrl", "channelId"],
-    },
+    inputSchema: z.object({
+      baseUrl: z.string().describe("The base URL of the WavePulse server (e.g., http://localhost:3000/wavepulse)"),
+      channelId: z.string().describe("The channel ID of the connected mobile app")
+    }),
+    outputSchema: z.any()
   },
   {
     name: "wavepulse_get_storage",
     description: "Get all storage entries from the connected mobile app. Returns AsyncStorage/localStorage key-value pairs.",
-    inputSchema: {
-      type: "object",
-      properties: {
-        baseUrl: {
-          type: "string",
-          description: "The base URL of the WavePulse server (e.g., http://localhost:3000/wavepulse)",
-        },
-        channelId: {
-          type: "string",
-          description: "The channel ID of the connected mobile app",
-        },
-      },
-      required: ["baseUrl", "channelId"],
-    },
+    inputSchema: z.object({
+      baseUrl: z.string().describe("The base URL of the WavePulse server (e.g., http://localhost:3000/wavepulse)"),
+      channelId: z.string().describe("The channel ID of the connected mobile app")
+    }),
+    outputSchema: z.any()
   },
   {
     name: "wavepulse_get_info",
     description: "Get app and platform information from the connected mobile app. Returns app details (name, version, theme, locale) and platform details (os, device).",
-    inputSchema: {
-      type: "object",
-      properties: {
-        baseUrl: {
-          type: "string",
-          description: "The base URL of the WavePulse server (e.g., http://localhost:3000/wavepulse)",
-        },
-        channelId: {
-          type: "string",
-          description: "The channel ID of the connected mobile app",
-        },
-      },
-      required: ["baseUrl", "channelId"],
-    },
+    inputSchema: z.object({
+      baseUrl: z.string().describe("The base URL of the WavePulse server (e.g., http://localhost:3000/wavepulse)"),
+      channelId: z.string().describe("The channel ID of the connected mobile app")
+    }),
+    outputSchema: z.any()
   },
   {
     name: "wavepulse_get_widget",
     description: "Get both properties and styles for a specific widget. Use the 'id' field from the element tree response (not the 'name' field) as the widgetId parameter.",
-    inputSchema: {
-      type: "object",
-      properties: {
-        baseUrl: {
-          type: "string",
-          description: "The base URL of the WavePulse server (e.g., http://localhost:3000/wavepulse)",
-        },
-        channelId: {
-          type: "string",
-          description: "The channel ID of the connected mobile app",
-        },
-        widgetId: {
-          type: "string",
-          description: "The widget ID from the element tree (use the 'id' field, not 'name')",
-        },
-      },
-      required: ["baseUrl", "channelId", "widgetId"],
-    },
+    inputSchema: z.object({
+      baseUrl: z.string().describe("The base URL of the WavePulse server (e.g., http://localhost:3000/wavepulse)"),
+      channelId: z.string().describe("The channel ID of the connected mobile app"),
+      widgetId: z.string().describe("The widget ID from the element tree (use the 'id' field, not 'name')")
+    }),
+    outputSchema: z.any()
   },
   {
     name: "wavepulse_get_widget_properties",
     description: "Get only properties for a specific widget. Use the 'id' field from the element tree response (not the 'name' field) as the widgetId parameter.",
-    inputSchema: {
-      type: "object",
-      properties: {
-        baseUrl: {
-          type: "string",
-          description: "The base URL of the WavePulse server (e.g., http://localhost:3000/wavepulse)",
-        },
-        channelId: {
-          type: "string",
-          description: "The channel ID of the connected mobile app",
-        },
-        widgetId: {
-          type: "string",
-          description: "The widget ID from the element tree (use the 'id' field, not 'name')",
-        },
-      },
-      required: ["baseUrl", "channelId", "widgetId"],
-    },
+    inputSchema: z.object({
+      baseUrl: z.string().describe("The base URL of the WavePulse server (e.g., http://localhost:3000/wavepulse)"),
+      channelId: z.string().describe("The channel ID of the connected mobile app"),
+      widgetId: z.string().describe("The widget ID from the element tree (use the 'id' field, not 'name')")
+    }),
+    outputSchema: z.any()
   },
   {
     name: "wavepulse_get_widget_styles",
     description: "Get only styles for a specific widget. Use the 'id' field from the element tree response (not the 'name' field) as the widgetId parameter. Returns styles organized by widget part (root, label, etc.).",
-    inputSchema: {
-      type: "object",
-      properties: {
-        baseUrl: {
-          type: "string",
-          description: "The base URL of the WavePulse server (e.g., http://localhost:3000/wavepulse)",
-        },
-        channelId: {
-          type: "string",
-          description: "The channel ID of the connected mobile app",
-        },
-        widgetId: {
-          type: "string",
-          description: "The widget ID from the element tree (use the 'id' field, not 'name')",
-        },
-      },
-      required: ["baseUrl", "channelId", "widgetId"],
-    },
+    inputSchema: z.object({
+      baseUrl: z.string().describe("The base URL of the WavePulse server (e.g., http://localhost:3000/wavepulse)"),
+      channelId: z.string().describe("The channel ID of the connected mobile app"),
+      widgetId: z.string().describe("The widget ID from the element tree (use the 'id' field, not 'name')")
+    }),
+    outputSchema: z.any()
   },
   // Filesystem Tools
   {
     name: "filesystem_execute_command",
     description: "Execute a whitelisted shell command with optional arguments. Allowed commands: git, npm, node, npx, yarn, pnpm, ls, cat, grep, find, echo, pwd, which, whoami, date, wc, head, tail, sort, uniq, diff, tree, du, df",
-    inputSchema: {
-      type: "object",
-      properties: {
-        command: {
-          type: "string",
-          description: "The command to execute (must be in whitelist)",
-        },
-        args: {
-          type: "array",
-          items: { type: "string" },
-          description: "Command arguments",
-        },
-        cwd: {
-          type: "string",
-          description: "Working directory for command execution",
-        },
-        timeout: {
-          type: "number",
-          description: "Timeout in milliseconds (default: 30000)",
-        },
-        shell: {
-          type: "boolean",
-          description: "Execute in shell (default: false)",
-        },
-      },
-      required: ["command"],
-    },
+    inputSchema: z.object({
+      command: z.string().describe("The command to execute (must be in whitelist)"),
+      args: z.array(z.string()).optional().describe("Command arguments"),
+      cwd: z.string().optional().describe("Working directory for command execution"),
+      timeout: z.number().optional().describe("Timeout in milliseconds (default: 30000)"),
+      shell: z.boolean().optional().describe("Execute in shell (default: false)")
+    }),
+    outputSchema: z.any()
   },
   {
     name: "filesystem_echo_command",
     description: "Echo text to stdout or write to a file",
-    inputSchema: {
-      type: "object",
-      properties: {
-        text: {
-          type: "string",
-          description: "Text to echo",
-        },
-        newline: {
-          type: "boolean",
-          description: "Add newline at the end (default: true)",
-        },
-        filePath: {
-          type: "string",
-          description: "Optional file path to write text to instead of stdout",
-        },
-      },
-      required: ["text"],
-    },
+    inputSchema: z.object({
+      text: z.string().describe("Text to echo"),
+      newline: z.boolean().optional().describe("Add newline at the end (default: true)"),
+      filePath: z.string().optional().describe("Optional file path to write text to instead of stdout")
+    }),
+    outputSchema: z.any()
   },
   {
     name: "filesystem_sed_command",
     description: "Perform sed-like text replacement in a file using regex patterns",
-    inputSchema: {
-      type: "object",
-      properties: {
-        filePath: {
-          type: "string",
-          description: "Path to the file to edit",
-        },
-        pattern: {
-          type: "string",
-          description: "Regex pattern to find",
-        },
-        replacement: {
-          type: "string",
-          description: "Replacement text",
-        },
-        flags: {
-          type: "string",
-          description: "Regex flags (default: 'g' for global)",
-        },
-        backup: {
-          type: "boolean",
-          description: "Create backup before modifying (default: true)",
-        },
-        inPlace: {
-          type: "boolean",
-          description: "Edit file in-place (default: true)",
-        },
-      },
-      required: ["filePath", "pattern", "replacement"],
-    },
+    inputSchema: z.object({
+      filePath: z.string().describe("Path to the file to edit"),
+      pattern: z.string().describe("Regex pattern to find"),
+      replacement: z.string().describe("Replacement text"),
+      flags: z.string().optional().describe("Regex flags (default: 'g' for global)"),
+      backup: z.boolean().optional().describe("Create backup before modifying (default: true)"),
+      inPlace: z.boolean().optional().describe("Edit file in-place (default: true)")
+    }),
+    outputSchema: z.any()
   },
   {
     name: "filesystem_read_file",
     description: "Read file contents with support for different encodings, partial reading, and binary files. Paths can be absolute (e.g., /Users/name/file.txt) or relative (resolved from MCP server's working directory).",
-    inputSchema: {
-      type: "object",
-      properties: {
-        filePath: {
-          type: "string",
-          description: "Path to the file to read",
-        },
-        encoding: {
-          type: "string",
-          description: "File encoding (default: 'utf-8')",
-        },
-        offset: {
-          type: "number",
-          description: "Starting line number for partial read",
-        },
-        limit: {
-          type: "number",
-          description: "Number of lines to read",
-        },
-        binary: {
-          type: "boolean",
-          description: "Read as binary and return base64 encoded (default: false)",
-        },
-      },
-      required: ["filePath"],
-    },
+    inputSchema: z.object({
+      filePath: z.string().describe("Path to the file to read"),
+      encoding: z.string().optional().describe("File encoding (default: 'utf-8')"),
+      offset: z.number().optional().describe("Starting line number for partial read"),
+      limit: z.number().optional().describe("Number of lines to read"),
+      binary: z.boolean().optional().describe("Read as binary and return base64 encoded (default: false)")
+    }),
+    outputSchema: z.any()
   },
   {
     name: "filesystem_write_file",
     description: "Write content to a file with atomic write operation, optional backup, and directory creation",
-    inputSchema: {
-      type: "object",
-      properties: {
-        filePath: {
-          type: "string",
-          description: "Path to the file to write",
-        },
-        content: {
-          type: "string",
-          description: "Content to write to the file",
-        },
-        encoding: {
-          type: "string",
-          description: "File encoding (default: 'utf-8')",
-        },
-        createDirs: {
-          type: "boolean",
-          description: "Create parent directories if they don't exist (default: true)",
-        },
-        backup: {
-          type: "boolean",
-          description: "Create backup of existing file (default: false)",
-        },
-        mode: {
-          type: "string",
-          description: "File permissions in octal format (e.g., '0644')",
-        },
-      },
-      required: ["filePath", "content"],
-    },
+    inputSchema: z.object({
+      filePath: z.string().describe("Path to the file to write"),
+      content: z.string().describe("Content to write to the file"),
+      encoding: z.string().optional().describe("File encoding (default: 'utf-8')"),
+      createDirs: z.boolean().optional().describe("Create parent directories if they don't exist (default: true)"),
+      backup: z.boolean().optional().describe("Create backup of existing file (default: false)"),
+      mode: z.string().optional().describe("File permissions in octal format (e.g., '0644')")
+    }),
+    outputSchema: z.any()
   },
   {
     name: "filesystem_append_file",
     description: "Append content to an existing file or create a new file",
-    inputSchema: {
-      type: "object",
-      properties: {
-        filePath: {
-          type: "string",
-          description: "Path to the file to append to",
-        },
-        content: {
-          type: "string",
-          description: "Content to append",
-        },
-        encoding: {
-          type: "string",
-          description: "File encoding (default: 'utf-8')",
-        },
-        createIfMissing: {
-          type: "boolean",
-          description: "Create file if it doesn't exist (default: true)",
-        },
-        newlineBefore: {
-          type: "boolean",
-          description: "Add newline before content (default: true)",
-        },
-      },
-      required: ["filePath", "content"],
-    },
+    inputSchema: z.object({
+      filePath: z.string().describe("Path to the file to append to"),
+      content: z.string().describe("Content to append"),
+      encoding: z.string().optional().describe("File encoding (default: 'utf-8')"),
+      createIfMissing: z.boolean().optional().describe("Create file if it doesn't exist (default: true)"),
+      newlineBefore: z.boolean().optional().describe("Add newline before content (default: true)")
+    }),
+    outputSchema: z.any()
   },
   {
     name: "filesystem_grep_files",
     description: "Search for regex patterns in files with recursive directory search. IMPORTANT: Use absolute paths (e.g., /Users/name/project) or paths will be resolved relative to the MCP server's working directory. Supports context lines, file filtering by glob patterns (e.g., '*.ts', '**/*.json'), and case-insensitive search. Returns match count and files searched count.",
-    inputSchema: {
-      type: "object",
-      properties: {
-        pattern: {
-          type: "string",
-          description: "Regex pattern to search for",
-        },
-        paths: {
-          type: "array",
-          items: { type: "string" },
-          description: "Array of file or directory paths to search",
-        },
-        recursive: {
-          type: "boolean",
-          description: "Recursively search directories (default: true)",
-        },
-        ignoreCase: {
-          type: "boolean",
-          description: "Case-insensitive search (default: false)",
-        },
-        includeLineNumbers: {
-          type: "boolean",
-          description: "Include line numbers in results (default: true)",
-        },
-        contextLines: {
-          type: "number",
-          description: "Number of context lines to show around matches (default: 0)",
-        },
-        maxResults: {
-          type: "number",
-          description: "Maximum number of results to return (default: 1000)",
-        },
-        filePattern: {
-          type: "string",
-          description: "Glob pattern to filter files (e.g., '*.ts')",
-        },
-        excludePattern: {
-          type: "string",
-          description: "Glob pattern to exclude files",
-        },
-      },
-      required: ["pattern", "paths"],
-    },
+    inputSchema: z.object({
+      pattern: z.string().describe("Regex pattern to search for"),
+      paths: z.array(z.string()).describe("Array of file or directory paths to search"),
+      recursive: z.boolean().optional().describe("Recursively search directories (default: true)"),
+      ignoreCase: z.boolean().optional().describe("Case-insensitive search (default: false)"),
+      includeLineNumbers: z.boolean().optional().describe("Include line numbers in results (default: true)"),
+      contextLines: z.number().optional().describe("Number of context lines to show around matches (default: 0)"),
+      maxResults: z.number().optional().describe("Maximum number of results to return (default: 1000)"),
+      filePattern: z.string().optional().describe("Glob pattern to filter files (e.g., '*.ts')"),
+      excludePattern: z.string().optional().describe("Glob pattern to exclude files")
+    }),
+    outputSchema: z.any()
   },
   {
     name: "filesystem_find_files",
     description: "Find files by glob pattern (e.g., '*.json', '**/*.ts', '**/src/**/*.js'). IMPORTANT: Use absolute searchPath (e.g., /Users/name/project) or it will be resolved relative to the MCP server's working directory. Pattern examples: '*.json' (files in search dir only), '**/*.json' (recursive all subdirs), '**/test/**/*.ts' (specific subdirectories). Supports type filtering, depth limits, and returns file metadata.",
-    inputSchema: {
-      type: "object",
-      properties: {
-        searchPath: {
-          type: "string",
-          description: "Root directory to search from",
-        },
-        pattern: {
-          type: "string",
-          description: "Glob pattern to match files (e.g., '*.ts', '**/*.json')",
-        },
-        type: {
-          type: "string",
-          enum: ["file", "directory", "all"],
-          description: "Filter by type (default: 'all')",
-        },
-        maxDepth: {
-          type: "number",
-          description: "Maximum directory depth to search",
-        },
-        ignoreHidden: {
-          type: "boolean",
-          description: "Ignore hidden files and directories (default: true)",
-        },
-        followSymlinks: {
-          type: "boolean",
-          description: "Follow symbolic links (default: false)",
-        },
-        maxResults: {
-          type: "number",
-          description: "Maximum number of results (default: 1000)",
-        },
-      },
-      required: ["searchPath"],
-    },
+    inputSchema: z.object({
+      searchPath: z.string().describe("Root directory to search from"),
+      pattern: z.string().optional().describe("Glob pattern to match files (e.g., '*.ts', '**/*.json')"),
+      type: z.enum(["file", "directory", "all"]).optional().describe("Filter by type (default: 'all')"),
+      maxDepth: z.number().optional().describe("Maximum directory depth to search"),
+      ignoreHidden: z.boolean().optional().describe("Ignore hidden files and directories (default: true)"),
+      followSymlinks: z.boolean().optional().describe("Follow symbolic links (default: false)"),
+      maxResults: z.number().optional().describe("Maximum number of results (default: 1000)")
+    }),
+    outputSchema: z.any()
   },
   {
     name: "filesystem_list_directory",
     description: "List directory contents with detailed file information, sorting, and filtering options. Paths can be absolute (e.g., /Users/name/dir) or relative (resolved from MCP server's working directory). Supports recursive listing, hidden file filtering, and sorting by name/size/modified date.",
-    inputSchema: {
-      type: "object",
-      properties: {
-        directoryPath: {
-          type: "string",
-          description: "Path to the directory to list",
-        },
-        recursive: {
-          type: "boolean",
-          description: "List subdirectories recursively (default: false)",
-        },
-        includeHidden: {
-          type: "boolean",
-          description: "Include hidden files (default: false)",
-        },
-        includeStats: {
-          type: "boolean",
-          description: "Include file statistics (default: true)",
-        },
-        sortBy: {
-          type: "string",
-          enum: ["name", "size", "modified"],
-          description: "Sort entries by field (default: 'name')",
-        },
-        pattern: {
-          type: "string",
-          description: "Glob pattern to filter entries",
-        },
-      },
-      required: ["directoryPath"],
-    },
+    inputSchema: z.object({
+      directoryPath: z.string().describe("Path to the directory to list"),
+      recursive: z.boolean().optional().describe("List subdirectories recursively (default: false)"),
+      includeHidden: z.boolean().optional().describe("Include hidden files (default: false)"),
+      includeStats: z.boolean().optional().describe("Include file statistics (default: true)"),
+      sortBy: z.enum(["name", "size", "modified"]).optional().describe("Sort entries by field (default: 'name')"),
+      pattern: z.string().optional().describe("Glob pattern to filter entries")
+    }),
+    outputSchema: z.any()
   },
   {
     name: "filesystem_edit_file",
     description: "Edit file with multiple line-based operations (insert, replace, delete) with atomic updates and backup",
-    inputSchema: {
-      type: "object",
-      properties: {
-        filePath: {
-          type: "string",
-          description: "Path to the file to edit",
-        },
-        operations: {
-          type: "array",
-          items: {
-            type: "object",
-            properties: {
-              type: {
-                type: "string",
-                enum: ["insert", "replace", "delete"],
-                description: "Type of operation",
-              },
-              startLine: {
-                type: "number",
-                description: "Starting line number (1-based)",
-              },
-              endLine: {
-                type: "number",
-                description: "Ending line number for replace/delete operations",
-              },
-              content: {
-                type: "string",
-                description: "Content for insert/replace operations",
-              },
-            },
-            required: ["type", "startLine"],
-          },
-          description: "Array of edit operations to apply",
-        },
-        backup: {
-          type: "boolean",
-          description: "Create backup before editing (default: true)",
-        },
-      },
-      required: ["filePath", "operations"],
-    },
+    inputSchema: z.object({
+      filePath: z.string().describe("Path to the file to edit"),
+      operations: z.array(z.object({
+        type: z.enum(["insert", "replace", "delete"]).describe("Type of operation"),
+        startLine: z.number().describe("Starting line number (1-based)"),
+        endLine: z.number().optional().describe("Ending line number for replace/delete operations"),
+        content: z.string().optional().describe("Content for insert/replace operations")
+      })).describe("Array of edit operations to apply"),
+      backup: z.boolean().optional().describe("Create backup before editing (default: true)")
+    }),
+    outputSchema: z.any()
   },
 ];
 
 // Central tool execution handler
-export async function handleToolCall(name: string, args: any) {
+export async function handleToolCall(name: string, args: any, context?: any) {
+  // context contains _meta with projectId, auth_cookie, platformType, etc.
+  // Currently not used by RN tools (they take explicit parameters)
+  // But available for future extensibility and consistency with UI server
+  
+  console.log(`[handleToolCall] START: ${name}`);
+  console.log(`[handleToolCall] Args:`, JSON.stringify(args));
+  console.log(`[handleToolCall] Context:`, context ? 'present' : 'absent');
+  
   try {
     switch (name) {
       case "wavemaker_authenticate": {

@@ -1,0 +1,21 @@
+{
+  "name": "wavemaker-react-prompt-tests",
+  "version": "1.0.0",
+  "description": "Automated testing for WaveMaker ReAct Agent",
+  "type": "module",
+  "scripts": {
+    "test": "node test-runner.js",
+    "validate": "node validator.js"
+  },
+  "dependencies": {
+    "@google/genai": "1.32.0",
+    "@modelcontextprotocol/sdk": "1.24.3",
+    "openai": "^6.10.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

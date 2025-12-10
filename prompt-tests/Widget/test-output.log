@@ -1,0 +1,119 @@
+[36m════════════════════════════════════════════════════════════[0m
+[36m  Comprehensive Widget Understanding Test (25 Questions)[0m
+[36m════════════════════════════════════════════════════════════[0m
+
+[36m📡 Connecting to MCP server...[0m
+WaveMaker RN MCP Server running on stdio
+[32m✅ Connected (60 tools available)[0m
+
+[33mRunning 25 test questions...[0m
+
+[34m[1/25] How many props does Accordion have?[0m
+[32m✓ Answered[0m
+undefined  Tools: search_widget_by_name, read_widget_structure[0m
+
+[34m[2/25] How many props does Text have?[0m
+[32m✓ Answered[0m
+undefined  Tools: search_widget_by_name, read_widget_structure[0m
+
+[34m[3/25] How many props does Form have?[0m
+[32m✓ Answered[0m
+undefined  Tools: search_widget_by_name, read_widget_structure[0m
+
+[34m[4/25] How many props does Label have?[0m
+[32m✓ Answered[0m
+undefined  Tools: search_widget_by_name, read_widget_structure[0m
+
+[34m[5/25] How many props does Checkbox have?[0m
+[32m✓ Answered[0m
+undefined  Tools: search_widget_by_name, read_widget_structure[0m
+
+[34m[6/25] What events does RadioSet widget support?[0m
+[32m✓ Answered[0m
+undefined  Tools: search_widget_by_name, read_widget_structure[0m
+
+[34m[7/25] What events are available for Tab?[0m
+[32m✓ Answered[0m
+undefined  Tools: search_widget_by_name, read_widget_structure[0m
+
+[34m[8/25] Does Picture widget have any events?[0m
+[32m✓ Answered[0m
+undefined  Tools: search_widget_by_name, read_widget_structure[0m
+
+[34m[9/25] List all events for Checkbox widget[0m
+[32m✓ Answered[0m
+undefined  Tools: search_widget_by_name, read_widget_structure[0m
+
+[34m[10/25] How do I style the Button widget?[0m
+[32m✓ Answered[0m
+undefined  Tools: search_widget_by_name, read_widget_structure[0m
+
+[34m[11/25] What CSS classes are available for Text widget?[0m
+[32m✓ Answered[0m
+undefined  Tools: search_widget_by_name, read_widget_structure[0m
+
+[34m[12/25] How do I change the text color in Button?[0m
+[32m✓ Answered[0m
+undefined  Tools: search_widget_by_name, read_widget_structure[0m
+
+[34m[13/25] Which style part does app-button-badge affect?[0m
+[32m✓ Answered[0m
+undefined  Tools: search_widget_by_name, read_widget_structure[0m
+
+[34m[14/25] Does Text widget inherit props from a parent class?[0m
+[32m✓ Answered[0m
+undefined  Tools: search_widget_by_name, read_widget_structure[0m
+
+[34m[15/25] What is the parent class of Text widget?[0m
+[32m✓ Answered[0m
+undefined  Tools: analyze_component_hierarchy[0m
+
+[34m[16/25] How many inherited props does Text have?[0m
+[32m✓ Answered[0m
+undefined  Tools: search_widget_by_name, read_widget_structure[0m
+
+[34m[17/25] Which has more props, Button or Text?[0m
+[32m✓ Answered[0m
+undefined  Tools: search_widget_by_name, read_widget_structure[0m
+
+[34m[18/25] Compare the number of events between Button and Picture[0m
+[32m✓ Answered[0m
+undefined  Tools: search_widget_by_name, read_widget_structure[0m
+
+[34m[19/25] What are the required props for Text widget?[0m
+[32m✓ Answered[0m
+undefined  Tools: search_widget_by_name, read_widget_structure[0m
+
+[34m[20/25] What is the default value of iconposition prop in Button?[0m
+[32m✓ Answered[0m
+undefined  Tools: search_widget_by_name, read_widget_structure[0m
+
+[34m[21/25] How many props does Container widget have?[0m
+Widget Unknown not found in catalog
+Widget Unknown not found in catalog
+[32m✓ Answered[0m
+undefined  Tools: search_widget_by_name, read_widget_structure[0m
+
+[34m[22/25] What events does Switch widget support?[0m
+[32m✓ Answered[0m
+undefined  Tools: search_widget_by_name, read_widget_structure[0m
+
+[34m[23/25] Does Label widget extend any parent class?[0m
+[32m✓ Answered[0m
+undefined  Tools: search_widget_by_name, read_widget_structure[0m
+
+[34m[24/25] What style classes are available for Picture?[0m
+[32m✓ Answered[0m
+undefined  Tools: search_widget_by_name, read_widget_structure[0m
+
+[34m[25/25] List all props that start with 'icon' in Button widget[0m
+[32m✓ Answered[0m
+undefined  Tools: search_widget_by_name, read_widget_structure[0m
+
+[36m════════════════════════════════════════════════════════════[0m
+[32m✅ Completed: 25/25 questions[0m
+[36m════════════════════════════════════════════════════════════[0m
+
+[32m📄 Results saved to: /Users/raajr_500278/ai/wavemaker-rn-mcp/prompt-tests/Widget/test-results-1765355364173.md[0m
+[33mPlease review the file and validate answers manually.[0m
+

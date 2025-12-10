@@ -3,7 +3,6 @@
  * Exports all 35 codebase tools for MCP server
  */
 
-import { Tool } from '@modelcontextprotocol/sdk/types.js';
 import { CodebaseToolResult } from './types.js';
 
 // Import all tool groups
@@ -16,12 +15,13 @@ import { fragmentPageTools, fragmentPageHandlers } from './fragments/index.js';
 import { serviceTools, serviceHandlers } from './services/index.js';
 
 /**
- * All 35 codebase tools
+ * All 33 codebase tools (with Zod schemas)
+ * Removed 2 problematic style tools: search_style_definitions, search_class_names
  */
-export const codebaseTools: Tool[] = [
+export const codebaseTools = [
   ...baseComponentTools,        // 6 tools
   ...widgetComponentTools,       // 5 tools
-  ...styleThemeTools,            // 7 tools
+  ...styleThemeTools,            // 5 tools (removed 2)
   ...transpilerCodegenTools,     // 6 tools
   ...variableBindingTools,       // 5 tools
   ...fragmentPageTools,          // 3 tools
@@ -78,7 +78,7 @@ export async function executeCodebaseTool(
 /**
  * Get tool by name
  */
-export function getCodebaseTool(toolName: string): Tool | undefined {
+export function getCodebaseTool(toolName: string) {
   return codebaseTools.find(t => t.name === toolName);
 }
 

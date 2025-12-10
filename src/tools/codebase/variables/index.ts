@@ -2,7 +2,7 @@
  * Variable & Binding Tools Registry
  */
 
-import { Tool } from '@modelcontextprotocol/sdk/types.js';
+import { z } from 'zod';
 import { handleSearchVariableSystem } from './variable-search.js';
 import { handleSearchBindingMechanism } from './binding-search.js';
 import { handleSearchWatcherSystem } from './watcher-search.js';
@@ -10,7 +10,7 @@ import { handleSearchVariableTypes } from './variable-types.js';
 import { handleAnalyzeBindingFlow } from './binding-flow.js';
 import { CodebaseToolResult } from '../types.js';
 
-export const variableBindingTools: Tool[] = [
+export const variableBindingTools = [
   {
     name: 'search_variable_system',
     description: `Searches for variable system implementation providing reactive state management across the application.
@@ -50,23 +50,14 @@ A variable system finder that locates the implementation of WaveMaker's reactive
 - Loading States: inProgress flag, loading indicators
 
 Use variableType parameter to filter: 'live', 'service', 'device', 'navigation', 'timer', or 'all'.`,
-    inputSchema: {
-      type: 'object',
-      properties: {
-        runtimePath: {
-          type: 'string',
-          description: 'Absolute path to @wavemaker/app-rn-runtime codebase directory'
-        },
-        codegenPath: {
-          type: 'string',
-          description: 'Absolute path to @wavemaker/rn-codegen codebase directory'
-        },
-        query: {type: 'string', description: 'Query about variable system'},
-        variableType: {type: 'string', enum: ['live', 'service', 'device', 'navigation', 'timer', 'all'], default: 'all'},
-        maxResults: {type: 'number', default: 10}
-      },
-      required: ['runtimePath', 'codegenPath', 'query']
-    }
+    inputSchema: z.object({
+      runtimePath: z.string().describe('Absolute path to @wavemaker/app-rn-runtime codebase directory'),
+      codegenPath: z.string().describe('Absolute path to @wavemaker/rn-codegen codebase directory'),
+      query: z.string().describe('Query about variable system'),
+      variableType: z.enum(['live', 'service', 'device', 'navigation', 'timer', 'all']).default('all'),
+      maxResults: z.number().default(10)
+    }),
+    outputSchema: z.any()
   },
   {
     name: 'search_binding_mechanism',
@@ -107,22 +98,13 @@ A binding mechanism finder that locates the implementation of data binding expre
 - Performance: Binding optimization strategies
 
 Use this tool to understand the complete data binding flow from markup to runtime.`,
-    inputSchema: {
-      type: 'object',
-      properties: {
-        runtimePath: {
-          type: 'string',
-          description: 'Absolute path to @wavemaker/app-rn-runtime codebase directory'
-        },
-        codegenPath: {
-          type: 'string',
-          description: 'Absolute path to @wavemaker/rn-codegen codebase directory'
-        },
-        query: {type: 'string'},
-        maxResults: {type: 'number', default: 10}
-      },
-      required: ['runtimePath', 'codegenPath', 'query']
-    }
+    inputSchema: z.object({
+      runtimePath: z.string().describe('Absolute path to @wavemaker/app-rn-runtime codebase directory'),
+      codegenPath: z.string().describe('Absolute path to @wavemaker/rn-codegen codebase directory'),
+      query: z.string(),
+      maxResults: z.number().default(10)
+    }),
+    outputSchema: z.any()
   },
   {
     name: 'search_watcher_system',
@@ -163,22 +145,13 @@ A watcher system finder that locates the implementation of WaveMaker's change de
 - Memory Management: Watcher cleanup and lifecycle
 
 Use this tool to understand the change detection engine powering reactive updates.`,
-    inputSchema: {
-      type: 'object',
-      properties: {
-        runtimePath: {
-          type: 'string',
-          description: 'Absolute path to @wavemaker/app-rn-runtime codebase directory'
-        },
-        codegenPath: {
-          type: 'string',
-          description: 'Absolute path to @wavemaker/rn-codegen codebase directory'
-        },
-        query: {type: 'string'},
-        maxResults: {type: 'number', default: 10}
-      },
-      required: ['runtimePath', 'codegenPath', 'query']
-    }
+    inputSchema: z.object({
+      runtimePath: z.string().describe('Absolute path to @wavemaker/app-rn-runtime codebase directory'),
+      codegenPath: z.string().describe('Absolute path to @wavemaker/rn-codegen codebase directory'),
+      query: z.string(),
+      maxResults: z.number().default(10)
+    }),
+    outputSchema: z.any()
   },
   {
     name: 'search_variable_types',
@@ -218,22 +191,13 @@ A variable type finder that locates implementations of specific variable types (
 - Use Cases: When to use each variable type
 
 Use variableType parameter to specify: 'live', 'service', 'device', 'navigation', or 'timer'.`,
-    inputSchema: {
-      type: 'object',
-      properties: {
-        runtimePath: {
-          type: 'string',
-          description: 'Absolute path to @wavemaker/app-rn-runtime codebase directory'
-        },
-        codegenPath: {
-          type: 'string',
-          description: 'Absolute path to @wavemaker/rn-codegen codebase directory'
-        },
-        variableType: {type: 'string', enum: ['live', 'service', 'device', 'navigation', 'timer']},
-        maxResults: {type: 'number', default: 10}
-      },
-      required: ['runtimePath', 'codegenPath', 'variableType']
-    }
+    inputSchema: z.object({
+      runtimePath: z.string().describe('Absolute path to @wavemaker/app-rn-runtime codebase directory'),
+      codegenPath: z.string().describe('Absolute path to @wavemaker/rn-codegen codebase directory'),
+      variableType: z.enum(['live', 'service', 'device', 'navigation', 'timer']),
+      maxResults: z.number().default(10)
+    }),
+    outputSchema: z.any()
   },
   {
     name: 'analyze_binding_flow',
@@ -273,21 +237,12 @@ A binding flow analyzer that traces the complete path of data from variable chan
 - Optimization: Strategies to improve binding performance
 
 Use componentName parameter to analyze binding flow for a specific component.`,
-    inputSchema: {
-      type: 'object',
-      properties: {
-        runtimePath: {
-          type: 'string',
-          description: 'Absolute path to @wavemaker/app-rn-runtime codebase directory'
-        },
-        codegenPath: {
-          type: 'string',
-          description: 'Absolute path to @wavemaker/rn-codegen codebase directory'
-        },
-        componentName: {type: 'string', description: 'Optional: specific component to analyze'}
-      },
-      required: ['runtimePath', 'codegenPath']
-    }
+    inputSchema: z.object({
+      runtimePath: z.string().describe('Absolute path to @wavemaker/app-rn-runtime codebase directory'),
+      codegenPath: z.string().describe('Absolute path to @wavemaker/rn-codegen codebase directory'),
+      componentName: z.string().optional().describe('Optional: specific component to analyze')
+    }),
+    outputSchema: z.any()
   }
 ];
 

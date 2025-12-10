@@ -2,13 +2,13 @@
  * Fragment & Page Tools Registry
  */
 
-import { Tool } from '@modelcontextprotocol/sdk/types.js';
+import { z } from 'zod';
 import { handleSearchFragmentSystem } from './fragment-search.js';
 import { handleSearchPageStructure } from './page-search.js';
 import { handleSearchPrefabSystem } from './prefab-search.js';
 import { CodebaseToolResult } from '../types.js';
 
-export const fragmentPageTools: Tool[] = [
+export const fragmentPageTools = [
   {
     name: 'search_fragment_system',
     description: `Searches for fragment system implementation including pages, partials, and prefabs.
@@ -48,22 +48,13 @@ A fragment system finder that locates the implementation of WaveMaker's fragment
 - Prefab System: Packaging, distribution, integration of prefabs
 
 Use this tool to understand the complete fragment architecture organizing app UI.`,
-    inputSchema: {
-      type: 'object',
-      properties: {
-        runtimePath: {
-          type: 'string',
-          description: 'Absolute path to @wavemaker/app-rn-runtime codebase directory'
-        },
-        codegenPath: {
-          type: 'string',
-          description: 'Absolute path to @wavemaker/rn-codegen codebase directory'
-        },
-        query: {type: 'string'},
-        maxResults: {type: 'number', default: 10}
-      },
-      required: ['runtimePath', 'codegenPath', 'query']
-    }
+    inputSchema: z.object({
+      runtimePath: z.string().describe('Absolute path to @wavemaker/app-rn-runtime codebase directory'),
+      codegenPath: z.string().describe('Absolute path to @wavemaker/rn-codegen codebase directory'),
+      query: z.string(),
+      maxResults: z.number().default(10)
+    }),
+    outputSchema: z.any()
   },
   {
     name: 'search_page_structure',
@@ -103,22 +94,13 @@ A page structure finder that locates page implementation patterns and lifecycle 
 - Event Handlers: Page-level event handling
 
 Use this tool to understand how pages are structured, generated, and managed.`,
-    inputSchema: {
-      type: 'object',
-      properties: {
-        runtimePath: {
-          type: 'string',
-          description: 'Absolute path to @wavemaker/app-rn-runtime codebase directory'
-        },
-        codegenPath: {
-          type: 'string',
-          description: 'Absolute path to @wavemaker/rn-codegen codebase directory'
-        },
-        query: {type: 'string'},
-        maxResults: {type: 'number', default: 10}
-      },
-      required: ['runtimePath', 'codegenPath', 'query']
-    }
+    inputSchema: z.object({
+      runtimePath: z.string().describe('Absolute path to @wavemaker/app-rn-runtime codebase directory'),
+      codegenPath: z.string().describe('Absolute path to @wavemaker/rn-codegen codebase directory'),
+      query: z.string(),
+      maxResults: z.number().default(10)
+    }),
+    outputSchema: z.any()
   },
   {
     name: 'search_prefab_system',
@@ -158,22 +140,13 @@ A prefab system finder that locates the implementation of packaged, reusable com
 - Prefab Patterns: Best practices for reusable components
 
 Use this tool to understand how to create and use packaged, reusable components.`,
-    inputSchema: {
-      type: 'object',
-      properties: {
-        runtimePath: {
-          type: 'string',
-          description: 'Absolute path to @wavemaker/app-rn-runtime codebase directory'
-        },
-        codegenPath: {
-          type: 'string',
-          description: 'Absolute path to @wavemaker/rn-codegen codebase directory'
-        },
-        query: {type: 'string'},
-        maxResults: {type: 'number', default: 10}
-      },
-      required: ['runtimePath', 'codegenPath', 'query']
-    }
+    inputSchema: z.object({
+      runtimePath: z.string().describe('Absolute path to @wavemaker/app-rn-runtime codebase directory'),
+      codegenPath: z.string().describe('Absolute path to @wavemaker/rn-codegen codebase directory'),
+      query: z.string(),
+      maxResults: z.number().default(10)
+    }),
+    outputSchema: z.any()
   }
 ];
 

@@ -3,7 +3,7 @@
  * Exports all widget component related tools
  */
 
-import { Tool } from '@modelcontextprotocol/sdk/types.js';
+import { z } from 'zod';
 import {
   SearchWidgetComponentsTool,
   handleSearchWidgetComponents
@@ -28,7 +28,7 @@ import {
 /**
  * Tool definitions for widget component domain
  */
-export const widgetComponentTools: Tool[] = [
+export const widgetComponentTools = [
   {
     name: 'search_widget_components',
     description: `Searches for widget component implementations across 50+ pre-built React Native widgets in @wavemaker/app-rn-runtime.
@@ -67,40 +67,15 @@ A comprehensive widget discovery tool that searches through the complete WaveMak
 - Widget Metadata: Category, file count, base class, prop interface
 
 Use category parameter to filter: 'basic', 'container', 'input', 'data', 'chart', 'navigation', 'device', 'dialogs', 'page', 'advanced', or 'all'. Set includeRelated=true to get all related files (.component.js, .styles.js, .props.ts) along with the main .tsx file.`,
-    inputSchema: {
-      type: 'object',
-      properties: {
-        runtimePath: {
-          type: 'string',
-          description: 'Absolute path to @wavemaker/app-rn-runtime codebase directory'
-        },
-        codegenPath: {
-          type: 'string',
-          description: 'Absolute path to @wavemaker/rn-codegen codebase directory'
-        },
-        query: {
-          type: 'string',
-          description: 'Widget name or category (e.g., "WmButton", "button", "list widgets", "form components")'
-        },
-        category: {
-          type: 'string',
-          enum: ['basic', 'container', 'data', 'form', 'input', 'layout', 'advanced', 'all'],
-          description: 'Widget category filter',
-          default: 'all'
-        },
-        includeRelated: {
-          type: 'boolean',
-          description: 'Include related files (.component.js, .styles.js, .props.ts)',
-          default: true
-        },
-        maxResults: {
-          type: 'number',
-          description: 'Maximum number of widgets to return',
-          default: 15
-        }
-      },
-      required: ['runtimePath', 'codegenPath', 'query']
-    }
+    inputSchema: z.object({
+      runtimePath: z.string().describe('Absolute path to @wavemaker/app-rn-runtime codebase directory'),
+      codegenPath: z.string().describe('Absolute path to @wavemaker/rn-codegen codebase directory'),
+      query: z.string().describe('Widget name or category (e.g., "WmButton", "button", "list widgets", "form components")'),
+      category: z.enum(['basic', 'container', 'data', 'form', 'input', 'layout', 'advanced', 'all']).default('all').describe('Widget category filter'),
+      includeRelated: z.boolean().default(true).describe('Include related files (.component.js, .styles.js, .props.ts)'),
+      maxResults: z.number().default(15).describe('Maximum number of widgets to return')
+    }),
+    outputSchema: z.any()
   },
   {
     name: 'read_widget_structure',
@@ -141,39 +116,15 @@ A widget structure parser that extracts and organizes key implementation details
 - State Interface: Widget state properties and their types
 
 Use extractProps=true to get prop interface, extractEvents=true for event handlers, extractStyles=true for style methods. All default to true for comprehensive extraction.`,
-    inputSchema: {
-      type: 'object',
-      properties: {
-        runtimePath: {
-          type: 'string',
-          description: 'Absolute path to @wavemaker/app-rn-runtime codebase directory'
-        },
-        codegenPath: {
-          type: 'string',
-          description: 'Absolute path to @wavemaker/rn-codegen codebase directory'
-        },
-        filePath: {
-          type: 'string',
-          description: 'Path to widget file (from search_widget_components result)'
-        },
-        extractProps: {
-          type: 'boolean',
-          description: 'Extract prop interface definition',
-          default: true
-        },
-        extractEvents: {
-          type: 'boolean',
-          description: 'Extract event handler methods',
-          default: true
-        },
-        extractStyles: {
-          type: 'boolean',
-          description: 'Extract style-related methods',
-          default: true
-        }
-      },
-      required: ['runtimePath', 'codegenPath', 'filePath']
-    }
+    inputSchema: z.object({
+      runtimePath: z.string().describe('Absolute path to @wavemaker/app-rn-runtime codebase directory'),
+      codegenPath: z.string().describe('Absolute path to @wavemaker/rn-codegen codebase directory'),
+      filePath: z.string().describe('Path to widget file (from search_widget_components result)'),
+      extractProps: z.boolean().default(true).describe('Extract prop interface definition'),
+      extractEvents: z.boolean().default(true).describe('Extract event handler methods'),
+      extractStyles: z.boolean().default(true).describe('Extract style-related methods')
+    }),
+    outputSchema: z.any()
   },
   {
     name: 'search_widget_by_name',
@@ -213,29 +164,13 @@ A fast, precise widget lookup tool that finds a widget by its exact name (e.g., 
 - Category Detection: Shows which category the widget belongs to
 
 Use widgetName parameter with exact name (e.g., "WmButton", "Button", "List"). Set includeRelated=true (default) to get all associated files, or false to get only the main .tsx component file. This is the go-to tool when you have a widget name and need its files immediately.`,
-    inputSchema: {
-      type: 'object',
-      properties: {
-        runtimePath: {
-          type: 'string',
-          description: 'Absolute path to @wavemaker/app-rn-runtime codebase directory'
-        },
-        codegenPath: {
-          type: 'string',
-          description: 'Absolute path to @wavemaker/rn-codegen codebase directory'
-        },
-        widgetName: {
-          type: 'string',
-          description: 'Exact widget name (e.g., "WmButton", "Button", "List")'
-        },
-        includeRelated: {
-          type: 'boolean',
-          description: 'Include all related files (component.js, styles.js, props.ts)',
-          default: true
-        }
-      },
-      required: ['runtimePath', 'codegenPath', 'widgetName']
-    }
+    inputSchema: z.object({
+      runtimePath: z.string().describe('Absolute path to @wavemaker/app-rn-runtime codebase directory'),
+      codegenPath: z.string().describe('Absolute path to @wavemaker/rn-codegen codebase directory'),
+      widgetName: z.string().describe('Exact widget name (e.g., "WmButton", "Button", "List")'),
+      includeRelated: z.boolean().default(true).describe('Include all related files (component.js, styles.js, props.ts)')
+    }),
+    outputSchema: z.any()
   },
   {
     name: 'list_all_widgets',
@@ -275,31 +210,13 @@ A complete widget catalog tool that returns an organized inventory of all 50+ wi
 - Library Statistics: Total widget count, category distribution, file counts
 
 Use category parameter to filter: 'basic', 'container', 'input', 'data', 'chart', 'navigation', 'device', 'dialogs', 'page', 'advanced', or 'all' (default). Set includeMetadata=true to get detailed information including prop interfaces, line counts, and base classes. This tool is perfect for getting a bird's-eye view of the entire widget ecosystem.`,
-    inputSchema: {
-      type: 'object',
-      properties: {
-        runtimePath: {
-          type: 'string',
-          description: 'Absolute path to @wavemaker/app-rn-runtime codebase directory'
-        },
-        codegenPath: {
-          type: 'string',
-          description: 'Absolute path to @wavemaker/rn-codegen codebase directory'
-        },
-        category: {
-          type: 'string',
-          enum: ['basic', 'container', 'data', 'form', 'input', 'layout', 'advanced', 'all'],
-          description: 'Filter by widget category',
-          default: 'all'
-        },
-        includeMetadata: {
-          type: 'boolean',
-          description: 'Include detailed metadata (prop interfaces, line counts, etc.)',
-          default: false
-        }
-      },
-      required: ['runtimePath', 'codegenPath']
-    }
+    inputSchema: z.object({
+      runtimePath: z.string().describe('Absolute path to @wavemaker/app-rn-runtime codebase directory'),
+      codegenPath: z.string().describe('Absolute path to @wavemaker/rn-codegen codebase directory'),
+      category: z.enum(['basic', 'container', 'data', 'form', 'input', 'layout', 'advanced', 'all']).default('all').describe('Filter by widget category'),
+      includeMetadata: z.boolean().default(false).describe('Include detailed metadata (prop interfaces, line counts, etc.)')
+    }),
+    outputSchema: z.any()
   },
   {
     name: 'search_widget_props',
@@ -340,33 +257,14 @@ A prop interface discovery tool that searches .props.ts files to find TypeScript
 - Data Props: dataset, datavalue, datasource for data binding
 
 Use query parameter to search semantically (e.g., "button props", "list properties", "input validation"). Use widgetName parameter to filter to a specific widget. Returns prop interface files with extracted property definitions, types, and documentation.`,
-    inputSchema: {
-      type: 'object',
-      properties: {
-        runtimePath: {
-          type: 'string',
-          description: 'Absolute path to @wavemaker/app-rn-runtime codebase directory'
-        },
-        codegenPath: {
-          type: 'string',
-          description: 'Absolute path to @wavemaker/rn-codegen codebase directory'
-        },
-        query: {
-          type: 'string',
-          description: 'Query about widget props (e.g., "button props", "list properties", "input validation")'
-        },
-        widgetName: {
-          type: 'string',
-          description: 'Optional: filter to specific widget name'
-        },
-        maxResults: {
-          type: 'number',
-          description: 'Maximum number of files to return',
-          default: 15
-        }
-      },
-      required: ['runtimePath', 'codegenPath', 'query']
-    }
+    inputSchema: z.object({
+      runtimePath: z.string().describe('Absolute path to @wavemaker/app-rn-runtime codebase directory'),
+      codegenPath: z.string().describe('Absolute path to @wavemaker/rn-codegen codebase directory'),
+      query: z.string().describe('Query about widget props (e.g., "button props", "list properties", "input validation")'),
+      widgetName: z.string().optional().describe('Optional: filter to specific widget name'),
+      maxResults: z.number().default(15).describe('Maximum number of files to return')
+    }),
+    outputSchema: z.any()
   }
 ];
 

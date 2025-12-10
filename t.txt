@@ -1,0 +1,20 @@
+I have a wavemaker-rn-mcp, I want to create an proper finetuned Prompt Agent ( where every word counts) on Top of these MCP tools which will use them and answer proeprly for Wavemaker 
+
+here is my general idea of how the prompt should be 
+Query -> 
+- Check Intent
+- Check and Plan What to do
+- Check and Make sure we can implement the Plan at every step
+- Create a Check list (which will be updated once the a task in the plan is completed successfully)
+- Start implement the plan task one by one
+- Validate the task execution after evey task
+- Update and carry forward the not to the next task
+- Check if there are any errors, if there are Errors then check for 3 W ( Why it happend?, When it happend? and What cause it?) 
+- Come up with possible solution plan and update the note
+- Continue.....
+
+1.Check and tell me best ways to create Prompt based Agents
+2. Check and see if the above plan works or not and suggest better plans or improvements
+
+Before you answer these I want you to go through /Users/raajr_500278/ai/wavemaker-rn-mcp and create your own understanding and let me know if you have any doubts.
+and also see if can take advantage of tool description as prompts as they are very detailed 
