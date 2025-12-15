@@ -1,0 +1,58 @@
+<wm-page-content>
+  <wm-container name="screen_root" class="h-full w-full" direction="column" gap="16" alignment="top-center" width="fill" height="fill">
+    
+    <wm-container name="header_row" class="w-full" direction="row" gap="auto" alignment="center" width="fill" height="hug">
+      <wm-icon name="back_icon" iconclass="fa fa-arrow-left" class="icon" />
+      <wm-label name="title" caption="My cart" class="text-xl font-bold" />
+      <wm-icon name="menu_icon" iconclass="fa fa-ellipsis-h" class="icon" />
+    </wm-container>
+    
+    <wm-list name="product_list" class="list-container" direction="column" gap="16" alignment="top-left" width="fill" height="hug">
+      <wm-list-template>
+        <wm-container name="product_item" class="list-item" direction="row" gap="12" alignment="middle-left" width="fill" height="hug">
+          <wm-picture name="product_image" width="80px" height="80px" picturesource="https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg?auto=compress&cs=tinysrgb&w=100" class="product-img" />
+          
+          <wm-container name="product_details" class="details" direction="column" gap="4" alignment="top-left" width="hug" height="hug">
+            <wm-label name="product_name" caption="Product Name" class="text-base" />
+            <wm-label name="product_description" caption="Description" class="text-sm text-gray-500" />
+            <wm-label name="product_price" caption="$Price" class="text-base font-bold" />
+          </wm-container>
+          
+          <wm-icon name="remove_icon" iconclass="fa fa-times" class="icon" />
+          
+          <wm-container name="quantity_controls" class="quantity-controls" direction="row" gap="8" alignment="middle-center" width="hug" height="hug">
+            <wm-button name="decrease_button" caption="-" class="btn-sm" />
+            <wm-label name="quantity_label" caption="1" class="text-base" />
+            <wm-button name="increase_button" caption="+" class="btn-sm" />
+          </wm-container>
+        </wm-container>
+      </wm-list-template>
+    </wm-list>
+    
+    <wm-container name="promo_code_row" class="promo-code-row" direction="row" gap="8" alignment="middle-left" width="fill" height="hug">
+      <wm-label name="promo_code" caption="ADJ3AK" class="text-base" />
+      <wm-label name="promo_applied" caption="Promocode applied" class="text-sm text-green-600" />
+      <wm-icon name="check_icon" iconclass="fa fa-check-circle" class="icon" />
+    </wm-container>
+    
+    <wm-container name="summary_column" class="summary-column" direction="column" gap="4" alignment="top-left" width="fill" height="hug">
+      <wm-container name="subtotal_row" class="subtotal-row" direction="row" gap="auto" alignment="start" width="fill" height="hug">
+        <wm-label name="subtotal_label" caption="Subtotal:" class="text-base" />
+        <wm-label name="subtotal_value" caption="$800.00" class="text-base font-bold" />
+      </wm-container>
+      
+      <wm-container name="delivery_fee_row" class="delivery-fee-row" direction="row" gap="auto" alignment="start" width="fill" height="hug">
+        <wm-label name="delivery_fee_label" caption="Delivery Fee:" class="text-base" />
+        <wm-label name="delivery_fee_value" caption="$5.00" class="text-base font-bold" />
+      </wm-container>
+      
+      <wm-container name="discount_row" class="discount-row" direction="row" gap="auto" alignment="start" width="fill" height="hug">
+        <wm-label name="discount_label" caption="Discount:" class="text-base" />
+        <wm-label name="discount_value" caption="40%" class="text-base font-bold" />
+      </wm-container>
+    </wm-container>
+    
+    <wm-button name="checkout_button" caption="Checkout for $480.00" class="btn-primary" width="fill" height="44px" />
+    
+  </wm-container>
+</wm-page-content>

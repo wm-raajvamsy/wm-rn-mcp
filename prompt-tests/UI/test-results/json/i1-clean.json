@@ -1,0 +1,94 @@
+{
+  "screen_root": {
+    "type": "container",
+    "name": "screen_root",
+    "direction": "column",
+    "gap": "16",
+    "alignment": "top-center",
+    "width": "fill",
+    "height": "fill",
+    "children": [
+      {
+        "type": "container",
+        "name": "header_row",
+        "direction": "row",
+        "gap": "auto",
+        "alignment": "start",
+        "width": "fill",
+        "height": "hug",
+        "children": [
+          {
+            "type": "label",
+            "emoji": "🟡",
+            "name": "order_number",
+            "text": "Order # 1234"
+          },
+          {
+            "type": "label",
+            "emoji": "🟡",
+            "name": "order_date",
+            "text": "24 June"
+          }
+        ]
+      },
+      {
+        "type": "container",
+        "name": "details_column",
+        "direction": "column",
+        "gap": "8",
+        "alignment": "top-left",
+        "width": "fill",
+        "height": "hug",
+        "children": [
+          {
+            "type": "label",
+            "emoji": "🟡",
+            "name": "payment_type",
+            "text": "Payment Type: Card"
+          },
+          {
+            "type": "label",
+            "emoji": "🟡",
+            "name": "total_amount",
+            "text": "Total Amount: $277.0"
+          },
+          {
+            "type": "label",
+            "emoji": "🟡",
+            "name": "products",
+            "text": "Products: milk bottle x1, Nivea Men Deodorant Fresh Active Spray 200ml x 2, Nestle Pure Life 1.5 Litre x 1"
+          }
+        ]
+      },
+      {
+        "type": "container",
+        "name": "buttons_row",
+        "direction": "row",
+        "gap": "auto",
+        "alignment": "start",
+        "width": "fill",
+        "height": "hug",
+        "children": [
+          {
+            "type": "button",
+            "emoji": "🔵",
+            "name": "accept_button",
+            "label": "Accept"
+          },
+          {
+            "type": "button",
+            "emoji": "🔵",
+            "name": "reject_button",
+            "label": "Reject"
+          },
+          {
+            "type": "button",
+            "emoji": "🔵",
+            "name": "details_button",
+            "label": "Details"
+          }
+        ]
+      }
+    ]
+  }
+}

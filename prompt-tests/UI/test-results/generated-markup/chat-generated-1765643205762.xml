@@ -1,0 +1,41 @@
+<wm-page class="order_page" name="order_page">
+  <wm-content class="content_root" name="content_root">
+    <wm-page-content class="page_content_root" name="page_content_root" columnwidth="12">
+      
+      <!-- Screen Root Container -->
+      <wm-container class="screen_root" name="screen_root" 
+                    direction="column" 
+                    width="fill" height="fill"
+                    gap="16"
+                    alignment="top-center">
+        
+        <!-- Title and Date -->
+        <wm-container class="title_date_row" name="title_date_row"
+                      direction="row" gap="auto" alignment="start"
+                      width="fill" height="hug">
+          <wm-label class="order_title" name="order_title" caption="Order # 1234"/>
+          <wm-label class="order_date" name="order_date" caption="24 June"/>
+        </wm-container>
+        
+        <!-- Details Section -->
+        <wm-container class="details_column" name="details_column"
+                      direction="column" gap="8" alignment="top-left"
+                      width="fill" height="hug">
+          <wm-label class="payment_type" name="payment_type" caption="Payment Type: Card"/>
+          <wm-label class="total_amount" name="total_amount" caption="Total Amount: $277.0"/>
+          <wm-label class="products" name="products" caption="Products: milk bottle x1, Nivea Men Deodorant Fresh Active Spray 200ml x 2, Nestle Pure Life 1.5 Litre x 1"/>
+        </wm-container>
+        
+        <!-- Buttons -->
+        <wm-container class="buttons_row" name="buttons_row"
+                      direction="row" gap="auto" alignment="start"
+                      width="fill" height="hug">
+          <wm-button class="accept_button" name="accept_button" caption="Accept"/>
+          <wm-button class="reject_button" name="reject_button" caption="Reject"/>
+          <wm-button class="details_button" name="details_button" caption="Details"/>
+        </wm-container>
+        
+      </wm-container>
+    </wm-page-content>
+  </wm-content>
+</wm-page>

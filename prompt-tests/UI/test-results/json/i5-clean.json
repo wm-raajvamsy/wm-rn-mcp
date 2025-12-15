@@ -1,0 +1,367 @@
+{
+  "screen_root": {
+    "type": "container",
+    "name": "screen_root",
+    "direction": "column",
+    "gap": "16",
+    "alignment": "top-center",
+    "width": "fill",
+    "height": "fill",
+    "children": [
+      {
+        "type": "container",
+        "name": "header_row",
+        "direction": "row",
+        "gap": "auto",
+        "alignment": "center",
+        "width": "fill",
+        "height": "hug",
+        "children": [
+          {
+            "type": "label",
+            "emoji": "🟡",
+            "name": "logo_text",
+            "text": "PlugPro ⚡"
+          },
+          {
+            "type": "icon",
+            "emoji": "🔵",
+            "name": "notification_icon",
+            "iconclass": "fa fa-bell"
+          }
+        ]
+      },
+      {
+        "type": "container",
+        "name": "search_bar",
+        "direction": "row",
+        "gap": "8",
+        "alignment": "middle-left",
+        "width": "fill",
+        "height": "hug",
+        "children": [
+          {
+            "type": "icon",
+            "emoji": "🔵",
+            "name": "search_icon",
+            "iconclass": "fa fa-search"
+          },
+          {
+            "type": "label",
+            "emoji": "🟡",
+            "name": "search_placeholder",
+            "text": "What service do you need?"
+          },
+          {
+            "type": "icon",
+            "emoji": "🔵",
+            "name": "filter_icon",
+            "iconclass": "fa fa-filter"
+          }
+        ]
+      },
+      {
+        "type": "container",
+        "name": "category_tabs",
+        "direction": "row",
+        "gap": "8",
+        "alignment": "middle-left",
+        "width": "fill",
+        "height": "hug",
+        "children": [
+          {
+            "type": "button",
+            "emoji": "🔵",
+            "name": "all_button",
+            "label": "All"
+          },
+          {
+            "type": "button",
+            "emoji": "🔵",
+            "name": "booked_button",
+            "label": "Booked"
+          },
+          {
+            "type": "button",
+            "emoji": "🔵",
+            "name": "electricians_button",
+            "label": "Electricians"
+          },
+          {
+            "type": "button",
+            "emoji": "🔵",
+            "name": "agents_button",
+            "label": "Agents"
+          }
+        ]
+      },
+      {
+        "type": "container",
+        "name": "promo_card",
+        "direction": "row",
+        "gap": "16",
+        "alignment": "middle-left",
+        "width": "fill",
+        "height": "hug",
+        "children": [
+          {
+            "type": "container",
+            "name": "promo_content",
+            "direction": "column",
+            "gap": "8",
+            "alignment": "top-left",
+            "width": "hug",
+            "height": "hug",
+            "children": [
+              {
+                "type": "label",
+                "emoji": "🟡",
+                "name": "promo_badge",
+                "text": "Popular"
+              },
+              {
+                "type": "label",
+                "emoji": "🟡",
+                "name": "promo_title",
+                "text": "Hire a Service Man"
+              },
+              {
+                "type": "label",
+                "emoji": "🟡",
+                "name": "promo_description",
+                "text": "Need help with wiring, repairs or installations?"
+              },
+              {
+                "type": "button",
+                "emoji": "🔵",
+                "name": "book_now_button",
+                "label": "Book Now"
+              }
+            ]
+          },
+          {
+            "type": "picture",
+            "emoji": "🔴",
+            "name": "promo_image",
+            "dimensions": "150x150px"
+          }
+        ]
+      },
+      {
+        "type": "container",
+        "name": "services_section",
+        "direction": "column",
+        "gap": "8",
+        "alignment": "top-left",
+        "width": "fill",
+        "height": "hug",
+        "children": [
+          {
+            "type": "label",
+            "emoji": "🟡",
+            "name": "services_title",
+            "text": "Our Services"
+          },
+          {
+            "type": "container",
+            "name": "services_tabs",
+            "direction": "row",
+            "gap": "8",
+            "alignment": "middle-left",
+            "width": "fill",
+            "height": "hug",
+            "children": [
+              {
+                "type": "button",
+                "emoji": "🔵",
+                "name": "repairing_button",
+                "label": "Repairing"
+              },
+              {
+                "type": "button",
+                "emoji": "🔵",
+                "name": "installation_button",
+                "label": "Installation"
+              },
+              {
+                "type": "button",
+                "emoji": "🔵",
+                "name": "rewiring_button",
+                "label": "Rewiring"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "list",
+        "name": "service_providers_list",
+        "direction": "row",
+        "width": "fill",
+        "height": "hug",
+        "item_count": 2,
+        "item_template": {
+          "type": "container",
+          "name": "service_provider_card",
+          "direction": "column",
+          "gap": "8",
+          "alignment": "top-left",
+          "width": "hug",
+          "height": "hug",
+          "children": [
+            {
+              "type": "picture",
+              "emoji": "🔴",
+              "name": "provider_image",
+              "dimensions": "100x100px"
+            },
+            {
+              "type": "label",
+              "emoji": "🟡",
+              "name": "provider_name",
+              "text": "James Carter"
+            },
+            {
+              "type": "label",
+              "emoji": "🟡",
+              "name": "provider_rating",
+              "text": "⭐ 4.9 (200)"
+            },
+            {
+              "type": "label",
+              "emoji": "🟡",
+              "name": "provider_experience",
+              "text": "8 years of experience"
+            }
+          ]
+        }
+      },
+      {
+        "type": "container",
+        "name": "bottom_nav",
+        "direction": "row",
+        "gap": "auto",
+        "alignment": "center",
+        "width": "fill",
+        "height": "hug",
+        "children": [
+          {
+            "type": "container",
+            "name": "home_tab",
+            "direction": "column",
+            "gap": "4",
+            "alignment": "top-center",
+            "width": "hug",
+            "height": "hug",
+            "children": [
+              {
+                "type": "icon",
+                "emoji": "🔵",
+                "name": "home_icon",
+                "iconclass": "fa fa-home"
+              },
+              {
+                "type": "label",
+                "emoji": "🟡",
+                "name": "home_label",
+                "text": "Home"
+              }
+            ]
+          },
+          {
+            "type": "container",
+            "name": "services_tab",
+            "direction": "column",
+            "gap": "4",
+            "alignment": "top-center",
+            "width": "hug",
+            "height": "hug",
+            "children": [
+              {
+                "type": "icon",
+                "emoji": "🔵",
+                "name": "services_icon",
+                "iconclass": "fa fa-briefcase"
+              },
+              {
+                "type": "label",
+                "emoji": "🟡",
+                "name": "services_label",
+                "text": "Services"
+              }
+            ]
+          },
+          {
+            "type": "container",
+            "name": "booking_tab",
+            "direction": "column",
+            "gap": "4",
+            "alignment": "top-center",
+            "width": "hug",
+            "height": "hug",
+            "children": [
+              {
+                "type": "icon",
+                "emoji": "🔵",
+                "name": "booking_icon",
+                "iconclass": "fa fa-calendar"
+              },
+              {
+                "type": "label",
+                "emoji": "🟡",
+                "name": "booking_label",
+                "text": "Booking"
+              }
+            ]
+          },
+          {
+            "type": "container",
+            "name": "chat_tab",
+            "direction": "column",
+            "gap": "4",
+            "alignment": "top-center",
+            "width": "hug",
+            "height": "hug",
+            "children": [
+              {
+                "type": "icon",
+                "emoji": "🔵",
+                "name": "chat_icon",
+                "iconclass": "fa fa-comments"
+              },
+              {
+                "type": "label",
+                "emoji": "🟡",
+                "name": "chat_label",
+                "text": "Chat"
+              }
+            ]
+          },
+          {
+            "type": "container",
+            "name": "profile_tab",
+            "direction": "column",
+            "gap": "4",
+            "alignment": "top-center",
+            "width": "hug",
+            "height": "hug",
+            "children": [
+              {
+                "type": "icon",
+                "emoji": "🔵",
+                "name": "profile_icon",
+                "iconclass": "fa fa-user"
+              },
+              {
+                "type": "label",
+                "emoji": "🟡",
+                "name": "profile_label",
+                "text": "Profile"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

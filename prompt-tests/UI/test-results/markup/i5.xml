@@ -1,0 +1,76 @@
+<wm-page-content>
+  <wm-container name="screen_root" class="h-full w-full" direction="column" gap="16" alignment="top-center" width="fill" height="fill">
+    
+    <wm-container name="header_row" class="w-full" direction="row" gap="auto" alignment="center" width="fill" height="hug">
+      <wm-label name="logo_text" caption="PlugPro ⚡" class="text-xl font-bold" />
+      <wm-icon name="notification_icon" iconclass="fa fa-bell" class="icon" />
+    </wm-container>
+    
+    <wm-container name="search_bar" class="w-full" direction="row" gap="8" alignment="middle-left" width="fill" height="hug">
+      <wm-icon name="search_icon" iconclass="fa fa-search" class="icon" />
+      <wm-label name="search_placeholder" caption="What service do you need?" class="text-base text-gray-500" />
+      <wm-icon name="filter_icon" iconclass="fa fa-filter" class="icon" />
+    </wm-container>
+    
+    <wm-container name="category_tabs" class="w-full" direction="row" gap="8" alignment="middle-left" width="fill" height="hug">
+      <wm-button name="all_button" caption="All" class="btn-primary" />
+      <wm-button name="booked_button" caption="Booked" class="btn-secondary" />
+      <wm-button name="electricians_button" caption="Electricians" class="btn-secondary" />
+      <wm-button name="agents_button" caption="Agents" class="btn-secondary" />
+    </wm-container>
+    
+    <wm-container name="promo_card" class="card" direction="row" gap="16" alignment="middle-left" width="fill" height="hug">
+      <wm-container name="promo_content" class="promo-content" direction="column" gap="8" alignment="top-left" width="hug" height="hug">
+        <wm-label name="promo_badge" caption="Popular" class="badge" />
+        <wm-label name="promo_title" caption="Hire a Service Man" class="text-lg font-bold" />
+        <wm-label name="promo_description" caption="Need help with wiring, repairs or installations?" class="text-sm text-gray-500" />
+        <wm-button name="book_now_button" caption="Book Now" class="btn-primary" />
+      </wm-container>
+      <wm-picture name="promo_image" width="150px" height="150px" picturesource="https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=150" class="promo-image" />
+    </wm-container>
+    
+    <wm-container name="services_section" class="w-full" direction="column" gap="8" alignment="top-left" width="fill" height="hug">
+      <wm-label name="services_title" caption="Our Services" class="text-xl font-bold" />
+      <wm-container name="services_tabs" class="w-full" direction="row" gap="8" alignment="middle-left" width="fill" height="hug">
+        <wm-button name="repairing_button" caption="Repairing" class="btn-secondary" />
+        <wm-button name="installation_button" caption="Installation" class="btn-secondary" />
+        <wm-button name="rewiring_button" caption="Rewiring" class="btn-secondary" />
+      </wm-container>
+    </wm-container>
+    
+    <wm-list name="service_providers_list" class="list-container">
+      <wm-list-template>
+        <wm-container name="service_provider_card" class="list-item" direction="column" gap="8" alignment="top-left" width="hug" height="hug">
+          <wm-picture name="provider_image" width="100px" height="100px" picturesource="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=100" class="provider-img" />
+          <wm-label name="provider_name" caption="James Carter" class="text-base font-bold" />
+          <wm-label name="provider_rating" caption="⭐ 4.9 (200)" class="text-sm text-yellow-500" />
+          <wm-label name="provider_experience" caption="8 years of experience" class="text-sm text-gray-500" />
+        </wm-container>
+      </wm-list-template>
+    </wm-list>
+    
+    <wm-container name="bottom_nav" class="w-full" direction="row" gap="auto" alignment="center" width="fill" height="hug">
+      <wm-container name="home_tab" class="nav-tab" direction="column" gap="4" alignment="top-center" width="hug" height="hug">
+        <wm-icon name="home_icon" iconclass="fa fa-home" class="nav-icon" />
+        <wm-label name="home_label" caption="Home" class="text-xs" />
+      </wm-container>
+      <wm-container name="services_tab" class="nav-tab" direction="column" gap="4" alignment="top-center" width="hug" height="hug">
+        <wm-icon name="services_icon" iconclass="fa fa-briefcase" class="nav-icon" />
+        <wm-label name="services_label" caption="Services" class="text-xs" />
+      </wm-container>
+      <wm-container name="booking_tab" class="nav-tab" direction="column" gap="4" alignment="top-center" width="hug" height="hug">
+        <wm-icon name="booking_icon" iconclass="fa fa-calendar" class="nav-icon" />
+        <wm-label name="booking_label" caption="Booking" class="text-xs" />
+      </wm-container>
+      <wm-container name="chat_tab" class="nav-tab" direction="column" gap="4" alignment="top-center" width="hug" height="hug">
+        <wm-icon name="chat_icon" iconclass="fa fa-comments" class="nav-icon" />
+        <wm-label name="chat_label" caption="Chat" class="text-xs" />
+      </wm-container>
+      <wm-container name="profile_tab" class="nav-tab" direction="column" gap="4" alignment="top-center" width="hug" height="hug">
+        <wm-icon name="profile_icon" iconclass="fa fa-user" class="nav-icon" />
+        <wm-label name="profile_label" caption="Profile" class="text-xs" />
+      </wm-container>
+    </wm-container>
+    
+  </wm-container>
+</wm-page-content>

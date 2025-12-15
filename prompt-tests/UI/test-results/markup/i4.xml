@@ -1,0 +1,78 @@
+<wm-page-content>
+  <wm-container name="screen_root" class="h-full w-full" direction="column" gap="16" alignment="top-center" width="fill" height="fill">
+    
+    <wm-container name="header_row" class="w-full" direction="row" gap="auto" alignment="center" width="fill" height="hug">
+      <wm-icon name="back_icon" iconclass="fa fa-arrow-left" class="icon" />
+      <wm-label name="welcome_label" caption="Welcome back" class="text-lg font-bold" />
+      <wm-icon name="notification_icon" iconclass="fa fa-bell" class="icon" />
+    </wm-container>
+    
+    <wm-container name="balance_card" class="card" direction="column" gap="8" alignment="top-center" width="fill" height="hug">
+      <wm-label name="account_balance_label" caption="Account balance" class="text-sm text-gray-500" />
+      <wm-label name="balance_amount" caption="$34,567.90" class="text-2xl font-bold" />
+      <wm-label name="account_number" caption="1289440585" class="text-sm text-gray-500" />
+    </wm-container>
+    
+    <wm-container name="actions_row" class="w-full" direction="row" gap="16" alignment="center" width="fill" height="hug">
+      <wm-container name="send_action" class="action" direction="column" gap="4" alignment="top-center" width="hug" height="hug">
+        <wm-icon name="send_icon" iconclass="fa fa-arrow-up" class="icon" />
+        <wm-label name="send_label" caption="Send" class="text-xs" />
+      </wm-container>
+      <wm-container name="add_funds_action" class="action" direction="column" gap="4" alignment="top-center" width="hug" height="hug">
+        <wm-icon name="add_funds_icon" iconclass="fa fa-plus" class="icon" />
+        <wm-label name="add_funds_label" caption="Add funds" class="text-xs" />
+      </wm-container>
+      <wm-container name="request_action" class="action" direction="column" gap="4" alignment="top-center" width="hug" height="hug">
+        <wm-icon name="request_icon" iconclass="fa fa-arrow-down" class="icon" />
+        <wm-label name="request_label" caption="Request" class="text-xs" />
+      </wm-container>
+      <wm-container name="more_action" class="action" direction="column" gap="4" alignment="top-center" width="hug" height="hug">
+        <wm-icon name="more_icon" iconclass="fa fa-ellipsis-h" class="icon" />
+        <wm-label name="more_label" caption="More" class="text-xs" />
+      </wm-container>
+    </wm-container>
+    
+    <wm-container name="transactions_header" class="w-full" direction="row" gap="auto" alignment="center" width="fill" height="hug">
+      <wm-label name="transactions_label" caption="Transactions" class="text-lg font-bold" />
+      <wm-button name="see_all_button" caption="see all" class="btn-secondary" />
+    </wm-container>
+    
+    <wm-list name="transactions_list" class="list-container">
+      <wm-list-template>
+        <wm-container name="transaction_item" class="list-item" direction="row" gap="12" alignment="middle-left" width="fill" height="hug">
+          <wm-icon name="transaction_icon" iconclass="fa fa-arrow-up" class="icon" />
+          
+          <wm-container name="transaction_details" class="details" direction="column" gap="4" alignment="top-left" width="hug" height="hug">
+            <wm-label name="transaction_name" caption="Name" class="text-base" />
+            <wm-label name="transaction_date" caption="Sent by you · Date" class="text-sm text-gray-500" />
+          </wm-container>
+          
+          <wm-container name="transaction_amount" class="amount" direction="column" gap="4" alignment="top-right" width="hug" height="hug">
+            <wm-label name="amount" caption="$Amount" class="font-bold" />
+            <wm-label name="transaction_id" caption="$TransactionID" class="text-sm text-gray-500" />
+          </wm-container>
+        </wm-container>
+      </wm-list-template>
+    </wm-list>
+    
+    <wm-container name="bottom_nav" class="w-full" direction="row" gap="auto" alignment="center" width="fill" height="hug">
+      <wm-container name="home_tab" class="nav-tab" direction="column" gap="4" alignment="top-center" width="hug" height="hug">
+        <wm-icon name="home_icon" iconclass="fa fa-home" class="nav-icon" />
+        <wm-label name="home_label" caption="Home" class="text-xs" />
+      </wm-container>
+      <wm-container name="wallet_tab" class="nav-tab" direction="column" gap="4" alignment="top-center" width="hug" height="hug">
+        <wm-icon name="wallet_icon" iconclass="fa fa-wallet" class="nav-icon" />
+        <wm-label name="wallet_label" caption="Wallet" class="text-xs" />
+      </wm-container>
+      <wm-container name="analytics_tab" class="nav-tab" direction="column" gap="4" alignment="top-center" width="hug" height="hug">
+        <wm-icon name="analytics_icon" iconclass="fa fa-chart-bar" class="nav-icon" />
+        <wm-label name="analytics_label" caption="Analytics" class="text-xs" />
+      </wm-container>
+      <wm-container name="settings_tab" class="nav-tab" direction="column" gap="4" alignment="top-center" width="hug" height="hug">
+        <wm-icon name="settings_icon" iconclass="fa fa-cog" class="nav-icon" />
+        <wm-label name="settings_label" caption="Setting" class="text-xs" />
+      </wm-container>
+    </wm-container>
+    
+  </wm-container>
+</wm-page-content>

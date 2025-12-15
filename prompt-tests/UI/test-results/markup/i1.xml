@@ -1,0 +1,22 @@
+<wm-page-content>
+  <wm-container name="screen_root" class="h-full w-full" direction="column" gap="16" alignment="top-center" width="fill" height="fill">
+    
+    <wm-container name="header_row" class="w-full" direction="row" gap="auto" alignment="start" width="fill" height="hug">
+      <wm-label name="order_number" caption="Order # 1234" class="text-lg font-bold" />
+      <wm-label name="order_date" caption="24 June" class="text-sm text-gray-500" />
+    </wm-container>
+    
+    <wm-container name="details_column" class="container" direction="column" gap="8" alignment="top-left" width="fill" height="hug">
+      <wm-label name="payment_type" caption="Payment Type: Card" class="text-base" />
+      <wm-label name="total_amount" caption="Total Amount: $277.0" class="text-base" />
+      <wm-label name="products" caption="Products: milk bottle x1, Nivea Men Deodorant Fresh Active Spray 200ml x 2, Nestle Pure Life 1.5 Litre x 1" class="text-sm" />
+    </wm-container>
+    
+    <wm-container name="buttons_row" class="w-full" direction="row" gap="auto" alignment="start" width="fill" height="hug">
+      <wm-button name="accept_button" caption="Accept" class="btn-primary" />
+      <wm-button name="reject_button" caption="Reject" class="btn-secondary" />
+      <wm-button name="details_button" caption="Details" class="btn-outline" />
+    </wm-container>
+    
+  </wm-container>
+</wm-page-content>

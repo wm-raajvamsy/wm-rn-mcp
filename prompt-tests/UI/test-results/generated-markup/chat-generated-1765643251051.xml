@@ -1,0 +1,42 @@
+<wm-page class="welcome_page" name="welcome_page">
+  <wm-content class="content_root" name="content_root">
+    <wm-page-content class="page_content_root" name="page_content_root" columnwidth="12">
+      
+      <!-- Screen Root Container -->
+      <wm-container class="screen_root" name="screen_root" 
+                    direction="column" 
+                    width="fill" height="fill"
+                    gap="24"
+                    alignment="top-center">
+        
+        <!-- Logo and Language Selector -->
+        <wm-container class="logo_language_row" name="logo_language_row"
+                      direction="row" gap="auto" alignment="start"
+                      width="fill" height="hug">
+          <wm-label class="logo" name="logo" caption="Zevoa"/>
+          <wm-button class="language_selector" name="language_selector" caption="English"/>
+        </wm-container>
+        
+        <!-- Content Section -->
+        <wm-container class="content_column" name="content_column"
+                      direction="column" gap="16" alignment="top-center"
+                      width="fill" height="hug">
+          <wm-picture class="illustration" name="illustration" source="path/to/image"/>
+          <wm-label class="welcome_title" name="welcome_title" caption="Welcome to Zevoa!"/>
+          <wm-label class="subtitle" name="subtitle" caption="The ultimate app for making your daily travel as convenient and smooth as possible"/>
+          <wm-container class="pagination_dots" name="pagination_dots"
+                        direction="row" gap="8" alignment="middle-center"
+                        width="hug" height="hug">
+            <!-- Pagination dots can be individual labels or icons -->
+            <wm-label class="dot" name="dot1" caption="●"/>
+            <wm-label class="dot" name="dot2" caption="●"/>
+            <wm-label class="dot" name="dot3" caption="●"/>
+          </wm-container>
+          <wm-button class="access_account_button" name="access_account_button" caption="Access Your Account"/>
+          <wm-label class="signup_link" name="signup_link" caption="Don't have an account? Signup"/>
+        </wm-container>
+        
+      </wm-container>
+    </wm-page-content>
+  </wm-content>
+</wm-page>

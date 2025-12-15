@@ -1,0 +1,103 @@
+```json
+{
+  "screen_root": {
+    "type": "container",
+    "name": "screen_root",
+    "direction": "column",
+    "gap": "16",
+    "alignment": "top-center",
+    "width": "fill",
+    "height": "fill",
+    "children": [
+      {
+        "type": "container",
+        "name": "header_row",
+        "direction": "row",
+        "gap": "auto",
+        "alignment": "center",
+        "width": "fill",
+        "height": "hug",
+        "children": [
+          {
+            "type": "picture",
+            "emoji": "🔴",
+            "name": "logo_icon",
+            "dimensions": "24x24px"
+          },
+          {
+            "type": "label",
+            "emoji": "🟡",
+            "name": "brand_name",
+            "text": "zevoa"
+          },
+          {
+            "type": "button",
+            "emoji": "🔵",
+            "name": "language_button",
+            "label": "English"
+          }
+        ]
+      },
+      {
+        "type": "picture",
+        "emoji": "🔴",
+        "name": "illustration",
+        "dimensions": "300x200px"
+      },
+      {
+        "type": "label",
+        "emoji": "🟡",
+        "name": "welcome_message",
+        "text": "Welcome to Zevoa!"
+      },
+      {
+        "type": "label",
+        "emoji": "🟡",
+        "name": "description",
+        "text": "The ultimate app for making your daily travel as convenient and smooth as possible"
+      },
+      {
+        "type": "container",
+        "name": "pagination_dots",
+        "direction": "row",
+        "gap": "8",
+        "alignment": "center",
+        "width": "hug",
+        "height": "hug",
+        "children": [
+          {
+            "type": "picture",
+            "emoji": "🔴",
+            "name": "dot_1",
+            "dimensions": "8x8px"
+          },
+          {
+            "type": "picture",
+            "emoji": "🔴",
+            "name": "dot_2",
+            "dimensions": "8x8px"
+          },
+          {
+            "type": "picture",
+            "emoji": "🔴",
+            "name": "dot_3",
+            "dimensions": "8x8px"
+          }
+        ]
+      },
+      {
+        "type": "button",
+        "emoji": "🔵",
+        "name": "access_account_button",
+        "label": "Access Your Account"
+      },
+      {
+        "type": "label",
+        "emoji": "🟡",
+        "name": "signup_prompt",
+        "text": "Don’t have an account? Signup"
+      }
+    ]
+  }
+}
+```

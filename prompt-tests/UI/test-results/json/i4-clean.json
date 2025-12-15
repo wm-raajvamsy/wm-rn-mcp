@@ -1,0 +1,371 @@
+{
+  "screen_root": {
+    "type": "container",
+    "name": "screen_root",
+    "direction": "column",
+    "gap": "16",
+    "alignment": "top-center",
+    "width": "fill",
+    "height": "fill",
+    "children": [
+      {
+        "type": "container",
+        "name": "header_row",
+        "direction": "row",
+        "gap": "auto",
+        "alignment": "center",
+        "width": "fill",
+        "height": "hug",
+        "children": [
+          {
+            "type": "icon",
+            "emoji": "🔵",
+            "name": "back_icon",
+            "iconclass": "fa fa-arrow-left"
+          },
+          {
+            "type": "label",
+            "emoji": "🟡",
+            "name": "welcome_label",
+            "text": "Welcome back"
+          },
+          {
+            "type": "icon",
+            "emoji": "🔵",
+            "name": "notification_icon",
+            "iconclass": "fa fa-bell"
+          }
+        ]
+      },
+      {
+        "type": "container",
+        "name": "balance_card",
+        "direction": "column",
+        "gap": "8",
+        "alignment": "top-center",
+        "width": "fill",
+        "height": "hug",
+        "children": [
+          {
+            "type": "label",
+            "emoji": "🟡",
+            "name": "account_balance_label",
+            "text": "Account balance"
+          },
+          {
+            "type": "label",
+            "emoji": "🟡",
+            "name": "balance_amount",
+            "text": "$34,567.90"
+          },
+          {
+            "type": "label",
+            "emoji": "🟡",
+            "name": "account_number",
+            "text": "1289440585"
+          }
+        ]
+      },
+      {
+        "type": "container",
+        "name": "actions_row",
+        "direction": "row",
+        "gap": "16",
+        "alignment": "center",
+        "width": "fill",
+        "height": "hug",
+        "children": [
+          {
+            "type": "container",
+            "name": "send_action",
+            "direction": "column",
+            "gap": "4",
+            "alignment": "top-center",
+            "width": "hug",
+            "height": "hug",
+            "children": [
+              {
+                "type": "icon",
+                "emoji": "🔵",
+                "name": "send_icon",
+                "iconclass": "fa fa-arrow-up"
+              },
+              {
+                "type": "label",
+                "emoji": "🟡",
+                "name": "send_label",
+                "text": "Send"
+              }
+            ]
+          },
+          {
+            "type": "container",
+            "name": "add_funds_action",
+            "direction": "column",
+            "gap": "4",
+            "alignment": "top-center",
+            "width": "hug",
+            "height": "hug",
+            "children": [
+              {
+                "type": "icon",
+                "emoji": "🔵",
+                "name": "add_funds_icon",
+                "iconclass": "fa fa-plus"
+              },
+              {
+                "type": "label",
+                "emoji": "🟡",
+                "name": "add_funds_label",
+                "text": "Add funds"
+              }
+            ]
+          },
+          {
+            "type": "container",
+            "name": "request_action",
+            "direction": "column",
+            "gap": "4",
+            "alignment": "top-center",
+            "width": "hug",
+            "height": "hug",
+            "children": [
+              {
+                "type": "icon",
+                "emoji": "🔵",
+                "name": "request_icon",
+                "iconclass": "fa fa-arrow-down"
+              },
+              {
+                "type": "label",
+                "emoji": "🟡",
+                "name": "request_label",
+                "text": "Request"
+              }
+            ]
+          },
+          {
+            "type": "container",
+            "name": "more_action",
+            "direction": "column",
+            "gap": "4",
+            "alignment": "top-center",
+            "width": "hug",
+            "height": "hug",
+            "children": [
+              {
+                "type": "icon",
+                "emoji": "🔵",
+                "name": "more_icon",
+                "iconclass": "fa fa-ellipsis-h"
+              },
+              {
+                "type": "label",
+                "emoji": "🟡",
+                "name": "more_label",
+                "text": "More"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "container",
+        "name": "transactions_header",
+        "direction": "row",
+        "gap": "auto",
+        "alignment": "center",
+        "width": "fill",
+        "height": "hug",
+        "children": [
+          {
+            "type": "label",
+            "emoji": "🟡",
+            "name": "transactions_label",
+            "text": "Transactions"
+          },
+          {
+            "type": "button",
+            "emoji": "🔵",
+            "name": "see_all_button",
+            "label": "see all"
+          }
+        ]
+      },
+      {
+        "type": "list",
+        "name": "transactions_list",
+        "direction": "column",
+        "width": "fill",
+        "height": "hug",
+        "item_count": 4,
+        "item_template": {
+          "type": "container",
+          "name": "transaction_item",
+          "direction": "row",
+          "gap": "12",
+          "alignment": "middle-left",
+          "width": "fill",
+          "height": "hug",
+          "children": [
+            {
+              "type": "icon",
+              "emoji": "🔵",
+              "name": "transaction_icon",
+              "iconclass": "fa fa-arrow-up"
+            },
+            {
+              "type": "container",
+              "name": "transaction_details",
+              "direction": "column",
+              "gap": "4",
+              "alignment": "top-left",
+              "width": "hug",
+              "height": "hug",
+              "children": [
+                {
+                  "type": "label",
+                  "emoji": "🟡",
+                  "name": "transaction_name",
+                  "text": "Name"
+                },
+                {
+                  "type": "label",
+                  "emoji": "🟡",
+                  "name": "transaction_date",
+                  "text": "Sent by you · Date"
+                }
+              ]
+            },
+            {
+              "type": "container",
+              "name": "transaction_amount",
+              "direction": "column",
+              "gap": "4",
+              "alignment": "top-right",
+              "width": "hug",
+              "height": "hug",
+              "children": [
+                {
+                  "type": "label",
+                  "emoji": "🟡",
+                  "name": "amount",
+                  "text": "$Amount"
+                },
+                {
+                  "type": "label",
+                  "emoji": "🟡",
+                  "name": "transaction_id",
+                  "text": "$TransactionID"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "type": "container",
+        "name": "bottom_nav",
+        "direction": "row",
+        "gap": "auto",
+        "alignment": "center",
+        "width": "fill",
+        "height": "hug",
+        "children": [
+          {
+            "type": "container",
+            "name": "home_tab",
+            "direction": "column",
+            "gap": "4",
+            "alignment": "top-center",
+            "width": "hug",
+            "height": "hug",
+            "children": [
+              {
+                "type": "icon",
+                "emoji": "🔵",
+                "name": "home_icon",
+                "iconclass": "fa fa-home"
+              },
+              {
+                "type": "label",
+                "emoji": "🟡",
+                "name": "home_label",
+                "text": "Home"
+              }
+            ]
+          },
+          {
+            "type": "container",
+            "name": "wallet_tab",
+            "direction": "column",
+            "gap": "4",
+            "alignment": "top-center",
+            "width": "hug",
+            "height": "hug",
+            "children": [
+              {
+                "type": "icon",
+                "emoji": "🔵",
+                "name": "wallet_icon",
+                "iconclass": "fa fa-wallet"
+              },
+              {
+                "type": "label",
+                "emoji": "🟡",
+                "name": "wallet_label",
+                "text": "Wallet"
+              }
+            ]
+          },
+          {
+            "type": "container",
+            "name": "analytics_tab",
+            "direction": "column",
+            "gap": "4",
+            "alignment": "top-center",
+            "width": "hug",
+            "height": "hug",
+            "children": [
+              {
+                "type": "icon",
+                "emoji": "🔵",
+                "name": "analytics_icon",
+                "iconclass": "fa fa-chart-bar"
+              },
+              {
+                "type": "label",
+                "emoji": "🟡",
+                "name": "analytics_label",
+                "text": "Analytics"
+              }
+            ]
+          },
+          {
+            "type": "container",
+            "name": "settings_tab",
+            "direction": "column",
+            "gap": "4",
+            "alignment": "top-center",
+            "width": "hug",
+            "height": "hug",
+            "children": [
+              {
+                "type": "icon",
+                "emoji": "🔵",
+                "name": "settings_icon",
+                "iconclass": "fa fa-cog"
+              },
+              {
+                "type": "label",
+                "emoji": "🟡",
+                "name": "settings_label",
+                "text": "Setting"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
