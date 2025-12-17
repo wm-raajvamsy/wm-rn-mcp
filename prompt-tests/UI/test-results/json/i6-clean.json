@@ -1,0 +1,207 @@
+{
+  "screen_root": {
+    "type": "container",
+    "name": "screen_root",
+    "direction": "column",
+    "gap": "16",
+    "alignment": "top-left",
+    "width": "fill",
+    "height": "fill",
+    "children": [
+      {
+        "type": "container",
+        "name": "header_row",
+        "direction": "row",
+        "gap": "auto",
+        "alignment": "center",
+        "width": "fill",
+        "height": "hug",
+        "children": [
+          {
+            "type": "icon",
+            "emoji": "🔵",
+            "name": "back_icon",
+            "iconclass": "fa fa-arrow-left"
+          },
+          {
+            "type": "label",
+            "emoji": "🟡",
+            "name": "title",
+            "text": "My Bag"
+          }
+        ]
+      },
+      {
+        "type": "list",
+        "name": "product_list",
+        "direction": "column",
+        "width": "fill",
+        "height": "hug",
+        "item_count": 3,
+        "item_template": {
+          "type": "container",
+          "name": "product_item",
+          "direction": "row",
+          "gap": "12",
+          "alignment": "middle-left",
+          "width": "fill",
+          "height": "hug",
+          "children": [
+            {
+              "type": "picture",
+              "emoji": "🔴",
+              "name": "product_image",
+              "dimensions": "80x80px"
+            },
+            {
+              "type": "container",
+              "name": "product_details",
+              "direction": "column",
+              "gap": "4",
+              "alignment": "top-left",
+              "width": "fill",
+              "height": "hug",
+              "children": [
+                {
+                  "type": "label",
+                  "emoji": "🟡",
+                  "name": "product_name",
+                  "text": "Product Name"
+                },
+                {
+                  "type": "label",
+                  "emoji": "🟡",
+                  "name": "product_description",
+                  "text": "Medium, Black"
+                }
+              ]
+            },
+            {
+              "type": "label",
+              "emoji": "🟡",
+              "name": "product_price",
+              "text": "$24.99"
+            },
+            {
+              "type": "container",
+              "name": "quantity_controls",
+              "direction": "row",
+              "gap": "8",
+              "alignment": "middle-left",
+              "width": "hug",
+              "height": "hug",
+              "children": [
+                {
+                  "type": "button",
+                  "emoji": "🔵",
+                  "name": "decrease_quantity",
+                  "label": "-"
+                },
+                {
+                  "type": "label",
+                  "emoji": "🟡",
+                  "name": "quantity",
+                  "text": "1"
+                },
+                {
+                  "type": "button",
+                  "emoji": "🔵",
+                  "name": "increase_quantity",
+                  "label": "+"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "type": "container",
+        "name": "summary_section",
+        "direction": "column",
+        "gap": "8",
+        "alignment": "top-left",
+        "width": "fill",
+        "height": "hug",
+        "children": [
+          {
+            "type": "container",
+            "name": "tax_row",
+            "direction": "row",
+            "gap": "auto",
+            "alignment": "center",
+            "width": "fill",
+            "height": "hug",
+            "children": [
+              {
+                "type": "label",
+                "emoji": "🟡",
+                "name": "tax_label",
+                "text": "Tax"
+              },
+              {
+                "type": "label",
+                "emoji": "🟡",
+                "name": "tax_amount",
+                "text": "$103.07"
+              }
+            ]
+          },
+          {
+            "type": "container",
+            "name": "discount_row",
+            "direction": "row",
+            "gap": "auto",
+            "alignment": "center",
+            "width": "fill",
+            "height": "hug",
+            "children": [
+              {
+                "type": "label",
+                "emoji": "🟡",
+                "name": "discount_label",
+                "text": "Discount"
+              },
+              {
+                "type": "label",
+                "emoji": "🟡",
+                "name": "discount_amount",
+                "text": "- $93.01"
+              }
+            ]
+          },
+          {
+            "type": "container",
+            "name": "total_row",
+            "direction": "row",
+            "gap": "auto",
+            "alignment": "center",
+            "width": "fill",
+            "height": "hug",
+            "children": [
+              {
+                "type": "label",
+                "emoji": "🟡",
+                "name": "total_label",
+                "text": "Total"
+              },
+              {
+                "type": "label",
+                "emoji": "🟡",
+                "name": "total_amount",
+                "text": "$217.99"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "button",
+        "emoji": "🔵",
+        "name": "checkout_button",
+        "label": "Checkout",
+        "width": "fill",
+        "height": "44px"
+      }
+    ]
+  }
+}

@@ -1,0 +1,50 @@
+<wm-page-content>
+  <wm-container name="screen_root" class="h-full w-full" direction="column" gap="16" alignment="top-left" width="fill" height="fill">
+    
+    <wm-container name="header_row" class="w-full" direction="row" gap="auto" alignment="center" width="fill" height="hug">
+      <wm-icon name="back_icon" iconclass="fa fa-arrow-left" class="icon" />
+      <wm-label name="title" caption="My Bag" class="text-xl font-bold" />
+    </wm-container>
+    
+    <wm-list name="product_list" class="list-container">
+      <wm-list-template>
+        <wm-container name="product_item" class="list-item" direction="row" gap="12" alignment="middle-left" width="fill" height="hug">
+          <wm-picture name="product_image" width="80px" height="80px" picturesource="https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg?auto=compress&cs=tinysrgb&w=80" class="product-img" />
+          
+          <wm-container name="product_details" class="details" direction="column" gap="4" alignment="top-left" width="fill" height="hug">
+            <wm-label name="product_name" caption="Product Name" class="text-base" />
+            <wm-label name="product_description" caption="Medium, Black" class="text-sm text-gray-500" />
+          </wm-container>
+          
+          <wm-label name="product_price" caption="$24.99" class="font-bold" />
+          
+          <wm-container name="quantity_controls" class="controls" direction="row" gap="8" alignment="middle-left" width="hug" height="hug">
+            <wm-button name="decrease_quantity" caption="-" class="btn-sm" />
+            <wm-label name="quantity" caption="1" class="text-base" />
+            <wm-button name="increase_quantity" caption="+" class="btn-sm" />
+          </wm-container>
+        </wm-container>
+      </wm-list-template>
+    </wm-list>
+    
+    <wm-container name="summary_section" class="summary" direction="column" gap="8" alignment="top-left" width="fill" height="hug">
+      <wm-container name="tax_row" class="w-full" direction="row" gap="auto" alignment="center" width="fill" height="hug">
+        <wm-label name="tax_label" caption="Tax" class="text-base" />
+        <wm-label name="tax_amount" caption="$103.07" class="font-bold" />
+      </wm-container>
+      
+      <wm-container name="discount_row" class="w-full" direction="row" gap="auto" alignment="center" width="fill" height="hug">
+        <wm-label name="discount_label" caption="Discount" class="text-base" />
+        <wm-label name="discount_amount" caption="- $93.01" class="font-bold" />
+      </wm-container>
+      
+      <wm-container name="total_row" class="w-full" direction="row" gap="auto" alignment="center" width="fill" height="hug">
+        <wm-label name="total_label" caption="Total" class="text-base" />
+        <wm-label name="total_amount" caption="$217.99" class="font-bold" />
+      </wm-container>
+    </wm-container>
+    
+    <wm-button name="checkout_button" caption="Checkout" class="btn-primary" width="fill" height="44px" />
+    
+  </wm-container>
+</wm-page-content>

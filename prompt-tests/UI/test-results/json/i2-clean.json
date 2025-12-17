@@ -2,99 +2,273 @@
   "screen_root": {
     "type": "container",
     "name": "screen_root",
+    "emoji": "🟣",
     "direction": "column",
-    "gap": "16",
-    "alignment": "top-center",
+    "gap": "0",
+    "alignment": "center",
     "width": "fill",
     "height": "fill",
     "children": [
       {
         "type": "container",
-        "name": "header_row",
-        "direction": "row",
-        "gap": "auto",
+        "name": "modal_overlay",
+        "emoji": "🟣",
+        "direction": "column",
+        "gap": "0",
         "alignment": "center",
         "width": "fill",
-        "height": "hug",
-        "children": [
-          {
-            "type": "picture",
-            "emoji": "🔴",
-            "name": "logo_icon",
-            "dimensions": "24x24px"
-          },
-          {
-            "type": "label",
-            "emoji": "🟡",
-            "name": "brand_name",
-            "text": "zevoa"
-          },
-          {
-            "type": "button",
-            "emoji": "🔵",
-            "name": "language_button",
-            "label": "English"
-          }
-        ]
-      },
-      {
-        "type": "picture",
-        "emoji": "🔴",
-        "name": "illustration",
-        "dimensions": "300x200px"
-      },
-      {
-        "type": "label",
-        "emoji": "🟡",
-        "name": "welcome_message",
-        "text": "Welcome to Zevoa!"
-      },
-      {
-        "type": "label",
-        "emoji": "🟡",
-        "name": "description",
-        "text": "The ultimate app for making your daily travel as convenient and smooth as possible"
+        "height": "fill",
+        "style": "overlay"
       },
       {
         "type": "container",
-        "name": "pagination_dots",
-        "direction": "row",
-        "gap": "8",
-        "alignment": "center",
-        "width": "hug",
-        "height": "hug",
+        "name": "modal_dialog",
+        "emoji": "🟣",
+        "direction": "column",
+        "gap": "0",
+        "alignment": "top-center",
+        "width": "90%",
+        "height": "auto",
+        "style": "card",
         "children": [
           {
-            "type": "picture",
-            "emoji": "🔴",
-            "name": "dot_1",
-            "dimensions": "8x8px"
+            "type": "container",
+            "name": "modal_header",
+            "emoji": "🟣",
+            "direction": "row",
+            "gap": "auto",
+            "alignment": "center",
+            "width": "fill",
+            "height": "56px",
+            "children": [
+              {
+                "type": "label",
+                "name": "modal_title",
+                "emoji": "🟡",
+                "text": "Edit Profile",
+                "style": "heading"
+              },
+              {
+                "type": "icon",
+                "name": "close_button",
+                "emoji": "🔵",
+                "iconclass": "fa fa-times"
+              }
+            ]
           },
           {
-            "type": "picture",
-            "emoji": "🔴",
-            "name": "dot_2",
-            "dimensions": "8x8px"
+            "type": "container",
+            "name": "modal_divider",
+            "emoji": "🟣",
+            "direction": "row",
+            "gap": "0",
+            "alignment": "start",
+            "width": "fill",
+            "height": "1px",
+            "style": "divider"
           },
           {
-            "type": "picture",
-            "emoji": "🔴",
-            "name": "dot_3",
-            "dimensions": "8x8px"
+            "type": "container",
+            "name": "form_container",
+            "emoji": "🟣",
+            "direction": "column",
+            "gap": "16",
+            "alignment": "top-left",
+            "width": "fill",
+            "height": "hug",
+            "children": [
+              {
+                "type": "container",
+                "name": "form_section_personal",
+                "emoji": "🟣",
+                "direction": "column",
+                "gap": "12",
+                "alignment": "top-left",
+                "width": "fill",
+                "height": "hug",
+                "children": [
+                  {
+                    "type": "label",
+                    "name": "section_label_personal",
+                    "emoji": "🟡",
+                    "text": "Personal Information",
+                    "style": "subheading"
+                  },
+                  {
+                    "type": "container",
+                    "name": "input_field_name",
+                    "emoji": "🟣",
+                    "direction": "column",
+                    "gap": "4",
+                    "alignment": "top-left",
+                    "width": "fill",
+                    "height": "hug",
+                    "children": [
+                      {
+                        "type": "label",
+                        "name": "label_name",
+                        "emoji": "🟡",
+                        "text": "Full Name",
+                        "style": "caption"
+                      },
+                      {
+                        "type": "input",
+                        "name": "input_full_name",
+                        "emoji": "🟢",
+                        "placeholder": "Enter your full name",
+                        "width": "fill",
+                        "height": "44px"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "container",
+                    "name": "input_field_email",
+                    "emoji": "🟣",
+                    "direction": "column",
+                    "gap": "4",
+                    "alignment": "top-left",
+                    "width": "fill",
+                    "height": "hug",
+                    "children": [
+                      {
+                        "type": "label",
+                        "name": "label_email",
+                        "emoji": "🟡",
+                        "text": "Email Address",
+                        "style": "caption"
+                      },
+                      {
+                        "type": "input",
+                        "name": "input_email",
+                        "emoji": "🟢",
+                        "placeholder": "Enter your email",
+                        "type": "email",
+                        "width": "fill",
+                        "height": "44px"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "container",
+                "name": "form_section_contact",
+                "emoji": "🟣",
+                "direction": "column",
+                "gap": "12",
+                "alignment": "top-left",
+                "width": "fill",
+                "height": "hug",
+                "children": [
+                  {
+                    "type": "label",
+                    "name": "section_label_contact",
+                    "emoji": "🟡",
+                    "text": "Contact Information",
+                    "style": "subheading"
+                  },
+                  {
+                    "type": "container",
+                    "name": "input_field_phone",
+                    "emoji": "🟣",
+                    "direction": "column",
+                    "gap": "4",
+                    "alignment": "top-left",
+                    "width": "fill",
+                    "height": "hug",
+                    "children": [
+                      {
+                        "type": "label",
+                        "name": "label_phone",
+                        "emoji": "🟡",
+                        "text": "Phone Number",
+                        "style": "caption"
+                      },
+                      {
+                        "type": "input",
+                        "name": "input_phone",
+                        "emoji": "🟢",
+                        "placeholder": "Enter your phone number",
+                        "type": "tel",
+                        "width": "fill",
+                        "height": "44px"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "container",
+                    "name": "input_field_address",
+                    "emoji": "🟣",
+                    "direction": "column",
+                    "gap": "4",
+                    "alignment": "top-left",
+                    "width": "fill",
+                    "height": "hug",
+                    "children": [
+                      {
+                        "type": "label",
+                        "name": "label_address",
+                        "emoji": "🟡",
+                        "text": "Address",
+                        "style": "caption"
+                      },
+                      {
+                        "type": "input",
+                        "name": "input_address",
+                        "emoji": "🟢",
+                        "placeholder": "Enter your address",
+                        "width": "fill",
+                        "height": "44px"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "container",
+            "name": "modal_divider_bottom",
+            "emoji": "🟣",
+            "direction": "row",
+            "gap": "0",
+            "alignment": "start",
+            "width": "fill",
+            "height": "1px",
+            "style": "divider"
+          },
+          {
+            "type": "container",
+            "name": "modal_footer",
+            "emoji": "🟣",
+            "direction": "row",
+            "gap": "12",
+            "alignment": "middle-end",
+            "width": "fill",
+            "height": "56px",
+            "children": [
+              {
+                "type": "button",
+                "name": "btn_cancel",
+                "emoji": "🔵",
+                "text": "Cancel",
+                "style": "secondary",
+                "width": "hug",
+                "height": "44px"
+              },
+              {
+                "type": "button",
+                "name": "btn_save",
+                "emoji": "🔵",
+                "text": "Save Changes",
+                "style": "primary",
+                "width": "hug",
+                "height": "44px"
+              }
+            ]
           }
         ]
-      },
-      {
-        "type": "button",
-        "emoji": "🔵",
-        "name": "access_account_button",
-        "label": "Access Your Account"
-      },
-      {
-        "type": "label",
-        "emoji": "🟡",
-        "name": "signup_prompt",
-        "text": "Don’t have an account? Signup"
       }
     ]
   }

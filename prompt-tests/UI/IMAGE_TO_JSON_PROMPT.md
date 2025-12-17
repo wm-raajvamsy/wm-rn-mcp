@@ -810,7 +810,7 @@ Clustered buttons:
     "type": "container",
     "name": "screen_root",
     "direction": "column",
-    "gap": "16",
+    "gap": "auto",
     "alignment": "top-center",  // or "top-left" if content is left-aligned
     "width": "fill",
     "height": "fill",

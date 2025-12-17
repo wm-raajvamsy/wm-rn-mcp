@@ -1,0 +1,92 @@
+<wm-page-content>
+  <wm-container name="screen_root" class="h-full w-full" direction="column" gap="16" alignment="top-center" width="fill" height="fill">
+    
+    <wm-container name="header_row" class="w-full" direction="row" gap="auto" alignment="center" width="fill" height="hug">
+      <wm-picture name="profile_picture" width="40px" height="40px" picturesource="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=40" class="avatar" />
+      <wm-label name="gender_selection" caption="Men" class="text-base" />
+      <wm-icon name="cart_icon" iconclass="fa fa-shopping-bag" class="icon" />
+    </wm-container>
+
+    <wm-container name="search_bar" class="w-full" direction="row" gap="8" alignment="middle-left" width="fill" height="hug">
+      <wm-icon name="search_icon" iconclass="fa fa-search" class="icon" />
+      <wm-label name="search_placeholder" caption="Search" class="text-base" />
+    </wm-container>
+
+    <wm-container name="categories_section" class="w-full" direction="column" gap="8" alignment="top-left" width="fill" height="hug">
+      <wm-container name="categories_header" class="w-full" direction="row" gap="auto" alignment="center" width="fill" height="hug">
+        <wm-label name="categories_title" caption="Categories" class="font-bold" />
+        <wm-label name="see_all_categories" caption="See All" class="text-sm text-gray-500" />
+      </wm-container>
+      <wm-container name="categories_list" class="w-full" direction="row" gap="16" alignment="middle-left" width="fill" height="hug">
+        <wm-container name="category_hoodies" class="nav-tab" direction="column" gap="4" alignment="top-center" width="hug" height="hug">
+          <wm-picture name="hoodies_image" width="60px" height="60px" picturesource="https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=60" class="icon" />
+          <wm-label name="hoodies_label" caption="Hoodies" class="text-xs" />
+        </wm-container>
+        <wm-container name="category_shorts" class="nav-tab" direction="column" gap="4" alignment="top-center" width="hug" height="hug">
+          <wm-picture name="shorts_image" width="60px" height="60px" picturesource="https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=60" class="icon" />
+          <wm-label name="shorts_label" caption="Shorts" class="text-xs" />
+        </wm-container>
+        <wm-container name="category_shoes" class="nav-tab" direction="column" gap="4" alignment="top-center" width="hug" height="hug">
+          <wm-picture name="shoes_image" width="60px" height="60px" picturesource="https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=60" class="icon" />
+          <wm-label name="shoes_label" caption="Shoes" class="text-xs" />
+        </wm-container>
+        <wm-container name="category_bag" class="nav-tab" direction="column" gap="4" alignment="top-center" width="hug" height="hug">
+          <wm-picture name="bag_image" width="60px" height="60px" picturesource="https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=60" class="icon" />
+          <wm-label name="bag_label" caption="Bag" class="text-xs" />
+        </wm-container>
+        <wm-container name="category_accessories" class="nav-tab" direction="column" gap="4" alignment="top-center" width="hug" height="hug">
+          <wm-picture name="accessories_image" width="60px" height="60px" picturesource="https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=60" class="icon" />
+          <wm-label name="accessories_label" caption="Accessories" class="text-xs" />
+        </wm-container>
+      </wm-container>
+    </wm-container>
+
+    <wm-container name="top_selling_section" class="w-full" direction="column" gap="8" alignment="top-left" width="fill" height="hug">
+      <wm-container name="top_selling_header" class="w-full" direction="row" gap="auto" alignment="center" width="fill" height="hug">
+        <wm-label name="top_selling_title" caption="Top Selling" class="font-bold" />
+        <wm-label name="see_all_top_selling" caption="See All" class="text-sm text-gray-500" />
+      </wm-container>
+      <wm-list name="top_selling_list" class="list-container">
+        <wm-list-template>
+          <wm-container name="product_card" class="card" direction="column" gap="8" alignment="top-left" width="hug" height="hug">
+            <wm-picture name="product_image" width="150px" height="150px" picturesource="https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=150" class="product-img" />
+            <wm-label name="product_name" caption="Product Name" class="text-base" />
+            <wm-label name="product_price" caption="$Price" class="font-bold" />
+          </wm-container>
+        </wm-list-template>
+      </wm-list>
+    </wm-container>
+
+    <wm-container name="new_in_section" class="w-full" direction="column" gap="8" alignment="top-left" width="fill" height="hug">
+      <wm-container name="new_in_header" class="w-full" direction="row" gap="auto" alignment="center" width="fill" height="hug">
+        <wm-label name="new_in_title" caption="New In" class="font-bold" />
+        <wm-label name="see_all_new_in" caption="See All" class="text-sm text-gray-500" />
+      </wm-container>
+      <wm-list name="new_in_list" class="list-container">
+        <wm-list-template>
+          <wm-container name="product_card" class="card" direction="column" gap="8" alignment="top-left" width="hug" height="hug">
+            <wm-picture name="product_image" width="150px" height="150px" picturesource="https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?auto=compress&cs=tinysrgb&w=150" class="product-img" />
+            <wm-label name="product_name" caption="Product Name" class="text-base" />
+            <wm-label name="product_price" caption="$Price" class="font-bold" />
+          </wm-container>
+        </wm-list-template>
+      </wm-list>
+    </wm-container>
+
+    <wm-container name="bottom_navigation" class="w-full" direction="row" gap="auto" alignment="center" width="fill" height="hug">
+      <wm-container name="home_tab" class="nav-tab" direction="column" gap="4" alignment="top-center" width="hug" height="hug">
+        <wm-icon name="home_icon" iconclass="fa fa-home" class="nav-icon" />
+      </wm-container>
+      <wm-container name="notifications_tab" class="nav-tab" direction="column" gap="4" alignment="top-center" width="hug" height="hug">
+        <wm-icon name="notifications_icon" iconclass="fa fa-bell" class="nav-icon" />
+      </wm-container>
+      <wm-container name="bookmarks_tab" class="nav-tab" direction="column" gap="4" alignment="top-center" width="hug" height="hug">
+        <wm-icon name="bookmarks_icon" iconclass="fa fa-bookmark" class="nav-icon" />
+      </wm-container>
+      <wm-container name="profile_tab" class="nav-tab" direction="column" gap="4" alignment="top-center" width="hug" height="hug">
+        <wm-icon name="profile_icon" iconclass="fa fa-user" class="nav-icon" />
+      </wm-container>
+    </wm-container>
+
+  </wm-container>
+</wm-page-content>

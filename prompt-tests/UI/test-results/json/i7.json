@@ -1,0 +1,417 @@
+```json
+{
+  "screen_root": {
+    "type": "container",
+    "name": "screen_root",
+    "direction": "column",
+    "gap": "16",
+    "alignment": "top-center",
+    "width": "fill",
+    "height": "fill",
+    "children": [
+      {
+        "type": "container",
+        "name": "header_row",
+        "direction": "row",
+        "gap": "auto",
+        "alignment": "center",
+        "width": "fill",
+        "height": "hug",
+        "children": [
+          {
+            "type": "picture",
+            "name": "profile_picture",
+            "dimensions": "40x40px"
+          },
+          {
+            "type": "label",
+            "name": "gender_selection",
+            "text": "Men"
+          },
+          {
+            "type": "icon",
+            "name": "cart_icon",
+            "iconclass": "fa fa-shopping-bag"
+          }
+        ]
+      },
+      {
+        "type": "container",
+        "name": "search_bar",
+        "direction": "row",
+        "gap": "8",
+        "alignment": "middle-left",
+        "width": "fill",
+        "height": "hug",
+        "children": [
+          {
+            "type": "icon",
+            "name": "search_icon",
+            "iconclass": "fa fa-search"
+          },
+          {
+            "type": "label",
+            "name": "search_placeholder",
+            "text": "Search"
+          }
+        ]
+      },
+      {
+        "type": "container",
+        "name": "categories_section",
+        "direction": "column",
+        "gap": "8",
+        "alignment": "top-left",
+        "width": "fill",
+        "height": "hug",
+        "children": [
+          {
+            "type": "container",
+            "name": "categories_header",
+            "direction": "row",
+            "gap": "auto",
+            "alignment": "center",
+            "width": "fill",
+            "height": "hug",
+            "children": [
+              {
+                "type": "label",
+                "name": "categories_title",
+                "text": "Categories"
+              },
+              {
+                "type": "label",
+                "name": "see_all_categories",
+                "text": "See All"
+              }
+            ]
+          },
+          {
+            "type": "container",
+            "name": "categories_list",
+            "direction": "row",
+            "gap": "16",
+            "alignment": "middle-left",
+            "width": "fill",
+            "height": "hug",
+            "children": [
+              {
+                "type": "container",
+                "name": "category_hoodies",
+                "direction": "column",
+                "gap": "4",
+                "alignment": "top-center",
+                "width": "hug",
+                "height": "hug",
+                "children": [
+                  {
+                    "type": "picture",
+                    "name": "hoodies_image",
+                    "dimensions": "60x60px"
+                  },
+                  {
+                    "type": "label",
+                    "name": "hoodies_label",
+                    "text": "Hoodies"
+                  }
+                ]
+              },
+              {
+                "type": "container",
+                "name": "category_shorts",
+                "direction": "column",
+                "gap": "4",
+                "alignment": "top-center",
+                "width": "hug",
+                "height": "hug",
+                "children": [
+                  {
+                    "type": "picture",
+                    "name": "shorts_image",
+                    "dimensions": "60x60px"
+                  },
+                  {
+                    "type": "label",
+                    "name": "shorts_label",
+                    "text": "Shorts"
+                  }
+                ]
+              },
+              {
+                "type": "container",
+                "name": "category_shoes",
+                "direction": "column",
+                "gap": "4",
+                "alignment": "top-center",
+                "width": "hug",
+                "height": "hug",
+                "children": [
+                  {
+                    "type": "picture",
+                    "name": "shoes_image",
+                    "dimensions": "60x60px"
+                  },
+                  {
+                    "type": "label",
+                    "name": "shoes_label",
+                    "text": "Shoes"
+                  }
+                ]
+              },
+              {
+                "type": "container",
+                "name": "category_bag",
+                "direction": "column",
+                "gap": "4",
+                "alignment": "top-center",
+                "width": "hug",
+                "height": "hug",
+                "children": [
+                  {
+                    "type": "picture",
+                    "name": "bag_image",
+                    "dimensions": "60x60px"
+                  },
+                  {
+                    "type": "label",
+                    "name": "bag_label",
+                    "text": "Bag"
+                  }
+                ]
+              },
+              {
+                "type": "container",
+                "name": "category_accessories",
+                "direction": "column",
+                "gap": "4",
+                "alignment": "top-center",
+                "width": "hug",
+                "height": "hug",
+                "children": [
+                  {
+                    "type": "picture",
+                    "name": "accessories_image",
+                    "dimensions": "60x60px"
+                  },
+                  {
+                    "type": "label",
+                    "name": "accessories_label",
+                    "text": "Accessories"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "container",
+        "name": "top_selling_section",
+        "direction": "column",
+        "gap": "8",
+        "alignment": "top-left",
+        "width": "fill",
+        "height": "hug",
+        "children": [
+          {
+            "type": "container",
+            "name": "top_selling_header",
+            "direction": "row",
+            "gap": "auto",
+            "alignment": "center",
+            "width": "fill",
+            "height": "hug",
+            "children": [
+              {
+                "type": "label",
+                "name": "top_selling_title",
+                "text": "Top Selling"
+              },
+              {
+                "type": "label",
+                "name": "see_all_top_selling",
+                "text": "See All"
+              }
+            ]
+          },
+          {
+            "type": "list",
+            "name": "top_selling_list",
+            "direction": "row",
+            "width": "fill",
+            "height": "hug",
+            "item_count": 3,
+            "item_template": {
+              "type": "container",
+              "name": "product_card",
+              "direction": "column",
+              "gap": "8",
+              "alignment": "top-left",
+              "width": "hug",
+              "height": "hug",
+              "children": [
+                {
+                  "type": "picture",
+                  "name": "product_image",
+                  "dimensions": "150x150px"
+                },
+                {
+                  "type": "label",
+                  "name": "product_name",
+                  "text": "Product Name"
+                },
+                {
+                  "type": "label",
+                  "name": "product_price",
+                  "text": "$Price"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "type": "container",
+        "name": "new_in_section",
+        "direction": "column",
+        "gap": "8",
+        "alignment": "top-left",
+        "width": "fill",
+        "height": "hug",
+        "children": [
+          {
+            "type": "container",
+            "name": "new_in_header",
+            "direction": "row",
+            "gap": "auto",
+            "alignment": "center",
+            "width": "fill",
+            "height": "hug",
+            "children": [
+              {
+                "type": "label",
+                "name": "new_in_title",
+                "text": "New In"
+              },
+              {
+                "type": "label",
+                "name": "see_all_new_in",
+                "text": "See All"
+              }
+            ]
+          },
+          {
+            "type": "list",
+            "name": "new_in_list",
+            "direction": "row",
+            "width": "fill",
+            "height": "hug",
+            "item_count": 3,
+            "item_template": {
+              "type": "container",
+              "name": "product_card",
+              "direction": "column",
+              "gap": "8",
+              "alignment": "top-left",
+              "width": "hug",
+              "height": "hug",
+              "children": [
+                {
+                  "type": "picture",
+                  "name": "product_image",
+                  "dimensions": "150x150px"
+                },
+                {
+                  "type": "label",
+                  "name": "product_name",
+                  "text": "Product Name"
+                },
+                {
+                  "type": "label",
+                  "name": "product_price",
+                  "text": "$Price"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "type": "container",
+        "name": "bottom_navigation",
+        "direction": "row",
+        "gap": "auto",
+        "alignment": "center",
+        "width": "fill",
+        "height": "hug",
+        "children": [
+          {
+            "type": "container",
+            "name": "home_tab",
+            "direction": "column",
+            "gap": "4",
+            "alignment": "top-center",
+            "width": "hug",
+            "height": "hug",
+            "children": [
+              {
+                "type": "icon",
+                "name": "home_icon",
+                "iconclass": "fa fa-home"
+              }
+            ]
+          },
+          {
+            "type": "container",
+            "name": "notifications_tab",
+            "direction": "column",
+            "gap": "4",
+            "alignment": "top-center",
+            "width": "hug",
+            "height": "hug",
+            "children": [
+              {
+                "type": "icon",
+                "name": "notifications_icon",
+                "iconclass": "fa fa-bell"
+              }
+            ]
+          },
+          {
+            "type": "container",
+            "name": "bookmarks_tab",
+            "direction": "column",
+            "gap": "4",
+            "alignment": "top-center",
+            "width": "hug",
+            "height": "hug",
+            "children": [
+              {
+                "type": "icon",
+                "name": "bookmarks_icon",
+                "iconclass": "fa fa-bookmark"
+              }
+            ]
+          },
+          {
+            "type": "container",
+            "name": "profile_tab",
+            "direction": "column",
+            "gap": "4",
+            "alignment": "top-center",
+            "width": "hug",
+            "height": "hug",
+            "children": [
+              {
+                "type": "icon",
+                "name": "profile_icon",
+                "iconclass": "fa fa-user"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
+```

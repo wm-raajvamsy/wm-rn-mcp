@@ -1,25 +1,59 @@
 <wm-page-content>
-  <wm-container name="screen_root" class="h-full w-full" direction="column" gap="16" alignment="top-center" width="fill" height="fill">
+  <wm-container name="screen_root" class="h-full w-full" direction="column" gap="0" alignment="center" width="fill" height="fill">
     
-    <wm-container name="header_row" class="w-full" direction="row" gap="auto" alignment="center" width="fill" height="hug">
-      <wm-picture name="logo_icon" width="24px" height="24px" picturesource="https://cdn-icons-png.flaticon.com/128/2111/2111463.png" class="icon" />
-      <wm-label name="brand_name" caption="zevoa" class="text-xl font-bold" />
-      <wm-button name="language_button" caption="English" class="btn-secondary" />
+    <wm-container name="modal_overlay" class="overlay" direction="column" gap="0" alignment="center" width="fill" height="fill">
     </wm-container>
     
-    <wm-picture name="illustration" width="300px" height="200px" picturesource="https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=300" class="illustration" />
-    
-    <wm-label name="welcome_message" caption="Welcome to Zevoa!" class="text-2xl font-bold" />
-    <wm-label name="description" caption="The ultimate app for making your daily travel as convenient and smooth as possible" class="text-base text-gray-500" />
-    
-    <wm-container name="pagination_dots" class="centered" direction="row" gap="8" alignment="center" width="hug" height="hug">
-      <wm-picture name="dot_1" width="8px" height="8px" picturesource="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Ccircle cx='4' cy='4' r='4' fill='%23000'/%3E%3C/svg%3E" class="dot" />
-      <wm-picture name="dot_2" width="8px" height="8px" picturesource="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Ccircle cx='4' cy='4' r='4' fill='%23000'/%3E%3C/svg%3E" class="dot" />
-      <wm-picture name="dot_3" width="8px" height="8px" picturesource="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Ccircle cx='4' cy='4' r='4' fill='%23000'/%3E%3C/svg%3E" class="dot" />
+    <wm-container name="modal_dialog" class="card" direction="column" gap="0" alignment="top-center" width="90%" height="auto">
+      
+      <wm-container name="modal_header" class="" direction="row" gap="auto" alignment="center" width="fill" height="56px">
+        <wm-label name="modal_title" class="heading" caption="Edit Profile" />
+        <wm-icon name="close_button" iconclass="fa fa-times" />
+      </wm-container>
+      
+      <wm-container name="modal_divider" class="divider" direction="row" gap="0" alignment="start" width="fill" height="1px">
+      </wm-container>
+      
+      <wm-container name="form_container" class="" direction="column" gap="16" alignment="top-left" width="fill" height="hug">
+        
+        <wm-container name="form_section_personal" class="" direction="column" gap="12" alignment="top-left" width="fill" height="hug">
+          <wm-label name="section_label_personal" class="subheading" caption="Personal Information" />
+          
+          <wm-container name="input_field_name" class="" direction="column" gap="4" alignment="top-left" width="fill" height="hug">
+            <wm-label name="label_name" class="caption" caption="Full Name" />
+            <wm-input name="input_full_name" placeholder="Enter your full name" width="fill" height="44px" />
+          </wm-container>
+          
+          <wm-container name="input_field_email" class="" direction="column" gap="4" alignment="top-left" width="fill" height="hug">
+            <wm-label name="label_email" class="caption" caption="Email Address" />
+            <wm-input name="input_email" placeholder="Enter your email" type="email" width="fill" height="44px" />
+          </wm-container>
+        </wm-container>
+        
+        <wm-container name="form_section_contact" class="" direction="column" gap="12" alignment="top-left" width="fill" height="hug">
+          <wm-label name="section_label_contact" class="subheading" caption="Contact Information" />
+          
+          <wm-container name="input_field_phone" class="" direction="column" gap="4" alignment="top-left" width="fill" height="hug">
+            <wm-label name="label_phone" class="caption" caption="Phone Number" />
+            <wm-input name="input_phone" placeholder="Enter your phone number" type="tel" width="fill" height="44px" />
+          </wm-container>
+          
+          <wm-container name="input_field_address" class="" direction="column" gap="4" alignment="top-left" width="fill" height="hug">
+            <wm-label name="label_address" class="caption" caption="Address" />
+            <wm-input name="input_address" placeholder="Enter your address" width="fill" height="44px" />
+          </wm-container>
+        </wm-container>
+      </wm-container>
+      
+      <wm-container name="modal_divider_bottom" class="divider" direction="row" gap="0" alignment="start" width="fill" height="1px">
+      </wm-container>
+      
+      <wm-container name="modal_footer" class="" direction="row" gap="12" alignment="middle-end" width="fill" height="56px">
+        <wm-button name="btn_cancel" class="btn-secondary" caption="Cancel" width="hug" height="44px" />
+        <wm-button name="btn_save" class="btn-primary" caption="Save Changes" width="hug" height="44px" />
+      </wm-container>
+      
     </wm-container>
-    
-    <wm-button name="access_account_button" caption="Access Your Account" class="btn-primary" />
-    <wm-label name="signup_prompt" caption="Don’t have an account? Signup" class="text-sm" />
     
   </wm-container>
 </wm-page-content>
