@@ -1,0 +1,166 @@
+<wm-container 
+  name="screen_root" 
+  class="h-full w-full" 
+  direction="column" 
+  gap="16" 
+  alignment="top-center" 
+  width="fill" 
+  height="fill"
+>
+  <wm-container 
+    name="header_row" 
+    class="w-full" 
+    direction="row" 
+    gap="auto" 
+    alignment="center" 
+    width="fill" 
+    height="hug"
+  >
+    <wm-label name="leave_summary_tab" caption="🟡 Leave Summary" />
+    <wm-label name="leave_balance_tab" caption="🟡 Leave Balance" />
+    <wm-label name="leave_requests_tab" caption="🟡 Leave Requests" />
+    <wm-label name="compensatory_request_tab" caption="🟡 Compensatory Request" />
+  </wm-container>
+
+  <wm-container 
+    name="summary_info_row" 
+    class="w-full" 
+    direction="row" 
+    gap="16" 
+    alignment="middle-left" 
+    width="fill" 
+    height="hug"
+  >
+    <wm-label name="leave_booked_info" caption="🟡 Leave booked this year : 3 day(s) | Absent : 0" />
+    <wm-container 
+      name="date_range_container" 
+      class="hug" 
+      direction="row" 
+      gap="8" 
+      alignment="middle-left" 
+      width="hug" 
+      height="hug"
+    >
+      <wm-icon name="calendar_icon" iconclass="fa fa-calendar" />
+      <wm-label name="date_range" caption="🟡 01-Apr-2025 - 31-Mar-2026" />
+    </wm-container>
+    <wm-button name="apply_leave_button" caption="🔵 Apply Leave" />
+  </wm-container>
+
+  <wm-container 
+    name="leave_cards_row" 
+    class="w-full" 
+    direction="row" 
+    gap="16" 
+    alignment="middle-left" 
+    width="fill" 
+    height="hug"
+  >
+    <wm-container 
+      name="bereavement_leave_card" 
+      class="hug" 
+      direction="column" 
+      gap="8" 
+      alignment="top-left" 
+      width="hug" 
+      height="hug"
+    >
+      <wm-label name="bereavement_leave_title" caption="🟡 Bereavement leave" />
+      <wm-picture name="bereavement_icon" width="40px" height="40px" />
+      <wm-label name="bereavement_available" caption="🟡 Available 5" />
+      <wm-label name="bereavement_booked" caption="🟡 Booked 0" />
+    </wm-container>
+
+    <wm-container 
+      name="compensatory_off_card" 
+      class="hug" 
+      direction="column" 
+      gap="8" 
+      alignment="top-left" 
+      width="hug" 
+      height="hug"
+    >
+      <wm-label name="compensatory_off_title" caption="🟡 Compensatory Off" />
+      <wm-picture name="compensatory_icon" width="40px" height="40px" />
+      <wm-label name="compensatory_available" caption="🟡 Available 0" />
+      <wm-label name="compensatory_booked" caption="🟡 Booked 0" />
+    </wm-container>
+
+    <wm-container 
+      name="loss_of_pay_card" 
+      class="hug" 
+      direction="column" 
+      gap="8" 
+      alignment="top-left" 
+      width="hug" 
+      height="hug"
+    >
+      <wm-label name="loss_of_pay_title" caption="🟡 Loss of Pay" />
+      <wm-picture name="loss_of_pay_icon" width="40px" height="40px" />
+      <wm-label name="loss_of_pay_available" caption="🟡 Available 0" />
+      <wm-label name="loss_of_pay_booked" caption="🟡 Booked 0" />
+    </wm-container>
+
+    <wm-container 
+      name="maternity_leave_card" 
+      class="hug" 
+      direction="column" 
+      gap="8" 
+      alignment="top-left" 
+      width="hug" 
+      height="hug"
+    >
+      <wm-label name="maternity_leave_title" caption="🟡 Maternity Leave" />
+      <wm-picture name="maternity_icon" width="40px" height="40px" />
+      <wm-label name="maternity_available" caption="🟡 Available 0" />
+      <wm-label name="maternity_booked" caption="🟡 Booked 0" />
+    </wm-container>
+
+    <wm-container 
+      name="pto_card" 
+      class="hug" 
+      direction="column" 
+      gap="8" 
+      alignment="top-left" 
+      width="hug" 
+      height="hug"
+    >
+      <wm-label name="pto_title" caption="🟡 Personal Time Off (PTO)" />
+      <wm-picture name="pto_icon" width="40px" height="40px" />
+      <wm-label name="pto_available" caption="🟡 Available 18" />
+      <wm-label name="pto_booked" caption="🟡 Booked 3" />
+    </wm-container>
+  </wm-container>
+
+  <wm-container 
+    name="upcoming_leaves_section" 
+    class="w-full" 
+    direction="column" 
+    gap="16" 
+    alignment="top-left" 
+    width="fill" 
+    height="hug"
+  >
+    <wm-button name="upcoming_leaves_dropdown" caption="🔵 Upcoming Leaves & Holidays" />
+    <wm-list 
+      name="upcoming_leaves_list" 
+      class="w-full" 
+      direction="column" 
+      width="fill" 
+      height="hug"
+    >
+      <wm-container 
+        name="leave_item" 
+        class="w-full" 
+        direction="row" 
+        gap="16" 
+        alignment="middle-left" 
+        width="fill" 
+        height="hug"
+      >
+        <wm-label name="leave_date" caption="🟡 Date" />
+        <wm-label name="leave_name" caption="🟡 Holiday Name" />
+      </wm-container>
+    </wm-list>
+  </wm-container>
+</wm-container>

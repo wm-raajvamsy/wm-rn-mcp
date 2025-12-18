@@ -1,0 +1,328 @@
+{
+  "screen_root": {
+    "type": "container",
+    "name": "screen_root",
+    "direction": "column",
+    "gap": "16",
+    "alignment": "top-center",
+    "width": "fill",
+    "height": "fill",
+    "children": [
+      {
+        "type": "container",
+        "name": "header_row",
+        "direction": "row",
+        "gap": "auto",
+        "alignment": "center",
+        "width": "fill",
+        "height": "hug",
+        "children": [
+          {
+            "type": "label",
+            "emoji": "🟡",
+            "name": "leave_summary_tab",
+            "text": "Leave Summary"
+          },
+          {
+            "type": "label",
+            "emoji": "🟡",
+            "name": "leave_balance_tab",
+            "text": "Leave Balance"
+          },
+          {
+            "type": "label",
+            "emoji": "🟡",
+            "name": "leave_requests_tab",
+            "text": "Leave Requests"
+          },
+          {
+            "type": "label",
+            "emoji": "🟡",
+            "name": "compensatory_request_tab",
+            "text": "Compensatory Request"
+          }
+        ]
+      },
+      {
+        "type": "container",
+        "name": "summary_info_row",
+        "direction": "row",
+        "gap": "16",
+        "alignment": "middle-left",
+        "width": "fill",
+        "height": "hug",
+        "children": [
+          {
+            "type": "label",
+            "emoji": "🟡",
+            "name": "leave_booked_info",
+            "text": "Leave booked this year : 3 day(s) | Absent : 0"
+          },
+          {
+            "type": "container",
+            "name": "date_range_container",
+            "direction": "row",
+            "gap": "8",
+            "alignment": "middle-left",
+            "width": "hug",
+            "height": "hug",
+            "children": [
+              {
+                "type": "icon",
+                "emoji": "🔵",
+                "name": "calendar_icon",
+                "iconclass": "fa fa-calendar"
+              },
+              {
+                "type": "label",
+                "emoji": "🟡",
+                "name": "date_range",
+                "text": "01-Apr-2025 - 31-Mar-2026"
+              }
+            ]
+          },
+          {
+            "type": "button",
+            "emoji": "🔵",
+            "name": "apply_leave_button",
+            "label": "Apply Leave"
+          }
+        ]
+      },
+      {
+        "type": "container",
+        "name": "leave_cards_row",
+        "direction": "row",
+        "gap": "16",
+        "alignment": "middle-left",
+        "width": "fill",
+        "height": "hug",
+        "children": [
+          {
+            "type": "container",
+            "name": "bereavement_leave_card",
+            "direction": "column",
+            "gap": "8",
+            "alignment": "top-left",
+            "width": "hug",
+            "height": "hug",
+            "children": [
+              {
+                "type": "label",
+                "emoji": "🟡",
+                "name": "bereavement_leave_title",
+                "text": "Bereavement leave"
+              },
+              {
+                "type": "picture",
+                "emoji": "🔴",
+                "name": "bereavement_icon",
+                "dimensions": "40x40px"
+              },
+              {
+                "type": "label",
+                "emoji": "🟡",
+                "name": "bereavement_available",
+                "text": "Available 5"
+              },
+              {
+                "type": "label",
+                "emoji": "🟡",
+                "name": "bereavement_booked",
+                "text": "Booked 0"
+              }
+            ]
+          },
+          {
+            "type": "container",
+            "name": "compensatory_off_card",
+            "direction": "column",
+            "gap": "8",
+            "alignment": "top-left",
+            "width": "hug",
+            "height": "hug",
+            "children": [
+              {
+                "type": "label",
+                "emoji": "🟡",
+                "name": "compensatory_off_title",
+                "text": "Compensatory Off"
+              },
+              {
+                "type": "picture",
+                "emoji": "🔴",
+                "name": "compensatory_icon",
+                "dimensions": "40x40px"
+              },
+              {
+                "type": "label",
+                "emoji": "🟡",
+                "name": "compensatory_available",
+                "text": "Available 0"
+              },
+              {
+                "type": "label",
+                "emoji": "🟡",
+                "name": "compensatory_booked",
+                "text": "Booked 0"
+              }
+            ]
+          },
+          {
+            "type": "container",
+            "name": "loss_of_pay_card",
+            "direction": "column",
+            "gap": "8",
+            "alignment": "top-left",
+            "width": "hug",
+            "height": "hug",
+            "children": [
+              {
+                "type": "label",
+                "emoji": "🟡",
+                "name": "loss_of_pay_title",
+                "text": "Loss of Pay"
+              },
+              {
+                "type": "picture",
+                "emoji": "🔴",
+                "name": "loss_of_pay_icon",
+                "dimensions": "40x40px"
+              },
+              {
+                "type": "label",
+                "emoji": "🟡",
+                "name": "loss_of_pay_available",
+                "text": "Available 0"
+              },
+              {
+                "type": "label",
+                "emoji": "🟡",
+                "name": "loss_of_pay_booked",
+                "text": "Booked 0"
+              }
+            ]
+          },
+          {
+            "type": "container",
+            "name": "maternity_leave_card",
+            "direction": "column",
+            "gap": "8",
+            "alignment": "top-left",
+            "width": "hug",
+            "height": "hug",
+            "children": [
+              {
+                "type": "label",
+                "emoji": "🟡",
+                "name": "maternity_leave_title",
+                "text": "Maternity Leave"
+              },
+              {
+                "type": "picture",
+                "emoji": "🔴",
+                "name": "maternity_icon",
+                "dimensions": "40x40px"
+              },
+              {
+                "type": "label",
+                "emoji": "🟡",
+                "name": "maternity_available",
+                "text": "Available 0"
+              },
+              {
+                "type": "label",
+                "emoji": "🟡",
+                "name": "maternity_booked",
+                "text": "Booked 0"
+              }
+            ]
+          },
+          {
+            "type": "container",
+            "name": "pto_card",
+            "direction": "column",
+            "gap": "8",
+            "alignment": "top-left",
+            "width": "hug",
+            "height": "hug",
+            "children": [
+              {
+                "type": "label",
+                "emoji": "🟡",
+                "name": "pto_title",
+                "text": "Personal Time Off (PTO)"
+              },
+              {
+                "type": "picture",
+                "emoji": "🔴",
+                "name": "pto_icon",
+                "dimensions": "40x40px"
+              },
+              {
+                "type": "label",
+                "emoji": "🟡",
+                "name": "pto_available",
+                "text": "Available 18"
+              },
+              {
+                "type": "label",
+                "emoji": "🟡",
+                "name": "pto_booked",
+                "text": "Booked 3"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "container",
+        "name": "upcoming_leaves_section",
+        "direction": "column",
+        "gap": "16",
+        "alignment": "top-left",
+        "width": "fill",
+        "height": "hug",
+        "children": [
+          {
+            "type": "button",
+            "emoji": "🔵",
+            "name": "upcoming_leaves_dropdown",
+            "label": "Upcoming Leaves & Holidays"
+          },
+          {
+            "type": "list",
+            "name": "upcoming_leaves_list",
+            "direction": "column",
+            "width": "fill",
+            "height": "hug",
+            "item_count": 4,
+            "item_template": {
+              "type": "container",
+              "name": "leave_item",
+              "direction": "row",
+              "gap": "16",
+              "alignment": "middle-left",
+              "width": "fill",
+              "height": "hug",
+              "children": [
+                {
+                  "type": "label",
+                  "emoji": "🟡",
+                  "name": "leave_date",
+                  "text": "Date"
+                },
+                {
+                  "type": "label",
+                  "emoji": "🟡",
+                  "name": "leave_name",
+                  "text": "Holiday Name"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
